@@ -1,0 +1,74 @@
+#ssh-agent w/ quiet (optional, set custom key if desired)
+#zstyle :omz:plugins:ssh-agent agent-forwarding yes
+#zstyle :omz:plugins:ssh-agent quiet yes
+#zstyle :omz:plugins:ssh-agent identities ~/.ssh/kali
+
+#place this in plugins to activate ssh-agetn
+#ssh-agent
+
+# Path to your oh-my-zsh installation.
+export ZSH="/root/.oh-my-zsh"
+
+
+#New History file location allows us to back it up to github
+HISTFILE="/$HOME/.kali_history"
+
+HISTSIZE=100000
+SAVEHIST=100000
+HISTSTAMPS="mm/dd/yyyy"
+HISTTIMEFORMAT="[%F %T] "
+setopt EXTENDED_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
+setopt INC_APPEND_HISTORY_TIME
+setopt INC_APPEND_HISTORY
+
+#history log function
+
+function logfile(){
+        # Give the session name parameter
+        readonly sessionname=${1:?" Syntax: logfile sessionname"}
+        # Set the datum variable, change the dir, print status.
+        local datum=$(date '+%Y%m%d-%T')
+        cd ~/.logs/
+        echo "logging to $datum-$1.log file. Type exit to end command logging session!"
+        # Record the session
+        script --t=kali_time -q -c '/bin/zsh --login' $datum-$1.log
+}
+
+#zsh theme
+ZSH_THEME="aussiegeek"
+
+zstyle ':omz:update' mode auto      # update automatically without asking
+
+plugins=(
+colored-man-pages
+sudo
+zsh-autosuggestions
+zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
+
+#Custom ENV
+export EDITOR=vim
+
+#daily drivers for day to day tasks
+alias http='python3 -m http.server 80'
+alias reload='. ~/.zshrc'
+alias update='apt-get update'
+alias t='tmux -f ~/.tmux.conf'
+alias i='apt-get install'
+alias public='curl wtfismyip.com/text'
+alias py='python3'
+
+#basic shortcuts with a windows target flavor
+alias cme='crackmapexec'
+alias secretsdump='impacket-secretsdump'
+alias ps-shell='cp /root/nishang/Shells/Invoke-PowerShellTcpOneLine.ps1 .'
+alias portscan='cp /root/nishang/Scan/Invoke-PortScan.ps1 .'
+alias nc='nc -nvlp'
+alias turbo='python3 ~/tools/Turbolist3r/turbolist3r.py'
+alias cloudscrap='python3 ~/tools/CloudScraper/CloudScraper.py'
+

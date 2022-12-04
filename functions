@@ -1,0 +1,28 @@
+function kali() {
+	dirname=${PWD##*/}
+	if [ ! -d `pwd`/.kali-logs ];
+	then
+   	 	mkdir .kali-logs \
+   	 	&& docker run --name $NAME --rm -it \
+   	 	--net=host --entrypoint=/bin/zsh \
+		--cap-add=NET_ADMIN \
+   	 	-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
+    	-e DISPLAY=$DISPLAY \
+		-e NAME=$NAME \
+   	 	-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
+   	 	-w /${dirname} fonalex45/project-repo-1:kali-full
+	else
+		docker run --name $NAME --rm -it \
+		--net=host --entrypoint=/bin/zsh \
+		--cap-add=NET_ADMIN \
+		-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
+    	-e DISPLAY=$DISPLAY \
+		-e NAME=$NAME \
+		-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
+		-w /${dirname} fonalex45/project-repo-1:kali-full
+	fi
+}
+
+function enter-kali() {
+	docker exec -it $NAME /bin/zsh
+}
