@@ -116,7 +116,7 @@ function kali() {
     	-e DISPLAY=$DISPLAY \
 		-e NAME=$NAME \
    	 	-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
-   	 	-w /${dirname} fonalex45/katet
+   	 	-w /${dirname} fonalex45/katet:ka-tet
 	else
 		docker run --name $NAME --rm -it \
 		--net=host --entrypoint=/bin/zsh \
@@ -125,7 +125,7 @@ function kali() {
     	-e DISPLAY=$DISPLAY \
 		-e NAME=$NAME \
 		-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
-		-w /${dirname} fonalex45/katet
+		-w /${dirname} fonalex45/katet:ka-tet
 	fi
 }
 
