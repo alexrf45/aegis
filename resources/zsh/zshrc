@@ -66,6 +66,7 @@ alias py='python3'
 
 #web app based aliases
 alias whatweb='whatweb -a=1 -U=$AGENT -t 10 --wait=0.2'
+alias ffuf='ffuf -c -t 10 -p 0.1 -mc 200' #just need to add the wordlist path, target and and headers or data
 
 
 #basic shortcuts with a windows target flavor
