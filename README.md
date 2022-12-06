@@ -40,6 +40,7 @@ Custom zsh aliases included:
 | portscan   | 'cp /root/nishang/Scan/Invoke-PortScan.ps1 .'                                                         |
 | turbo      | 'python3 ~/tools/Turbolist3r/turbolist3r.py'                                                          |
 | cloudscrap | 'python3 ~/tools/CloudScraper/CloudScraper.py'                                                        |
+| whatweb    | 'whatweb -a=1 -U=$AGENT -t 10 --wait=0.2'                                                             |
 
 ## Usage/Examples
 
@@ -114,6 +115,7 @@ function kali() {
 		--cap-add=NET_ADMIN \
    	 	-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
     	-e DISPLAY=$DISPLAY \
+		-e AGENT=$AGENT \
 		-e NAME=$NAME \
    	 	-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
    	 	-w /${dirname} fonalex45/katet:ka-tet
@@ -123,6 +125,7 @@ function kali() {
 		--cap-add=NET_ADMIN \
 		-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
     	-e DISPLAY=$DISPLAY \
+		-e AGENT=$AGENT \
 		-e NAME=$NAME \
 		-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
 		-w /${dirname} fonalex45/katet:ka-tet

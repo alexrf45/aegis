@@ -22,8 +22,10 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get update && apt-get install -y \
 	netcat-traditional \
 	nmap \
+	netdiscover \
 	inetutils-tools \
 	iputils-ping \
+	iproute2 \
 	ftp \
 	proxychains \
 	telnet \
