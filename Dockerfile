@@ -107,6 +107,8 @@ COPY resources/zsh/aussiegeek.zsh-theme /root/.oh-my-zsh/themes/.
 
 COPY resources/zsh/kali_history /root/.kali_history
 
+COPY resources/ffufrc /root/.ffufrc
+
 RUN rm -rf /etc/localtime 
 
 RUN ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
