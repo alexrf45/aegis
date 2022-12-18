@@ -64,17 +64,11 @@ alias i='apt-get install'
 alias public='curl wtfismyip.com/text'
 alias py='python3'
 
-#web app based aliases
-alias whatweb='whatweb -a=1 -U=$AGENT -t 10 --wait=0.2'
-alias ffuf='ffuf -c -t 10 -p 0.1 -mc 200' #just need to add the wordlist path, target and and headers or data
-
-
 #basic shortcuts with a windows target flavor
 alias cme='crackmapexec'
 alias secretsdump='impacket-secretsdump'
 alias ps-shell='cp /root/nishang/Shells/Invoke-PowerShellTcpOneLine.ps1 .'
 alias portscan='cp /root/nishang/Scan/Invoke-PortScan.ps1 .'
-alias nc='nc -nvlp'
 alias turbo='python3 ~/tools/Turbolist3r/turbolist3r.py'
 alias cloudscrap='python3 ~/tools/CloudScraper/CloudScraper.py'
 

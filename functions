@@ -9,6 +9,8 @@ function kali() {
    	 	-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
     	-e DISPLAY=$DISPLAY \
 		-e NAME=$NAME \
+		-e TARGET=$TARGET \
+		-e IP=$IP \
    	 	-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
    	 	-w /${dirname} fonalex45/katet:ka-tet
 	else
@@ -18,6 +20,8 @@ function kali() {
 		-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
     	-e DISPLAY=$DISPLAY \
 		-e NAME=$NAME \
+		-e TARGET=$TARGET \
+		-e IP=$IP \
 		-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
 		-w /${dirname} fonalex45/katet:ka-tet
 	fi
