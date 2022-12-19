@@ -1,0 +1,126 @@
+# #ssh-agent w/ quiet
+# zstyle :omz:plugins:ssh-agent agent-forwarding yes
+# zstyle :omz:plugins:ssh-agent identities   ~/.ssh/kali-ssh
+# zstyle :omz:plugins:ssh-agent quiet yes
+
+# Path to your oh-my-zsh installation.
+export ZSH="/home/ubuntu/.oh-my-zsh"
+
+#New History file location allows us to back it up to github
+HISTFILE="$HOME/.jump_history"
+HISTSIZE=1000
+SAVEHIST=2000
+HISTSTAMPS="mm/dd/yyyy"
+setopt EXTENDED_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
+setopt INC_APPEND_HISTORY_TIME
+alias backup='cp -r ~/.logs ~/.config/hist'
+
+
+#history log function
+    precmd() { eval 'if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history -f)" >> ~/.logs/zsh-history-$(date "+%Y-%m-%d").log; fi' }
+
+alias clear-history='cp $HOME/.jump_history $HOME/.config/.history_backup && truncate -s 0 $HOME/.jump_history'
+
+#zsh theme
+ZSH_THEME="aussiegeek"
+
+
+zstyle ':omz:update' mode auto      # update automatically without asking
+
+plugins=(
+aws
+colored-man-pages
+colorize
+git
+history
+jsontools
+ssh-agent
+themes
+tmux
+web-search
+zsh-autosuggestions
+zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
+
+bindkey -v
+
+# Preferred editor for local and remote sessions
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+ else
+   export EDITOR='vim'
+ fi
+
+# zsh-autosuggestions settings.
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
+#user agent w/ appropriate command modifiers
+export AGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+alias curl="curl -A '$AGENT'"
+alias wget="wget -U '$AGENT'"
+
+
+#docker function
+function dockershellhere() {
+    dirname=${PWD##*/}
+    mkdir .kali-logs && docker run --rm -it --entrypoint=/bin/bash -v `pwd`:/${dirname} -w /${dirname} debian:latest
+}
+
+#docker kali function
+function kali() {
+	dirname=${PWD##*/}
+	if [ ! -d `pwd`/.kali-logs ];
+	then
+   	 	mkdir .kali-logs \
+   	 	&& docker run --name $NAME --rm -it \
+   	 	--net=host --entrypoint=/bin/zsh \
+		--cap-add=NET_ADMIN \
+   	 	-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
+    	        -e DISPLAY=$DISPLAY \
+		-e NAME=$NAME \
+		-e TARGET=$TARGET \
+		-e IP=$IP \
+   	 	-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
+   	 	-w /${dirname} fonalex45/katet:ka-tet
+	else
+		docker run --name $NAME --rm -it \
+		--net=host --entrypoint=/bin/zsh \
+		--cap-add=NET_ADMIN \
+		-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
+    	        -e DISPLAY=$DISPLAY \
+		-e NAME=$NAME \
+		-e TARGET=$TARGET \
+		-e IP=$IP \
+		-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
+		-w /${dirname} fonalex45/katet:ka-tet
+	fi
+}
+
+#enter Kali container
+function enter-kali() {
+	docker exec -it $NAME /bin/zsh
+}
+
+
+#volatility
+function volatility() {
+  docker run --rm --user=$(id -u):$(id -g) -v "$(pwd)":/dumps:ro,Z -ti phocean/volatility $@
+}
+
+#covenant c2
+function covenant() {
+    docker run --rm -it -p 7443:7443 -p 8080:8080 -p 443:443 --name covenant covenant --username roland --computername 0.0.0.0
+}
+
+function remnux(){
+    docker run --rm -it --net=host --privileged -v ${PWD}:/home/remnux/files -e DISPLAY=$DISPLAY remnux/remnux-distro:latest bash
+}
+
+function dssuite() {
+    dock run -it --rm --net=host --name ds_suite -v ${PWD}:/malware rootshell/dssuite  
+}
