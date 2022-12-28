@@ -54,6 +54,7 @@ source $ZSH/oh-my-zsh.sh
 #Custom ENV
 export EDITOR=vim
 export AGENT='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
+export PATH=$PATH:/root/go/bin:/usr/local/go/bin:/root/.local
 
 #daily drivers for day to day tasks
 alias http='python3 -m http.server 80'
@@ -71,4 +72,5 @@ alias ps-shell='cp /root/nishang/Shells/Invoke-PowerShellTcpOneLine.ps1 .'
 alias portscan='cp /root/nishang/Scan/Invoke-PortScan.ps1 .'
 alias turbo='python3 ~/tools/Turbolist3r/turbolist3r.py'
 alias cloudscrap='python3 ~/tools/CloudScraper/CloudScraper.py'
+alias msdorkdump='python3 ~/tools/msdorkdump/msdorkdump.py'
 

@@ -2,7 +2,7 @@
 FROM kalilinux/kali-rolling:latest
 
 LABEL "author"="Sean Fontaine"
-LABEL "version"="1.0"
+LABEL "version"="1.01"
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -17,7 +17,8 @@ RUN apt-get update && apt-get install -y \
 	ruby \
 	vim  \
 	nano \
-	python3-pip
+	python3-pip \
+	libpcap-dev
 
 RUN apt-get update && apt-get install -y \
 	netcat-traditional \
@@ -38,7 +39,7 @@ RUN apt-get update && apt-get install -y \
 	dnsenum  \
 	dnsutils \
 	amass \
-	wireshark 
+	wireshark
 
 RUN apt-get install -y \
 	whatweb \
@@ -70,22 +71,7 @@ RUN apt-get install -y \
 
 WORKDIR /root
 
-RUN mkdir .logs
-
-RUN git clone https://github.com/samratashok/nishang.git
-
-RUN mkdir tools && cd tools/ && \
-	git clone https://github.com/fleetcaptain/Turbolist3r.git && cd Turbolist3r/ && \
-	pip install -r requirements.txt
-
-RUN cd tools/ && git clone https://github.com/jordanpotti/CloudScraper && cd CloudScraper/ && pip install -r requirements.txt
-
-RUN cd tools/ && \
-	wget -q -O pspy https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy64s && \
-	wget -q -O l.sh https://github.com/carlospolop/PEASS-ng/releases/download/20221106/linpeas.sh && \
-	wget -q -O winpeas.exe https://github.com/carlospolop/PEASS-ng/releases/download/20221106/winPEASx64.exe && \
-	wget -q -O sharp.ps1 https://github.com/BloodHoundAD/BloodHound/raw/master/Collectors/SharpHound.ps1 && \
-	wget -q -O netcat https://github.com/ShutdownRepo/Exegol-resources/raw/main/windows/nc.exe
+ADD sources /root/sources/
 
 COPY resources/tmux.conf .tmux.conf
 
@@ -93,7 +79,32 @@ COPY resources/recon.sh recon.sh
 
 COPY resources/slackcat slackcat
 
+
+COPY resources/ffufrc /root/.ffufrc
+
+RUN chmod +x /root/sources/python.sh \
+	&& chmod +x /root/sources/go.sh \
+	&& chmod +x /root/sources/tools.sh
+
+RUN mkdir .logs
+
+RUN mkdir tools
+
+RUN mkdir .local
+
+RUN git clone https://github.com/samratashok/nishang.git
+
+RUN /root/sources/python.sh python_tools
+
+RUN /root/sources/go.sh install_go
+
+RUN /root/sources/tools.sh tools_install
+
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+COPY resources/zsh/aussiegeek.zsh-theme /root/.oh-my-zsh/themes/.
+
+COPY resources/zsh/kali_history /root/.kali_history
 
 COPY resources/zsh/zshrc .zshrc
 
@@ -103,13 +114,9 @@ RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUS
 
 RUN cp .zshrc .zlogin && touch ~/.hushlogin
 
-COPY resources/zsh/aussiegeek.zsh-theme /root/.oh-my-zsh/themes/.
-
-COPY resources/zsh/kali_history /root/.kali_history
-
-COPY resources/ffufrc /root/.ffufrc
-
 RUN rm -rf /etc/localtime 
+
+RUN rm -rf /root/sources
 
 RUN ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
 
