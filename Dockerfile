@@ -89,8 +89,6 @@ RUN chmod +x /root/sources/python.sh \
 
 RUN mkdir .logs
 
-RUN mkdir tools
-
 RUN mkdir .local
 
 RUN git clone https://github.com/samratashok/nishang.git
