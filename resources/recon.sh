@@ -23,7 +23,7 @@ do
 done
 
 amass_tool () {
-    amass enum -active -d $domain -o results.txt
+    amass enum -active -tr 8.8.8.8,1.1.1.1 -d $domain -o results.txt
 }
 
 live_hosts () {

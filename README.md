@@ -41,6 +41,8 @@ Custom zsh aliases included:
 | turbo      | 'python3 ~/tools/Turbolist3r/turbolist3r.py'                                                          |
 | cloudscrap | 'python3 ~/tools/CloudScraper/CloudScraper.py'                                                        |
 | whatweb    | 'whatweb -a=1 -U=$AGENT -t 10 --wait=0.2'                                                             |
+| msdorkdump | 'python3 ~/tools/msdorkdump/msdorkdump.py'                                                            |
+| spidy      | 'python3 ~/tools/spidey/crawler.py'                                                                   |
 
 ## Usage/Examples
 
@@ -137,3 +139,14 @@ function enter-kali() {
 }
 
 ```
+
+Bug Bounty/Recon example:
+
+recon.sh is a simple shell script that runs amass, httprobe, httpx, and nuclei on a specified domain. Unfortunately the results must be manually parsed or fed into another script for further target enumeration. It's a great start for getting an initial footprint of the target. 
+
+```bash
+
+./recon.sh $DOMAIN 
+
+```
+
