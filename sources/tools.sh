@@ -7,6 +7,6 @@ function tools_install() {
 	wget -q -O winpeas.exe https://github.com/carlospolop/PEASS-ng/releases/download/20221106/winPEASx64.exe && \
 	wget -q -O sharp.ps1 https://github.com/BloodHoundAD/BloodHound/raw/master/Collectors/SharpHound.ps1 && \
 	wget -q -O netcat https://github.com/ShutdownRepo/Exegol-resources/raw/main/windows/nc.exe && \
-	wget -q https://github.com/rivermont/spidy/releases/download/1.4.0/spidy.zip && unzip spidy.zip -d /root/tools/spidy && rm spidy.zip
+	wget -q https://github.com/rivermont/spidy/releases/download/1.4.0/spidy.zip && unzip spidy.zip -d ./spidy && rm spidy.zip
 }
 tools_install
