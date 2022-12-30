@@ -142,7 +142,7 @@ function enter-kali() {
 
 Bug Bounty/Recon example:
 
-recon.sh is a simple shell script that runs amass, httprobe, httpx, and nuclei on a specified domain. Unfortunately the results must be manually parsed or fed into another script for further target enumeration. It's a great start for getting an initial footprint of the target. 
+recon.sh is a simple shell script that runs amass, httprobe, httpx, and nuclei on specified domains. Unfortunately the results must be manually parsed or fed into another script for further target enumeration. It's a great start for getting an initial footprint of the target. 
 
 ```bash
 

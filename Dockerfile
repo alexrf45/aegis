@@ -79,6 +79,7 @@ COPY resources/recon.sh recon.sh
 
 COPY resources/slackcat slackcat
 
+COPY resources/resolvers.txt /root/tools/resolvers.txt
 
 COPY resources/ffufrc /root/.ffufrc
 
