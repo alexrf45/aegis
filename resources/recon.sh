@@ -35,9 +35,9 @@ probed_hosts () {
 
 }
 
-scanned_hosts () {
-    naabu -list results.txt > scanned-hosts.txt
-}
+# scanned_hosts () {
+#     naabu -list results.txt > scanned-hosts.txt
+# }
 
 aquatone_tool () {
     cat live-hosts.txt | aquatone \
