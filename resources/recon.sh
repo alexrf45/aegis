@@ -31,8 +31,16 @@ live_hosts () {
 }
 
 probed_hosts () {
-    httpx -list results.txt -silent -probe > probed-hosts.txt
+    httpx -list live-hosts.txt -silent -probe > probed-hosts.txt
 
+}
+file_format(){
+    cat probed-hosts.txt | grep 'SUCCESS' | cut -d '[' -f 1 > targets.txt
+
+}
+
+spider_directories() {
+    for URL in $(<targets.txt); do ( ffuf -u "${URL}/FUZZ" -w /usr/share/seclists/Discovery/Web-Content/quickhits.txt -c -t 5 -p 0.1 -H "User-Agent: $AGENT" -ac -mc 200 -o $NAME.txt -of html ); done
 }
 
 # scanned_hosts () {
@@ -59,8 +67,12 @@ echo -e "\e[1;31m searching for live hosts on $domain... \e[0m"
 live_hosts
 echo -e "\e[1;31m probing hosts... \e[0m"
 probed_hosts
-echo -e "\e[1;31m scanning hosts for $domain... \e[0m"
-scanned_hosts
+echo -e "\e[1;31m formating hosts for ffuf.. \e[0m"
+file_format
+echo -e "\e[1;31m spidering directories... \e[0m"
+spider_directories
+# echo -e "\e[1;31m scanning hosts for $domain... \e[0m"
+# scanned_hosts
 #echo -e "\e[1;31m screenshotting live hosts on $domain... \e[0m"
 #aquatone_tool
 echo -e "\e[1;31m running nuclei for live hosts on $domain... \e[0m"

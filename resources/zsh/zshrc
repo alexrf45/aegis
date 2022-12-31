@@ -73,5 +73,5 @@ alias portscan='cp /root/nishang/Scan/Invoke-PortScan.ps1 .'
 alias turbo='python3 ~/tools/Turbolist3r/turbolist3r.py'
 alias cloudscrap='python3 ~/tools/CloudScraper/CloudScraper.py'
 alias msdorkdump='python3 ~/tools/msdorkdump/msdorkdump.py'
-alias spidy='python3 ~/tools/spidey/crawler.py'
+alias spidy='python3 ~/tools/spidy/crawler.py'
 
