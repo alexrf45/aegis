@@ -2,7 +2,7 @@
 FROM kalilinux/kali-rolling:latest
 
 LABEL "author"="Sean Fontaine"
-LABEL "version"="1.01"
+LABEL "version"="1.02"
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -18,7 +18,9 @@ RUN apt-get update && apt-get install -y \
 	vim  \
 	nano \
 	python3-pip \
-	libpcap-dev
+	libpcap-dev \
+	jq \
+	mousepad
 
 RUN apt-get update && apt-get install -y \
 	netcat-traditional \

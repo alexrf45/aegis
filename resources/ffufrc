@@ -11,8 +11,8 @@
     ignorebody = false
     # method = "GET"
     # proxyurl = "http://127.0.0.1:8080"
-    recursion = false
-    recursion_depth = 0
+    recursion = true
+    recursion_depth = 3
     recursion_strategy = "default"
     # replayproxyurl = "http://127.0.0.1:8080"
     timeout = 10
@@ -33,7 +33,7 @@
     maxtimejob = 0
     noninteractive = false
     quiet = false
-    rate = 0
+    rate = 5
     stopon403 = false
     stoponall = false
     stoponerrors = false
@@ -61,8 +61,8 @@
 # [output]
 #     debuglog = "debug.log"
 #     outputdirectory = "/tmp/rawoutputdir"
-#     outputfile = "output.html"
-#     outputformat = "html"
+      outputfile = "output_$NAME.html"
+      outputformat = "html"
 #     outputcreateemptyfile = false
 
 [filter]
@@ -79,6 +79,6 @@
     lines = ""
     regexp = ""
     size = ""
-    status = "200"
+    status = "200,302,301,403"
     time = ""
     words = ""
