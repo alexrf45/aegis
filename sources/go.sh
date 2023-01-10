@@ -19,7 +19,8 @@ function httpx_install() {
     wget -q https://github.com/projectdiscovery/httpx/releases/download/v1.2.5/httpx_1.2.5_linux_amd64.zip \
     && unzip httpx_1.2.5_linux_amd64.zip -d ./httpx \
     && rm httpx_1.2.5_linux_amd64.zip \
-    && mv httpx/httpx /root/.local/
+    && mv httpx/httpx /root/.local/ \
+    && rm -r httpx/
 
 }
 

@@ -38,7 +38,7 @@ function logfile(){
 }
 
 #zsh theme
-ZSH_THEME="aussiegeek"
+ZSH_THEME="ka-tet"
 
 zstyle ':omz:update' mode auto      # update automatically without asking
 

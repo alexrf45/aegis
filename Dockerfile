@@ -75,25 +75,20 @@ WORKDIR /root
 
 ADD sources /root/sources/
 
-COPY resources/tmux.conf .tmux.conf
+ADD resources /root/resources/
 
-COPY resources/recon.sh recon.sh
-
-COPY resources/slackcat slackcat
-
-COPY resources/resolvers.txt /root/tools/resolvers.txt
-
-COPY resources/ffufrc /root/.ffufrc
+RUN mkdir .logs && mkdir .local && mkdir tools \
+	&& cp /root/resources/tmux.conf /root/.tmux.conf \
+	&& cp /root/resources/recon.sh /root/.local/recon.sh \
+	&& chmod +x /root/.local/recon.sh \
+	&& cp /root/resources/slackcat /root/tools/slackcat \
+	&& cp /root/resources/resolvers.txt /root/tools/resolvers.txt \
+	&& cp /root/resources/ffufrc /root/.ffufrc
 
 RUN chmod +x /root/sources/python.sh \
 	&& chmod +x /root/sources/go.sh \
-	&& chmod +x /root/sources/tools.sh
-
-RUN mkdir .logs
-
-RUN mkdir .local
-
-RUN git clone https://github.com/samratashok/nishang.git
+	&& chmod +x /root/sources/tools.sh \
+	&& git clone https://github.com/samratashok/nishang.git
 
 RUN /root/sources/python.sh python_tools
 
@@ -103,21 +98,14 @@ RUN /root/sources/tools.sh tools_install
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-COPY resources/zsh/aussiegeek.zsh-theme /root/.oh-my-zsh/themes/.
+RUN cp /root/resources/zsh/ka-tet.zsh-theme /root/.oh-my-zsh/themes/. \
+	&& cp /root/resources/zsh/kali_history /root/.kali_history \
+	&& cp /root/resources/zsh/zshrc /root/.zshrc 
 
-COPY resources/zsh/kali_history /root/.kali_history
+RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions \
+	&& git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-COPY resources/zsh/zshrc .zshrc
-
-RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-RUN cp .zshrc .zlogin && touch ~/.hushlogin
-
-RUN rm -rf /etc/localtime 
-
-RUN rm -rf /root/sources
+RUN rm -rf /root/sources && rm -rf /root/resources
 
 RUN ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
 

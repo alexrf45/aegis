@@ -326,5 +326,9 @@ export AGENT='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 ps-shell
 portscan
 secretsdump
-ffuf -c -t 30 -p 0.1 -H "User-Agent: $AGENT" -ac -mc 200 -o $NAME.txt -of html
+ffuf -c -t 30 -p 0.1 -H "User-Agent: $AGENT" -ac -o $NAME.txt -of html -w /usr/share/seclists/Discovery/Web-Content/common.txt -u http://$DOMAIN/FUZZ
+ffuf -c -t 40 -p 0.1 -o $NAME_domains.txt -of html -H "Host:FUZZ.$DOMAIN" -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://$DOMAIN/
 nc -nvlp
+./chisel server -p 8000 --reverse
+
+
