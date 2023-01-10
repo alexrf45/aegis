@@ -21,7 +21,7 @@ Docker is a life saver for reproducing a consistent environment for various type
 - Command history logging
 - Terminal Output logging using script
 - Persistance volume/workspace
-
+- Customizable resources and tooling
 
 Custom zsh aliases included: 
 

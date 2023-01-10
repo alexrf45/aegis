@@ -107,8 +107,6 @@ RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.
 
 RUN rm -rf /root/sources && rm -rf /root/resources
 
-RUN ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
-
 CMD zsh
 
 
