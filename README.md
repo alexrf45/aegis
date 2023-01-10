@@ -3,6 +3,10 @@
 
 ***"A group of people bound by faith or destiny"***
 
+![Logo](https://img.shields.io/docker/image-size/fonalex45/katet)
+![Logo](https://img.shields.io/docker/pulls/fonalex45/katet)
+![Logo](https://img.shields.io/docker/cloud/build/fonalex45/katet)
+
 ## Repeatable, immutable, and scalable Security Research w/ Docker
 
 
