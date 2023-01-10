@@ -124,7 +124,7 @@ function kali() {
 		-e AGENT=$AGENT \
 		-e NAME=$NAME \
    	 	-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
-   	 	-w /${dirname} fonalex45/katet:ka-tet
+   	 	-w /${dirname} fonalex45/katet:latest
 	else
 		docker run --name $NAME --rm -it \
 		--net=host --entrypoint=/bin/zsh \
@@ -134,7 +134,7 @@ function kali() {
 		-e AGENT=$AGENT \
 		-e NAME=$NAME \
 		-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
-		-w /${dirname} fonalex45/katet:ka-tet
+		-w /${dirname} fonalex45/katet:latest
 	fi
 }
 
