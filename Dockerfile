@@ -78,7 +78,8 @@ ADD sources /root/sources/
 
 ADD resources /root/resources/
 
-RUN mkdir .logs && mkdir .local && mkdir tools \
+RUN mkdir .logs && mkdir .local && mkdir tools && mkdir .config/amass \
+	&& cp /root/resources/config.ini /root/.config/amass/config.ini \
 	&& cp /root/resources/tmux.conf /root/.tmux.conf \
 	&& cp /root/resources/recon.sh /root/.local/recon.sh \
 	# && cp /root/resources/slackcat /root/tools/slackcat \ 

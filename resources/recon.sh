@@ -25,7 +25,7 @@ done
 
 
 amass_tool () {
-    amass enum -active -trf /root/tools/resolvers.txt -ef blacklist.txt -d $domain -o domains.txt
+    amass -dir ~/$NAME/config.ini
 }
 
 live_hosts () {
