@@ -121,8 +121,10 @@ function kali() {
 		--cap-add=NET_ADMIN \
    	 	-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
     	-e DISPLAY=$DISPLAY \
-		-e AGENT=$AGENT \
+		-e DOMAIN=$DOMAIN \
 		-e NAME=$NAME \
+		-e TARGET=$TARGET \
+		-e IP=$IP \
    	 	-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
    	 	-w /${dirname} fonalex45/katet:latest
 	else
@@ -130,9 +132,11 @@ function kali() {
 		--net=host --entrypoint=/bin/zsh \
 		--cap-add=NET_ADMIN \
 		-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
+		-e DOMAIN=$DOMAIN \
     	-e DISPLAY=$DISPLAY \
-		-e AGENT=$AGENT \
 		-e NAME=$NAME \
+		-e TARGET=$TARGET \
+		-e IP=$IP \
 		-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
 		-w /${dirname} fonalex45/katet:latest
 	fi

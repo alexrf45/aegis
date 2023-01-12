@@ -81,23 +81,25 @@ function kali() {
    	 	--net=host --entrypoint=/bin/zsh \
 		--cap-add=NET_ADMIN \
    	 	-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
-    	        -e DISPLAY=$DISPLAY \
+    	-e DISPLAY=$DISPLAY \
+		-e DOMAIN=$DOMAIN \
 		-e NAME=$NAME \
 		-e TARGET=$TARGET \
 		-e IP=$IP \
    	 	-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
-   	 	-w /${dirname} fonalex45/katet:ka-tet
+   	 	-w /${dirname} fonalex45/katet:latest
 	else
 		docker run --name $NAME --rm -it \
 		--net=host --entrypoint=/bin/zsh \
 		--cap-add=NET_ADMIN \
 		-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
-    	        -e DISPLAY=$DISPLAY \
+		-e DOMAIN=$DOMAIN \
+    	-e DISPLAY=$DISPLAY \
 		-e NAME=$NAME \
 		-e TARGET=$TARGET \
 		-e IP=$IP \
 		-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
-		-w /${dirname} fonalex45/katet:ka-tet
+		-w /${dirname} fonalex45/katet:latest
 	fi
 }
 

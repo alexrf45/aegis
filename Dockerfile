@@ -81,8 +81,8 @@ ADD resources /root/resources/
 RUN mkdir .logs && mkdir .local && mkdir tools \
 	&& cp /root/resources/tmux.conf /root/.tmux.conf \
 	&& cp /root/resources/recon.sh /root/.local/recon.sh \
-	&& chmod +x /root/.local/recon.sh \
-	&& cp /root/resources/slackcat /root/tools/slackcat \
+	# && cp /root/resources/slackcat /root/tools/slackcat \ 
+	#requires slack webhook
 	&& cp /root/resources/resolvers.txt /root/tools/resolvers.txt \
 	&& cp /root/resources/ffufrc /root/.ffufrc
 
