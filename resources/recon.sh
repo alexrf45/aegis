@@ -25,7 +25,7 @@ done
 
 
 amass_tool () {
-    amass -dir ~/$NAME/config.ini
+    amass -dir ~/.config/amass/config.ini
 }
 
 live_hosts () {
