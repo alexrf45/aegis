@@ -64,6 +64,15 @@ export AGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101
 alias curl="curl -A '$AGENT'"
 alias wget="wget -U '$AGENT'"
 
+#daily drivers
+alias t='tmux -f ~/.tmux.conf -s $1'
+alias tor='docker run --rm --detach --name tor --publish 9050:9050 fonalex45/project-repo-1:prox-tor'
+alias i='sudo apt-get install'
+alias upgrade='sudo apt-get upgrade -y'
+alias public='curl wtfismyip.com/text'
+alias publicinfo='curl wtfismyip.com/json'
+alias py='python3'
+alias kali-pull='docker pull fonalex45/katet:latest'
 
 #docker function
 function dockershellhere() {

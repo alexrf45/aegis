@@ -318,7 +318,7 @@ hekatomb -hashes :"$NT_HASH" "$DOMAIN"/"$USER"@"$TARGET" -debug -dnstcp
 whatweb http://$IP/
 whatweb https://$IP/
 whatweb -a 1 -U=$AGENT -t 10 --wait=0.2 http://$IP/
-rlwrap nc $PORT
+rlwrap nc -nvlp $PORT
 turbo -d $DOMAIN -t 5
 cloudscrap -u $URL -p 3 -d 3
 logfile $TARGET
@@ -330,5 +330,13 @@ ffuf -c -t 30 -p 0.1 -H "User-Agent: $AGENT" -ac -o $NAME.txt -of html -w /usr/s
 ffuf -c -t 40 -p 0.1 -o $NAME_domains.txt -of html -H "Host:FUZZ.$DOMAIN" -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://$DOMAIN/
 nc -nvlp
 ./chisel server -p 8000 --reverse
+nmap -sC -sV -oA $NAME-nmap/$NAME -p- $IP
+ffuf -c -t 50 -p 0.1 -H "User-Agent: $AGENT" -r -ac -o $NAME.txt -of html -mc 200,302,403 -w /usr/share/seclists/Discovery/Web-Content/raft-small-words.txt -u http://$DOMAIN/FUZZ
+export IP=
+export TARGET=
+export DOMAIN=
+export NAME=
+export USER=
+mysql $IP -u $USER -p
 
 
