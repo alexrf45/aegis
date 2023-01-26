@@ -21,7 +21,8 @@ RUN apt-get update && apt-get install -y \
 	python3-pip \
 	libpcap-dev \
 	jq \
-	mousepad
+	mousepad \
+	firefox-esr \
 
 RUN apt-get update && apt-get install -y \
 	netcat-traditional \
@@ -83,7 +84,8 @@ RUN mkdir .logs && mkdir .local && mkdir tools \
 	&& cp /root/resources/tmux.conf /root/.tmux.conf \
 	&& cp /root/resources/recon.sh /root/.local/recon.sh \
 	&& cp /root/resources/resolvers.txt /root/tools/resolvers.txt \
-	&& cp /root/resources/ffufrc /root/.ffufrc
+	&& cp /root/resources/ffufrc /root/.ffufrc \
+	&& cp -r /root/resources/.mozilla /root/.mozilla
 
 RUN chmod +x /root/sources/python.sh \
 	&& chmod +x /root/sources/go.sh \
