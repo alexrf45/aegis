@@ -21,8 +21,7 @@ RUN apt-get update && apt-get install -y \
 	python3-pip \
 	libpcap-dev \
 	jq \
-	mousepad \
-	firefox-esr \
+	mousepad
 
 RUN apt-get update && apt-get install -y \
 	netcat-traditional \
