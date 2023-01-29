@@ -5,8 +5,7 @@
 
 ![Logo](https://img.shields.io/docker/image-size/fonalex45/katet)
 ![Logo](https://img.shields.io/docker/pulls/fonalex45/katet)
-![Logo](https://img.shields.io/docker/cloud/build/fonalex45/katet)
-
+[![Publish Docker Image](https://github.com/alexrf45/Ka-tet/actions/workflows/dockerhub.yml/badge.svg?branch=main)](https://github.com/alexrf45/Ka-tet/actions/workflows/dockerhub.yml)
 ## Repeatable, immutable, and scalable Security Research w/ Docker
 
 
