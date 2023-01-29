@@ -54,7 +54,8 @@ RUN apt-get install -y \
 	djvulibre-bin \
 	crunch \
 	hydra \
-	wordlists
+	wordlists \
+	burpsuite
 
 RUN apt-get install -y \
 	python3-impacket \
