@@ -85,6 +85,7 @@ RUN mkdir .logs && mkdir .local && mkdir tools \
 	&& cp /root/resources/recon.sh /root/.local/recon.sh \
 	&& cp /root/resources/resolvers.txt /root/tools/resolvers.txt \
 	&& cp /root/resources/ffufrc /root/.ffufrc \
+	&& cp /root/resources/ffufrc_subdomain /root/.ffufrc_subdomain \
 	&& cp -r /root/resources/.BurpSuite /root/.BurpSuite
 
 RUN chmod +x /root/sources/python.sh \

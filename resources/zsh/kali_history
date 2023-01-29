@@ -338,5 +338,6 @@ export DOMAIN=
 export NAME=
 export USER=
 mysql $IP -u $USER -p
-
+ffuf -config ~/.ffufrc_domain
+ffuf -config ~/.ffufrc
 

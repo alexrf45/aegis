@@ -6,20 +6,21 @@
     followredirects = false
     headers = [
         "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
-        "X-Forwarded-For: 127.0.0.1"
+        "X-Forwarded-For: 127.0.0.1",
+				"Host: FUZZ.$DOMAIN.htb"
     ]
     ignorebody = false
     # method = "GET"
     # proxyurl = "http://127.0.0.1:8080"
-    recursion = true
-    recursion_depth = 3
+    #recursion = true
+    #recursion_depth = 3
     recursion_strategy = "default"
     # replayproxyurl = "http://127.0.0.1:8080"
     timeout = 10
     # url = "https://example.org/FUZZ"
 
 [general]
-    autocalibration = false
+    autocalibration = true
     # autocalibrationstrings = [
     #     "randomtest",
     #     "admin"
@@ -28,7 +29,7 @@
     # autocalibration_keyword = "FUZZ"
     # autocalibration_perhost = false
     colors = true
-    delay = "0.1"
+    #delay = "0.2"
     maxtime = 0
     maxtimejob = 0
     noninteractive = false
@@ -53,13 +54,13 @@
     # request = "requestfile.txt"
     # requestproto = "https"
     wordlists = [
-         "/usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt:FUZZ"
-    ]
+          "/usr/share/seclists/Discovery/Web-Content/raft-small-words.txt:FUZZ"
+     ]
 
 
 # [output]
 #     debuglog = "debug.log"
-#     outputdirectory = "/root/"
+#     outputdirectory = "~/$NAME_results"
       outputfile = "output_$NAME.html"
       outputformat = "html"
 #     outputcreateemptyfile = false
@@ -68,7 +69,7 @@
     mode = "or"
     lines = ""
     regexp = ""
-    size = "0"
+    size = ""
     status = ""
     time = ""
     words = ""
@@ -78,6 +79,6 @@
     lines = ""
     regexp = ""
     size = ""
-    status = "200,302,301,403,407,500"
+    status = "200"
     time = ""
     words = ""
