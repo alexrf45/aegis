@@ -85,7 +85,7 @@ RUN mkdir .logs && mkdir .local && mkdir tools \
 	&& cp /root/resources/recon.sh /root/.local/recon.sh \
 	&& cp /root/resources/resolvers.txt /root/tools/resolvers.txt \
 	&& cp /root/resources/ffufrc /root/.ffufrc \
-	&& cp -r /root/resources/.mozilla /root/.mozilla
+	&& cp -r /root/resources/.Burpsuite/ /root/.Burpsuite
 
 RUN chmod +x /root/sources/python.sh \
 	&& chmod +x /root/sources/go.sh \
