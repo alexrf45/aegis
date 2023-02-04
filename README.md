@@ -1,5 +1,5 @@
 
-![Logo](https://ka-tet.s3.amazonaws.com/logo-black.png)
+![Logo](https://ka-tet.s3.amazonaws.com/logo-black-edit.png)
 
 ***"A group of people bound by faith or destiny"***
 
