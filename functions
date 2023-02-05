@@ -2,7 +2,9 @@ function kali() {
 	dirname=${PWD##*/}
 	if [ ! -d `pwd`/.kali-logs ];
 	then
-   	 	mkdir .kali-logs \
+   	 	mkdir .kali-logs && \
+		export IP=$1 \
+		export NAME=$2 \
    	 	&& docker run --name $NAME --rm -it \
    	 	--net=host --entrypoint=/bin/zsh \
 		--cap-add=NET_ADMIN \
@@ -13,7 +15,7 @@ function kali() {
 		-e IP=$IP \
 		-e DOMAIN=$DOMAIN \
    	 	-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
-   	 	-w /${dirname} fonalex45/katet:ka-tet
+   	 	-w /${dirname} fonalex45/katet:latest
 	else
 		docker run --name $NAME --rm -it \
 		--net=host --entrypoint=/bin/zsh \
@@ -25,7 +27,7 @@ function kali() {
 		-e IP=$IP \
 		-e DOMAIN=$DOMAIN \
 		-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
-		-w /${dirname} fonalex45/katet:ka-tet
+		-w /${dirname} fonalex45/katet:latest
 	fi
 }
 
