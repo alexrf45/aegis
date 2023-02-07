@@ -7,7 +7,7 @@
 #ssh-agent
 
 # Path to your oh-my-zsh installation.
-export ZSH="/root/.oh-my-zsh"
+export ZSH="/home/kali/.oh-my-zsh"
 
 
 #New History file location allows us to back it up to github
@@ -56,22 +56,22 @@ source $ZSH/oh-my-zsh.sh
 #Custom ENV
 export EDITOR=vim
 export AGENT='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
-export PATH=$PATH:/root/go/bin:/usr/local/go/bin:/root/.local
+export PATH=$PATH:/home/kali/bin:/usr/local/go/bin:/home/kali/.local
 
 #daily drivers for day to day tasks
 alias http='python3 -m http.server 80'
 alias reload='. ~/.zshrc'
-alias update='apt-get update'
+alias update='sudo apt-get update -y'
 alias t='tmux -f ~/.tmux.conf'
-alias i='apt-get install'
+alias i='sudo apt-get install -y'
 alias public='curl wtfismyip.com/text'
 alias py='python3'
 
 #basic shortcuts with a windows target flavor
 alias cme='crackmapexec'
 alias secretsdump='impacket-secretsdump'
-alias ps-shell='cp /root/nishang/Shells/Invoke-PowerShellTcpOneLine.ps1 .'
-alias portscan='cp /root/nishang/Scan/Invoke-PortScan.ps1 .'
+alias ps-shell='cp ~/nishang/Shells/Invoke-PowerShellTcpOneLine.ps1 .'
+alias portscan='cp ~/nishang/Scan/Invoke-PortScan.ps1 .'
 alias turbo='python3 ~/tools/Turbolist3r/turbolist3r.py'
 alias cloudscrap='python3 ~/tools/CloudScraper/CloudScraper.py'
 alias msdorkdump='python3 ~/tools/msdorkdump/msdorkdump.py'

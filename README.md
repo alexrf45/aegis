@@ -15,16 +15,18 @@
  
 - [Exegol - Fully featured and community-driven hacking environment](https://github.com/ThePorgs/Exegol)
 
-## Fully Tested on: Debian 11, Arch Linux 5.17.8-zen
+## Fully Tested on: Debian 11, Arch Linux 5.17.8-zen, and Kali Linux 2022.04
 
 Docker is a life saver for reproducing a consistent environment for various types of assessments. Instead of wasting time configuring a Kali Linux virtual machine, this Docker image provides a repeatable environment for any type of engagement. 
 
 ## Features
 
 - Command history logging
-- Terminal Output logging using script
-- Persistance volume/workspace
-- Customizable resources and tooling
+- Terminal Output logging using script: `logfile $NAME`
+- Persistant containers or just volume/workspace. 
+- Customizable resources and tooling, config files are located in the resources/ & sources/ directories
+- ***UPDATE***: container runs as kali and no longer root. This is consistent with the Kali OS and provides some additional
+security as well as ease of use for python & pip. 
 
 Custom zsh aliases included: 
 
@@ -84,7 +86,7 @@ $ kali
 
 Output:
 
-[ Sun Dec 04 2022  2:21PM ]  [ root@dev-local:/engagement-20xx-xx-xx-company.com ]
+[ Sun Dec 04 2022  2:21PM ]  [ kali@dev-local:/engagement-20xx-xx-xx-company.com ]
  $ 
 
 $ logfile $NAME
@@ -115,9 +117,7 @@ function kali() {
 	if [ ! -d `pwd`/.kali-logs ];
 	then
    	 	mkdir .kali-logs && \
-		export IP=$1 \
-		export NAME=$2 \
-   	 	&& docker run --name $NAME --rm -it \
+   	 	docker run --name $NAME -it \
    	 	--net=host --entrypoint=/bin/zsh \
 		--cap-add=NET_ADMIN \
    	 	-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
@@ -129,7 +129,7 @@ function kali() {
    	 	-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
    	 	-w /${dirname} fonalex45/katet:latest
 	else
-		docker run --name $NAME --rm -it \
+		docker run --name $NAME -it \
 		--net=host --entrypoint=/bin/zsh \
 		--cap-add=NET_ADMIN \
 		-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
@@ -145,6 +145,14 @@ function kali() {
 
 function enter-kali() {
 	docker exec -it $NAME /bin/zsh
+}
+
+function stop-kali() {
+	docker container stop $NAME
+}
+
+function destroy-kali() {
+	docker container rm $NAME
 }
 
 ```

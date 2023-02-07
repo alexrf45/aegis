@@ -2,70 +2,85 @@
 FROM kalilinux/kali-rolling:latest
 
 LABEL "author"="Sean Fontaine"
-LABEL "version"="v0.0.2"
+LABEL "version"="v1.0.0"
 LABEL "website"="https://r0land.link"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get install -y \
-	wget curl man sudo git zsh tmux ruby ruby-dev vim nano \
-	djvulibre-bin ldap-utils powershell \
-	python3-pip libpcap-dev jq mousepad \
-	iputils-ping iproute2 proxychains
+RUN apt-get update -y && apt-get install -y sudo wireshark
 
-RUN apt-get update && apt-get install -y \
-	netcat-traditional rlwrap nmap netdiscover masscan \
-	httprobe wireshark dnsenum dnsutils amass\
-	ftp telnet swaks snmpcheck snmpcheck snmp-mibs-downloader
-	
-RUN apt-get install -y \
-	whatweb ffuf burpsuite nuclei \
-	seclists wordlists crunch \
-	sqlmap \
-	john exiftool hydra
+RUN groupadd --gid 1000 kali \
+    && useradd --home-dir /home/kali --create-home --uid 1000 \
+      --gid 1000 --shell /bin/bash --skel /dev/null kali
 
-RUN apt-get install -y \
-	python3-impacket impacket-scripts \
-	smbclient smbmap \
-	crackmapexec evil-winrm bloodhound
+RUN chown -R kali:kali /home/kali/
 
-WORKDIR /root
+RUN echo kali:kali | chpasswd
 
-ADD sources /root/sources/
+RUN usermod -aG sudo kali
 
-ADD resources /root/resources/
+RUN echo 'kali  ALL=(ALL) NOPASSWD:ALL' >>  /etc/sudoers.d/kali
+
+WORKDIR /home/kali/
+
+USER kali
+
+ADD sources /home/kali/sources/
+
+RUN sudo chown -R kali:kali /home/kali/sources
+
+RUN sudo chmod +x /home/kali/sources/packages_0.sh && \
+	/home/kali/sources/packages_0.sh install_0
+
+RUN sudo chmod +x /home/kali/sources/packages_1.sh && \
+	/home/kali/sources/packages_1.sh install_1
+
+RUN sudo chmod +x /home/kali/sources/packages_2.sh && \
+	/home/kali/sources/packages_2.sh install_2
+
+ADD resources /home/kali/resources/
+
+RUN sudo chown -R kali:kali /home/kali/resources
 
 RUN mkdir .logs && mkdir .local && mkdir tools \
-	&& cp /root/resources/config.ini /root/.local/config.ini \
-	&& cp /root/resources/tmux.conf /root/.tmux.conf \
-	&& cp /root/resources/recon.sh /root/.local/recon.sh \
-	&& cp /root/resources/resolvers.txt /root/tools/resolvers.txt \
-	&& cp /root/resources/ffufrc /root/.ffufrc \
-	&& cp /root/resources/ffufrc_subdomain /root/.ffufrc_subdomain \
-	&& cp -r /root/resources/.BurpSuite /root/.BurpSuite
+	&& cp /home/kali/resources/config.ini /home/kali/.local/config.ini \
+	&& cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
+	&& cp /home/kali/resources/recon.sh /home/kali/.local/recon.sh \
+	&& cp /home/kali/resources/resolvers.txt /home/kali/tools/resolvers.txt \
+	&& cp /home/kali/resources/ffufrc /home/kali/.ffufrc \
+	&& cp /home/kali/resources/ffufrc_subdomain /home/kali/.ffufrc_subdomain \
+	&& cp -r /home/kali/resources/.BurpSuite /home/kali/.BurpSuite
 
-RUN chmod +x /root/sources/python.sh \
-	&& /root/sources/python.sh python_tools \
-	&& chmod +x /root/sources/go.sh \
-	&& /root/sources/go.sh install_go \
-	&& chmod +x /root/sources/tools.sh \
-	&& /root/sources/tools.sh tools_install \
-	&& git clone https://github.com/samratashok/nishang.git
+RUN sudo chmod +x /home/kali/sources/python.sh \
+	&& /home/kali/sources/python.sh python_tools
+
+RUN sudo chmod +x /home/kali/sources/go.sh \
+	&& /home/kali/sources/go.sh install_go
+
+RUN sudo chmod +x /home/kali/sources/tools.sh \
+	&& /home/kali/sources/tools.sh tools_install
+	
+RUN git clone https://github.com/samratashok/nishang.git
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" \
 	--unattended
 
-RUN cp /root/resources/zsh/ka-tet.zsh-theme /root/.oh-my-zsh/themes/. \
-	&& cp /root/resources/zsh/kali_history /root/.kali_history \
-	&& cp /root/resources/zsh/zshrc /root/.zshrc \
-	&& git clone https://github.com/zsh-users/zsh-autosuggestions \
-	${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions \
-	&& git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+RUN cp /home/kali/resources/zsh/zshrc /home/kali/.zshrc
+
+RUN cp /home/kali/resources/zsh/ka-tet.zsh-theme /home/kali/.oh-my-zsh/themes/. \
+	&& cp /home/kali/resources/zsh/kali_history /home/kali/.kali_history
+
+RUN git clone https://github.com/zsh-users/zsh-autosuggestions \
+	${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
 	${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-RUN rm -rf /root/sources && rm -rf /root/resources
+RUN sudo rm -rf /home/kali/sources && sudo rm -rf /home/kali/resources
 
-CMD zsh
+USER kali
+
+RUN zsh
 
 
 
