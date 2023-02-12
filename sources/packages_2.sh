@@ -1,10 +1,8 @@
 #!/bin/bash
 
-function install_2 () {
-    sudo apt-get install -y whatweb ffuf gobuster nuclei \
-	seclists wordlists crunch \
-	sqlmap john exiftool hydra python3-impacket impacket-scripts \
-	smbclient smbmap crackmapexec evil-winrm bloodhound
+function web () {
+    sudo apt-get install -y whatweb ffuf gobuster nuclei httprobe sqlmap \
+	exiftool default-mysql-client hurl postgresql arjun
 }
 
-install_2
+web

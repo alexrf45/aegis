@@ -2,7 +2,7 @@
 FROM kalilinux/kali-rolling:latest
 
 LABEL "author"="Sean Fontaine"
-LABEL "version"="v1.0.0"
+LABEL "version"="v1.1.0"
 LABEL "website"="https://r0land.link"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -30,13 +30,19 @@ ADD sources /home/kali/sources/
 RUN sudo chown -R kali:kali /home/kali/sources
 
 RUN sudo chmod +x /home/kali/sources/packages_0.sh && \
-	/home/kali/sources/packages_0.sh install_0
+	/home/kali/sources/packages_0.sh base
 
 RUN sudo chmod +x /home/kali/sources/packages_1.sh && \
-	/home/kali/sources/packages_1.sh install_1
+	/home/kali/sources/packages_1.sh network
 
 RUN sudo chmod +x /home/kali/sources/packages_2.sh && \
-	/home/kali/sources/packages_2.sh install_2
+	/home/kali/sources/packages_2.sh web
+
+RUN sudo chmod +x /home/kali/sources/packages_3.sh && \
+	/home/kali/sources/packages_3.sh active_directory
+
+RUN sudo chmod +x /home/kali/sources/packages_4.sh && \
+	/home/kali/sources/packages_4.sh password
 
 ADD resources /home/kali/resources/
 
@@ -49,7 +55,8 @@ RUN mkdir .logs && mkdir .local && mkdir tools \
 	&& cp /home/kali/resources/resolvers.txt /home/kali/tools/resolvers.txt \
 	&& cp /home/kali/resources/ffufrc /home/kali/.ffufrc \
 	&& cp /home/kali/resources/ffufrc_subdomain /home/kali/.ffufrc_subdomain \
-	&& cp -r /home/kali/resources/.BurpSuite /home/kali/.BurpSuite
+	&& cp -r /home/kali/resources/.BurpSuite /home/kali/.BurpSuite \
+	&& sudo cp /home/kali/resources/neo4j.conf /usr/share/neo4j/conf/.
 
 RUN sudo chmod +x /home/kali/sources/python.sh \
 	&& /home/kali/sources/python.sh python_tools

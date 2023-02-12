@@ -20,14 +20,11 @@ function httpx_install() {
     wget -q https://github.com/projectdiscovery/httpx/releases/download/v1.2.5/httpx_1.2.5_linux_amd64.zip \
     && unzip httpx_1.2.5_linux_amd64.zip -d ./httpx \
     && rm httpx_1.2.5_linux_amd64.zip \
-    && mv httpx/httpx /home/kali/.local/ \
+    && mv httpx/httpx /home/kali/.local/http-x \
     && rm -r httpx/
 
 }
 
-# function naabu_install() {
-
-# }
 install_go
 waybackurls_install
 httpx_install
