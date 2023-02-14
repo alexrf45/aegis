@@ -25,7 +25,7 @@ alias backup='cp -r ~/.logs ~/.config/hist'
 alias clear-history='cp $HOME/.jump_history $HOME/.config/.history_backup && truncate -s 0 $HOME/.jump_history'
 
 #zsh theme
-ZSH_THEME="aussiegeek"
+ZSH_THEME="ka-tet"
 
 
 zstyle ':omz:update' mode auto      # update automatically without asking
@@ -59,14 +59,8 @@ bindkey -v
 # zsh-autosuggestions settings.
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
-#user agent w/ appropriate command modifiers
-export AGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
-alias curl="curl -A '$AGENT'"
-alias wget="wget -U '$AGENT'"
-
 #daily drivers
-alias t='tmux -f ~/.tmux.conf -s $1'
-alias tor='docker run --rm --detach --name tor --publish 9050:9050 fonalex45/project-repo-1:prox-tor'
+alias t='tmux new -f ~/.tmux.conf -s $1'
 alias i='sudo apt-get install'
 alias upgrade='sudo apt-get upgrade -y'
 alias public='curl wtfismyip.com/text'
@@ -115,23 +109,4 @@ function kali() {
 #enter Kali container
 function enter-kali() {
 	docker exec -it $NAME /bin/zsh
-}
-
-
-#volatility
-function volatility() {
-  docker run --rm --user=$(id -u):$(id -g) -v "$(pwd)":/dumps:ro,Z -ti phocean/volatility $@
-}
-
-#covenant c2
-function covenant() {
-    docker run --rm -it -p 7443:7443 -p 8080:8080 -p 443:443 --name covenant covenant --username roland --computername 0.0.0.0
-}
-
-function remnux(){
-    docker run --rm -it --net=host --privileged -v ${PWD}:/home/remnux/files -e DISPLAY=$DISPLAY remnux/remnux-distro:latest bash
-}
-
-function dssuite() {
-    dock run -it --rm --net=host --name ds_suite -v ${PWD}:/malware rootshell/dssuite  
 }
