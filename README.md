@@ -159,11 +159,18 @@ function destroy-kali() {
 
 Bug Bounty/Recon example:
 
-recon.sh is a simple shell script that runs amass, httprobe, httpx, and nuclei on specified domains. Unfortunately the results must be manually parsed or fed into another script for further target enumeration. It's a great start for getting an initial footprint of the target. 
+`recon.sh` is a simple shell script that does the following:
+- amass for subdomains (set up your config.ini with api keys for accurate results)
+- httprobe to discover live hosts/domains from the amass results
+- httpx to verify reachable hosts from the httprobe results
+- spider to check for directories on each discovered url from httpx (Needs refining) 
+- nuclei for basic recon checks on the verified hosts from httpx
+
+Unfortunately the results must be manually parsed or fed into another script for further target enumeration. It's a great start for getting an initial footprint of the target. 
 
 ```bash
 
-./recon.sh $DOMAIN 
+./recon.sh -p PROJECTNAME -d DOMAIN(s) #multiple domains can be listed here here 
 
 ```
 
