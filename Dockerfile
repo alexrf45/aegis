@@ -2,7 +2,7 @@
 FROM kalilinux/kali-rolling:latest
 
 LABEL "author"="Sean Fontaine"
-LABEL "version"="v1.1.0"
+LABEL "version"="v1.2.0"
 LABEL "website"="https://r0land.link"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -51,15 +51,15 @@ RUN sudo chown -R kali:kali /home/kali/resources
 RUN mkdir .logs && mkdir .local && mkdir tools \
 	&& cp /home/kali/resources/config.ini /home/kali/.local/config.ini \
 	&& cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
-	&& cp /home/kali/resources/recon.sh /home/kali/.local/recon.sh \
 	&& cp /home/kali/resources/resolvers.txt /home/kali/tools/resolvers.txt \
-	&& cp /home/kali/resources/ffufrc /home/kali/.ffufrc \
-	&& cp /home/kali/resources/ffufrc_subdomain /home/kali/.ffufrc_subdomain \
+	&& cp /home/kali/resources/ffufrc /home/kali/tools/.ffufrc \
+	&& cp /home/kali/resources/ffufrc_subdomain /home/kali/tools/.ffufrc_subdomain \
 	&& cp -r /home/kali/resources/.BurpSuite /home/kali/.BurpSuite \
 	&& sudo cp /home/kali/resources/neo4j.conf /usr/share/neo4j/conf/.
 
-RUN sudo chmod +x /home/kali/sources/python.sh \
-	&& /home/kali/sources/python.sh python_tools
+#TODO: fix python env
+# RUN sudo chmod +x /home/kali/sources/python.sh \
+# 	&& /home/kali/sources/python.sh python_tools 
 
 RUN sudo chmod +x /home/kali/sources/go.sh \
 	&& /home/kali/sources/go.sh install_go

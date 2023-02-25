@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function web () {
-    sudo apt-get install -y whatweb ffuf gobuster nuclei httprobe sqlmap \
+    sudo apt-get install -y whatweb ffuf gobuster sqlmap \
 	exiftool default-mysql-client hurl postgresql arjun
 }
 

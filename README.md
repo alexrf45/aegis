@@ -43,10 +43,7 @@ Custom zsh aliases included:
 | scan       | 'nmap -sC -sV -p- -oA $NAME'                                                                                |
 | ffuf-quick | 'ffuf -u $URL -w /usr/share/seclists/Discovery/Web-Content/common.txt' -o $NAME-results.txt -mc 200 -fs 0' |
 | portscan   | 'cp /root/nishang/Scan/Invoke-PortScan.ps1 .'                                                         |
-| turbo      | 'python3 ~/tools/Turbolist3r/turbolist3r.py'                                                          |
-| cloudscrap | 'python3 ~/tools/CloudScraper/CloudScraper.py'                                                        |
 | whatweb    | 'whatweb -a=1 -U=$AGENT -t 10 --wait=0.2'                                                             |
-| msdorkdump | 'python3 ~/tools/msdorkdump/msdorkdump.py'                                                            |
 | spidy      | 'python3 ~/tools/spidey/crawler.py'                                                                   |
 
 ## Usage/Examples
@@ -154,23 +151,6 @@ function stop-kali() {
 function destroy-kali() {
 	docker container rm $NAME
 }
-
-```
-
-Bug Bounty/Recon example:
-
-`recon.sh` is a simple shell script that does the following:
-- amass for subdomains (set up your config.ini with api keys for accurate results)
-- httprobe to discover live hosts/domains from the amass results
-- httpx to verify reachable hosts from the httprobe results
-- spider to check for directories on each discovered url from httpx (Needs refining) 
-- nuclei for basic recon checks on the verified hosts from httpx
-
-Unfortunately the results must be manually parsed or fed into another script for further target enumeration. It's a great start for getting an initial footprint of the target. 
-
-```bash
-
-./recon.sh -p PROJECTNAME -d DOMAIN(s) #multiple domains can be listed here here 
 
 ```
 
