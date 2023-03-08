@@ -11,6 +11,14 @@ function tools_install() {
 	wget -q -O winpeas.exe https://github.com/carlospolop/PEASS-ng/releases/download/20230219/winPEASx64.exe && \
 	wget -q -O sharp.ps1 https://github.com/BloodHoundAD/BloodHound/raw/master/Collectors/SharpHound.ps1 && \
 	wget -q -O nc.exe https://github.com/ShutdownRepo/Exegol-resources/raw/main/windows/nc.exe && \
-	wget -q https://github.com/rivermont/spidy/releases/download/1.4.0/spidy.zip && unzip spidy.zip -d ./spidy && rm spidy.zip
+	wget -q https://github.com/rivermont/spidy/releases/download/1.4.0/spidy.zip && unzip spidy.zip -d ./spidy && rm spidy.zip && \
+  wget -q -O SharpHound.exe \
+  "https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/SharpHound.exe" && \
+  wget -q -O nc.exe \
+  "https://gitlab.com/onemask/pentest-tools/-/raw/master/windows/nc.exe" && \
+  wget -q -O nc \
+  "https://github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/ncat"
+
 }
+
 tools_install

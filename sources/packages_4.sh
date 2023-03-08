@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function password() {
-    sudo apt-get install -y seclists wordlists crunch hydra john
+    sudo apt-get install -y seclists crunch hydra john hashcat
 }
 
 password
