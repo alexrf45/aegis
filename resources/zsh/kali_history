@@ -340,4 +340,5 @@ export USER=
 mysql $IP -u $USER -p
 ffuf -config ~/.ffufrc_domain
 ffuf -config ~/.ffufrc
+rustscan -a $IP -r 20-20000 -- -A -sC -sV > $NAME-scan-1.txt
 
