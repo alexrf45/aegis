@@ -66,7 +66,9 @@ RUN sudo chmod +x /home/kali/sources/go.sh \
 
 RUN sudo chmod +x /home/kali/sources/tools.sh \
 	&& /home/kali/sources/tools.sh tools_install
-	
+
+RUN sudo dpkg -i /home/kali/resources/rustscan_2.1.1_amd64.deb
+
 RUN git clone https://github.com/samratashok/nishang.git
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" \
