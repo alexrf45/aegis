@@ -49,17 +49,10 @@ ADD resources /home/kali/resources/
 RUN sudo chown -R kali:kali /home/kali/resources
 
 RUN mkdir .logs && mkdir .local && mkdir tools \
-	&& cp /home/kali/resources/config.ini /home/kali/.local/config.ini \
 	&& cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
 	&& cp /home/kali/resources/resolvers.txt /home/kali/tools/resolvers.txt \
-	&& cp /home/kali/resources/ffufrc /home/kali/tools/.ffufrc \
-	&& cp /home/kali/resources/ffufrc_subdomain /home/kali/tools/.ffufrc_subdomain \
 	&& cp -r /home/kali/resources/.BurpSuite /home/kali/.BurpSuite \
 	&& sudo cp /home/kali/resources/neo4j.conf /usr/share/neo4j/conf/.
-
-#TODO: fix python env
-# RUN sudo chmod +x /home/kali/sources/python.sh \
-# 	&& /home/kali/sources/python.sh python_tools 
 
 RUN sudo chmod +x /home/kali/sources/go.sh \
 	&& /home/kali/sources/go.sh install_go

