@@ -40,11 +40,8 @@ Custom zsh aliases included:
 | i          | 'sudo apt-get install'                                                                               |
 | public     | 'curl wtfismyip.com/text'                                                                                   |
 | speedtest  | 'curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -'     |
-| scan       | 'nmap -sC -sV -p- -oA $NAME'                                                                                |
-| ffuf-quick | 'ffuf -u $URL -w /usr/share/seclists/Discovery/Web-Content/common.txt' -o $NAME-results.txt -mc 200 -fs 0' |
 | portscan   | 'cp /root/nishang/Scan/Invoke-PortScan.ps1 .'                                                         |
 | whatweb    | 'whatweb -a=1 -U=$AGENT -t 10 --wait=0.2'                                                             |
-| spidy      | 'python3 ~/tools/spidey/crawler.py'                                                                   |
 
 ## Usage/Examples
 
@@ -117,26 +114,28 @@ function kali() {
    	 	docker run --name $NAME -it \
    	 	--net=host --entrypoint=/bin/zsh \
 		--cap-add=NET_ADMIN \
-   	 	-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
+   	 	-v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
+        -v /tmp/.X11-unix:/tmp/.X11-unix \
     	-e DISPLAY=$DISPLAY \
 		-e NAME=$NAME \
 		-e TARGET=$TARGET \
 		-e IP=$IP \
 		-e DOMAIN=$DOMAIN \
-    -e TZ=America/New_York \
+        -e TZ=America/New_York \
    	 	-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
    	 	-w /${dirname} fonalex45/katet:latest
 	else
 		docker run --name $NAME -it \
 		--net=host --entrypoint=/bin/zsh \
 		--cap-add=NET_ADMIN \
-		-v $HOME/.Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -e DISPLAY=$DISPLAY \
+		-v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
+        -v /tmp/.X11-unix:/tmp/.X11-unix \
+        -e DISPLAY=$DISPLAY \
 		-e NAME=$NAME \
 		-e TARGET=$TARGET \
 		-e IP=$IP \
 		-e DOMAIN=$DOMAIN \
-    -e TZ=America/New_York \
+        -e TZ=America/New_York \
 		-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
 		-w /${dirname} fonalex45/katet:latest
 	fi
