@@ -328,4 +328,7 @@ netdiscover -i INTERFACE_NAME -r IP_RANGE/CIDR -p
 sudo nmap -sU --min-rate 10000 --reason IP
 snmpwalk -v2c -c COMMUNITYSTRING IP
 python3 snmp-brute.py -t IP -f WORDLIST
-
+cat mailroom-ffuf.json| jq '.results[]|select(.status == '200')' | jq -c '{url:.url,length:.length}' | sort -u -t, -k2 | awk -F '"' '{print $4}' > 200.txt
+cat mailroom-ffuf.json| jq '.results[]|select(.status == '403')' | jq -c '{url:.url,length:.length}' | sort -u -t, -k2 | awk -F '"' '{print $4}' > 200.txt
+cat mailroom-ffuf.json| jq '.results[]|select(.status == '404')' | jq -c '{url:.url,length:.length}' | sort -u -t, -k2 | awk -F '"' '{print $4}' > 200.txt
+cat mailroom-ffuf.json| jq '.results[]|select(.status == '500')' | jq -c '{url:.url,length:.length}' | sort -u -t, -k2 | awk -F '"' '{print $4}' > 200.txt
