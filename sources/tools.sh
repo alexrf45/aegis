@@ -21,7 +21,7 @@ function tools_install() {
 			"https://github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/ncat" &&
 		wget -q -O gofourohfour.tar.gz \
 			"https://github.com/sentrium-security/GoFourOhFour/releases/download/v1.0.1/GoFourOhFour-v1.0.1-linux-amd64.tar.gz" &&
-		tar -xvf gofourohfour.tar && mv GoFourOhFour /home/kali/.local/GoFourOhFour
+		gunzip gofourohfour.tar.gz && tar -xvf gofourohfour.tar && mv GoFourOhFour /home/kali/.local/GoFourOhFour
 }
 
 tools_install
