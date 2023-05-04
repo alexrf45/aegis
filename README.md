@@ -145,4 +145,12 @@ function destroy-kali() {
 }
 
 ```
+## Command list:
+
+- Tired of looking for a specific command or long one liner? You can use this handy alias to search the prebuilt zsh history
+for commonly used commands. This is included in the container zshrc.
+
+```
+alias commands='history | cut -c 6-'
+```
 

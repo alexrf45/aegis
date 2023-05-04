@@ -66,6 +66,7 @@ alias t='tmux -f ~/.tmux.conf'
 alias i='sudo apt-get install -y'
 alias public='curl wtfismyip.com/text'
 alias py='python3'
+alias commands='history | cut -c 6-'
 
 #basic shortcuts with a windows target flavor
 alias cme='crackmapexec'
