@@ -6,6 +6,8 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
       -
         name: Set up QEMU
@@ -25,3 +27,10 @@ jobs:
         with:
           push: true
           tags: fonalex45/katet:latest
+      -
+        name: Notify Slack Channel of finished build
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+          channel: '#general'
+        if: always()
