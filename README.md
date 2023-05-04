@@ -15,7 +15,7 @@
  
 - [Exegol - Fully featured and community-driven hacking environment](https://github.com/ThePorgs/Exegol)
 
-## Fully Tested on: Debian 11, Arch Linux 5.17.8-zen, and Kali Linux 2022.04
+## Fully Tested on: Debian 11, Arch Linux 6.2.13-zen-1-zen, and Kali Linux 2023.1
 
 Docker is a life saver for reproducing a consistent environment for various types of assessments. Instead of wasting time configuring a Kali Linux virtual machine, this Docker image provides a repeatable environment for any type of engagement. 
 
@@ -26,7 +26,9 @@ Docker is a life saver for reproducing a consistent environment for various type
 - Persistant containers or just volume/workspace. 
 - Customizable resources and tooling, config files are located in the resources/ & sources/ directories
 - ***UPDATE***: container runs as kali and no longer root. This is consistent with the Kali OS and provides some additional
-security as well as ease of use for python & pip. 
+security as well as ease of use for python & pip.
+- UPDATE #2: I added a custom tmux configuration as well as the tpm plugin manager. Completely optional to use within the container but helpful
+for reducing the number of docker exec commands during an engagement.
 
 Custom zsh aliases included: 
 
@@ -41,11 +43,10 @@ Custom zsh aliases included:
 | public     | 'curl wtfismyip.com/text'                                                                                   |
 | speedtest  | 'curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -'     |
 | portscan   | 'cp /root/nishang/Scan/Invoke-PortScan.ps1 .'                                                         |
-| whatweb    | 'whatweb -a=1 -U=$AGENT -t 10 --wait=0.2'                                                             |
 
-## Usage/Examples
+# Usage/Examples:
 
-Initial Set up and testing:
+## Initial Set up and testing:
 
 ```bash
 
@@ -63,22 +64,19 @@ $ kali
 
 ```
 
-Pre-engagement:
+## Pre-engagement:
 
 ```bash
 
 $ export NAME="engagement-20xx-xx-xx-company.com"
 
 $ mkdir $NAME && cd $NAME
-
 ```
 
-Engagement: 
+## Logging: 
 
 ```bash
 $ kali
-
-Output:
 
 [ Sun Dec 04 2022  2:21PM ]  [ kali@dev-local:/engagement-20xx-xx-xx-company.com ]
  $ 
@@ -87,7 +85,7 @@ $ logfile $NAME
 
 $ cd /$NAME
 ```
-Customization: 
+## Customization:
 
 - You can build the image locally: 
 ```bash
@@ -100,44 +98,37 @@ $ docker build -t $IMAGE_NAME .
 
 ```
 
-- Feel free to edit the `zshrc` and add command examples in the `kali_history` based on desired configuration
+- Feel free to edit the `zshrc` and add command examples in the `history` based on desired configuration
 
-Container Functions for your .zshrc or .bashrc: 
+## Container Functions for .zshrc or .bashrc: 
 
 ```bash
-
 function kali() {
 	dirname=${PWD##*/}
 	if [ ! -d `pwd`/.kali-logs ];
 	then
-   	 	mkdir .kali-logs && \
-   	 	docker run --name $NAME -it \
-   	 	--net=host --entrypoint=/bin/zsh \
-		--cap-add=NET_ADMIN \
-   	 	-v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
-        -v /tmp/.X11-unix:/tmp/.X11-unix \
-    	-e DISPLAY=$DISPLAY \
-		-e NAME=$NAME \
-		-e TARGET=$TARGET \
-		-e IP=$IP \
-		-e DOMAIN=$DOMAIN \
-        -e TZ=America/New_York \
-   	 	-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
-   	 	-w /${dirname} fonalex45/katet:latest
+      mkdir .kali-logs && \
+      docker run --name $NAME -it \
+      --net=host --entrypoint=/bin/zsh \
+		  --cap-add=NET_ADMIN \
+      -v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
+      -v /tmp/.X11-unix:/tmp/.X11-unix \
+      -v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
+      -w /${dirname} fonalex45/katet:latest \
+      -e DISPLAY=$DISPLAY -e NAME=$NAME \
+      -e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
+      -e TZ=America/New_York
 	else
 		docker run --name $NAME -it \
 		--net=host --entrypoint=/bin/zsh \
 		--cap-add=NET_ADMIN \
 		-v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
-        -v /tmp/.X11-unix:/tmp/.X11-unix \
-        -e DISPLAY=$DISPLAY \
-		-e NAME=$NAME \
-		-e TARGET=$TARGET \
-		-e IP=$IP \
-		-e DOMAIN=$DOMAIN \
-        -e TZ=America/New_York \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
 		-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
-		-w /${dirname} fonalex45/katet:latest
+		-w /${dirname} fonalex45/katet:latest \
+    -e DISPLAY=$DISPLAY -e NAME=$NAME \
+		-e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
+    -e TZ=America/New_York
 	fi
 }
 
