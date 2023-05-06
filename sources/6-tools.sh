@@ -10,7 +10,7 @@ function tools_install() {
 		gunzip chisel.gz &&
 		wget -q -O win-chisel.gz \
 			"https://github.com/jpillora/chisel/releases/download/v1.8.1/chisel_1.8.1_windows_amd64.gz" &&
-		gunzip w-chisel.gz &&
+		gunzip win-chisel.gz &&
 		wget -q -O l.sh \
 			"https://github.com/carlospolop/PEASS-ng/releases/download/20230219/linpeas_linux_amd64" &&
 		wget -q -O winpeas.exe \
