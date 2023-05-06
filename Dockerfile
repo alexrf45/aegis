@@ -70,6 +70,8 @@ RUN cp /home/kali/resources/zsh/zshrc /home/kali/.zshrc
 RUN cp /home/kali/resources/zsh/ka-tet.zsh-theme /home/kali/.oh-my-zsh/themes/. \
   && cp /home/kali/resources/zsh/history /home/kali/.kali_history
 
+RUN tar -xvf /home/kali/resources/mozilla.tar.bz2 -C /home/kali/
+
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions \
   ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
