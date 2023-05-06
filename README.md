@@ -110,7 +110,7 @@ function kali() {
       mkdir .kali-logs && \
       docker run --name $NAME -it \
       --net=host --entrypoint=/bin/zsh \
-		  --cap-add=NET_ADMIN \
+      --cap-add=NET_ADMIN \
       -v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
       -v /tmp/.X11-unix:/tmp/.X11-unix \
       -v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
@@ -119,16 +119,16 @@ function kali() {
       -e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
       -e TZ=America/New_York
 	else
-		docker run --name $NAME -it \
-		--net=host --entrypoint=/bin/zsh \
-		--cap-add=NET_ADMIN \
-		-v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-		-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
-		-w /${dirname} fonalex45/katet:latest \
-    -e DISPLAY=$DISPLAY -e NAME=$NAME \
-		-e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
-    -e TZ=America/New_York
+	docker run --name $NAME -it \
+	--net=host --entrypoint=/bin/zsh \
+	--cap-add=NET_ADMIN \
+	-v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
+        -v /tmp/.X11-unix:/tmp/.X11-unix \
+	-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
+	-w /${dirname} fonalex45/katet:latest \
+        -e DISPLAY=$DISPLAY -e NAME=$NAME \
+	-e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
+        -e TZ=America/New_York
 	fi
 }
 
