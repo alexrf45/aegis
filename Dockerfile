@@ -2,7 +2,7 @@
 FROM kalilinux/kali-rolling:latest
 
 LABEL "author"="Sean Fontaine"
-LABEL "version"="v1.3.0"
+LABEL "version"="v1.3.2"
 LABEL "website"="https://r0land.link"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -29,20 +29,20 @@ ADD sources /home/kali/sources/
 
 RUN sudo chown -R kali:kali /home/kali/sources
 
-RUN sudo chmod +x /home/kali/sources/packages_0.sh && \
-  /home/kali/sources/packages_0.sh base
+RUN sudo chmod +x /home/kali/sources/0-base-pkgs.sh && \
+  /home/kali/sources/0-base-pkgs.sh base
 
-RUN sudo chmod +x /home/kali/sources/packages_1.sh && \
-  /home/kali/sources/packages_1.sh network
+RUN sudo chmod +x /home/kali/sources/1-ntwk-pkgs.sh && \
+  /home/kali/sources/1-ntwk-pkgs.sh network
 
-RUN sudo chmod +x /home/kali/sources/packages_2.sh && \
-  /home/kali/sources/packages_2.sh web
+RUN sudo chmod +x /home/kali/sources/2-web-pkgs.sh && \
+  /home/kali/sources/2-web-pkgs.sh web
 
-RUN sudo chmod +x /home/kali/sources/packages_3.sh && \
-  /home/kali/sources/packages_3.sh active_directory
+RUN sudo chmod +x /home/kali/sources/3-AD-pkgs.sh && \
+  /home/kali/sources/3-AD-pkgs.sh active_directory
 
-RUN sudo chmod +x /home/kali/sources/packages_4.sh && \
-  /home/kali/sources/packages_4.sh password
+RUN sudo chmod +x /home/kali/sources/4-password-pkgs.sh && \
+  /home/kali/sources/4-password-pkgs.sh password
 
 ADD resources /home/kali/resources/
 
@@ -52,11 +52,11 @@ RUN mkdir .logs && mkdir .local && mkdir tools \
   && cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
   && cp -r /home/kali/resources/.BurpSuite /home/kali/.BurpSuite
 
-RUN sudo chmod +x /home/kali/sources/go.sh \
-  && /home/kali/sources/go.sh install_go
+RUN sudo chmod +x /home/kali/sources/5-go.sh \
+  && /home/kali/sources/5-go.sh install_go
 
-RUN sudo chmod +x /home/kali/sources/tools.sh \
-  && /home/kali/sources/tools.sh tools_install
+RUN sudo chmod +x /home/kali/sources/6-tools.sh \
+  && /home/kali/sources/6-tools.sh tools_install
 
 RUN sudo dpkg -i /home/kali/resources/rustscan_2.1.1_amd64.deb
 
