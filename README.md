@@ -25,12 +25,16 @@ Docker is a life saver for reproducing a consistent environment for various type
 - Terminal Output logging using script: `logfile $NAME`
 - Persistant containers or just volume/workspace. 
 - Customizable resources and tooling, config files are located in the resources/ & sources/ directories
-- ***UPDATE***: container runs as kali and no longer root. This is consistent with the Kali OS and provides some additional
-security as well as ease of use for python & pip.
-- UPDATE #2: I added a custom tmux configuration as well as the tpm plugin manager. Completely optional to use within the container but helpful
-for reducing the number of docker exec commands during an engagement.
+- Non-root container
+- Tmux inside the container
+- UPDATE #3: I installed the latest crackmapexec instead of the kali package
+- UPDATE #4: Firefox can now be launched from the container.
+  Just run `firefox -P f0zy &`
+  - Extensions included:
+      - Wappalyzer
+      - Foxyproxy extensions with configs for burp, TOR and basic SOCKS proxy.
 
-Custom zsh aliases included: 
+### Custom zsh aliases included: 
 
 | alias      | command                                                                                              |
 |------------|------------------------------------------------------------------------------------------------------|
