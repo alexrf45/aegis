@@ -33,6 +33,7 @@ Docker is a life saver for reproducing a consistent environment for various type
   - Extensions included:
       - Wappalyzer
       - Foxyproxy extensions with configs for burp, TOR and basic SOCKS proxy.
+  MAJOR UPDATE: I've built a bash wrapper with user input for ease of use.
 
 ### Custom zsh aliases included: 
 
@@ -50,7 +51,7 @@ Docker is a life saver for reproducing a consistent environment for various type
 
 # Usage/Examples:
 
-## Initial Set up and testing:
+## Initial Set up:
 
 ```bash
 
@@ -58,24 +59,16 @@ $ git clone https://github.com/alexrf45/Ka-tet.git
 
 $ cd Ka-tet
 
-$ cat functions >> ~/.zshrc
+$ chmod +x katet
 
-$ . ~/.zshrc
+$ sudo cp katet /usr/local/bin
 
-$ export NAME=test
+$ cp USAGE.md ~/.local/USAGE.md
 
-$ kali
+$ katet guide
 
 ```
-
-## Pre-engagement:
-
-```bash
-
-$ export NAME="engagement-20xx-xx-xx-company.com"
-
-$ mkdir $NAME && cd $NAME
-```
+Further instructions are listed in the guide command.
 
 ## Logging: 
 
@@ -104,51 +97,7 @@ $ docker build -t $IMAGE_NAME .
 
 - Feel free to edit the `zshrc` and add command examples in the `history` based on desired configuration
 
-## Container Functions for .zshrc or .bashrc: 
 
-```bash
-function kali() {
-	dirname=${PWD##*/}
-	if [ ! -d `pwd`/.kali-logs ];
-	then
-      mkdir .kali-logs && \
-      docker run --name $NAME -it \
-      --net=host --entrypoint=/bin/zsh \
-      --cap-add=NET_ADMIN \
-      -v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
-      -v /tmp/.X11-unix:/tmp/.X11-unix \
-      -v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
-      -w /${dirname} fonalex45/katet:latest \
-      -e DISPLAY=$DISPLAY -e NAME=$NAME \
-      -e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
-      -e TZ=America/New_York
-	else
-	docker run --name $NAME -it \
-	--net=host --entrypoint=/bin/zsh \
-	--cap-add=NET_ADMIN \
-	-v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
-        -v /tmp/.X11-unix:/tmp/.X11-unix \
-	-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/${dirname} \
-	-w /${dirname} fonalex45/katet:latest \
-        -e DISPLAY=$DISPLAY -e NAME=$NAME \
-	-e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
-        -e TZ=America/New_York
-	fi
-}
-
-function enter-kali() {
-	docker exec -it $NAME /bin/zsh
-}
-
-function stop-kali() {
-	docker container stop $NAME
-}
-
-function destroy-kali() {
-	docker container rm $NAME
-}
-
-```
 ## Command list:
 
 - Tired of looking for a specific command or long one liner? You can use this handy alias to search the prebuilt zsh history

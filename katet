@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -e
 
@@ -6,42 +6,42 @@ BACKGROUND="230"
 FOREGROUND="57"
 BORDER="rounded"
 BORDER_BACKGROUND="212"
-BORDER_FOREGROUND="250"
+BORDER_FOREGROUND="56"
 PADDING="2 4"
 ALIGN="left"
 
-
-gum style --border $BORDER --margin "1" --padding "$PADDING" --border-foreground $BORDER_FOREGROUND \
-	"$(gum style --foreground $FOREGROUND '"A group of people bound by faith or destiny"')."
-
-project_name=$(gum input \
-	--prompt.bold \
-	--cursor.bold \
-	--prompt "> " \
-	--placeholder "Enter Project Name:")
-
-TIME_ZONE=$(gum input \
-	--prompt.bold \
-	--cursor.bold \
-	--prompt "> " \
-	--placeholder "Enter Desired Time Zone:")
-
-
-IMAGE=$(gum choose --cursor "[ ]" --selected-prefix "[✓]" "dev" "latest")
-
-gum confirm "Ready to start container ${project_name}?"
-
-gum spin --spinner pulse --title "Starting Container" -- sleep 2
-
-function folder_create() {
-	if [ ! -d $(pwd)/.kali-logs ]; then
-		mkdir .kali-logs
-	else
-		rm -r .kali-logs
-	fi
+### this functions displays a command reference
+guide() {
+	gum pager \
+		--bold \
+		--foreground=$FOREGROUND \
+		--border $BORDER \
+		--border-foreground=$BORDER_FOREGROUND <~/.local/USAGE.md
 }
 
+### container creation w/ prompts for container name and time zone
 create() {
+	gum style --border $BORDER --margin "1" --padding "$PADDING" --border-foreground $BORDER_FOREGROUND \
+		"$(gum style --foreground $FOREGROUND '"A group of people bound by faith or destiny"')."
+
+	project_name=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "> " \
+		--placeholder "Enter Project Name:")
+
+	TIME_ZONE=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "> " \
+		--placeholder "Enter Desired Time Zone:")
+
+	IMAGE=$(gum choose --cursor "[ ]" --selected-prefix "[✓]" "dev" "latest")
+
+	gum confirm "Ready to start container ${project_name}?"
+
+	gum spin --spinner pulse --title "Starting Container" -- sleep 2
+
 	mkdir $project_name && cd $project_name &&
 		docker run --name $project_name -it \
 			--net=host --entrypoint=/bin/zsh \
@@ -53,25 +53,60 @@ create() {
 			-e DISPLAY=$DISPLAY \
 			-e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
 			-e TZ=$TIME_ZONE -e NAME=$project_name \
-			fonalex45/katet:$IMAGE 
+			fonalex45/katet:$IMAGE
+
 }
 
-
-enter() {
-	docker exec -it $NAME /bin/zsh
+### creates logging directory
+folder_create() {
+	if [ ! -d $(pwd)/.kali-logs ]; then
+		mkdir .kali-logs
+	else
+		rm -r .kali-logs
+	fi
 }
 
+### starts existing container using it's name
 start() {
+	NAME=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "> " \
+		--placeholder "Enter Container Name:")
 	docker container start $NAME
 }
 
-stop () {
+### enters existing container using it's name
+enter() {
+	NAME=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "> " \
+		--placeholder "Enter Container Name:")
+	docker exec -it $NAME /bin/zsh
+}
+
+### stops existing container using it's name
+stop() {
+	NAME=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "> " \
+		--placeholder "Enter Container Name:")
 	docker container stop $NAME
 }
 
+### destroys existing container using it's name
 destroy() {
+	NAME=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "> " \
+		--placeholder "Enter Container Name:")
 	docker container rm $NAME
 }
 
 folder_create
 
+#Allows you to call a specific function
+$1
