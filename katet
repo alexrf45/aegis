@@ -1,5 +1,9 @@
 #!/bin/bash
 
+##### Katet - Security research, penetration testing and CTFs made easy with Docker#####
+#Version: 1.5.0
+#Author: Sean Fontaine
+
 set -e
 
 BACKGROUND="230"
@@ -13,34 +17,51 @@ ALIGN="left"
 ### this functions displays a command reference
 guide() {
 	gum pager \
-		--bold \
-		--foreground=$FOREGROUND \
-		--border $BORDER \
-		--border-foreground=$BORDER_FOREGROUND <~/.local/USAGE.md
+		--theme dracula \
+		<~/.local/USAGE.md
+}
+
+##install dependencies
+install() {
+	gum spin --spinner pusle --title "Installing dependencies.." --
+	curl -fsSL https://get.docker.com -o get-docker.sh
+	sh get-docker.sh
+	sudo mkdir -p /etc/apt/keyrings
+	curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
+	echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
+	sudo apt update && sudo apt install gum
+}
+
+build() {
+	tag=$(gum input \
+		--prompt " " \
+		--placeholder "Enter Desired Time Zone:")
+	docker build -t katet:$tag .
 }
 
 ### container creation w/ prompts for container name and time zone
 create() {
 	gum style --border $BORDER --margin "1" --padding "$PADDING" --border-foreground $BORDER_FOREGROUND \
-		"$(gum style --foreground $FOREGROUND '"A group of people bound by faith or destiny"')."
+		"$(gum style --foreground $FOREGROUND '" Katet: A group of people bound by faith or destiny"')."
 
 	project_name=$(gum input \
 		--prompt.bold \
 		--cursor.bold \
-		--prompt "> " \
+		--prompt "󰣞 " \
 		--placeholder "Enter Project Name:")
 
 	TIME_ZONE=$(gum input \
-		--prompt.bold \
-		--cursor.bold \
-		--prompt "> " \
+		--prompt " " \
 		--placeholder "Enter Desired Time Zone:")
 
-	IMAGE=$(gum choose --cursor "[ ]" --selected-prefix "[✓]" "dev" "latest")
+	IMAGE=$(gum choose --header "Choose Desired Image" \
+		--selected.bold \
+		--cursor "[ ]" \
+		--selected-prefix "[✓]" "dev" "latest")
 
-	gum confirm "Ready to start container ${project_name}?"
+	gum confirm "Ready to start project ${project_name}?"
 
-	gum spin --spinner pulse --title "Starting Container" -- sleep 2
+	gum spin --spinner pulse --title "Starting Container" -- sleep 1
 
 	mkdir $project_name && cd $project_name &&
 		docker run --name $project_name -it \
@@ -54,6 +75,45 @@ create() {
 			-e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
 			-e TZ=$TIME_ZONE -e NAME=$project_name \
 			fonalex45/katet:$IMAGE
+
+}
+
+custom-create() {
+	gum style --border $BORDER --margin "1" --padding "$PADDING" --border-foreground $BORDER_FOREGROUND \
+		"$(gum style --foreground $FOREGROUND '" Katet: A group of people bound by faith or destiny"')."
+
+	project_name=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "󰣞 " \
+		--placeholder "Enter Project Name:")
+
+	TIME_ZONE=$(gum input \
+		--prompt " " \
+		--placeholder "Enter Desired Time Zone:")
+
+	image_tag=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "󰡨 " \
+		--placeholder "Enter custom image tag:")
+
+	gum confirm "Ready to start project ${project_name}?"
+
+	gum spin --spinner pulse --title "Starting Container" -- sleep 1
+
+	mkdir $project_name && cd $project_name &&
+		docker run --name $project_name -it \
+			--net=host --entrypoint=/bin/zsh \
+			--cap-add=NET_ADMIN \
+			-v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
+			-v /tmp/.X11-unix:/tmp/.X11-unix \
+			-v $(pwd)/.kali-logs:/root/.logs:rw -v $(pwd):/$project_name \
+			-w /$project_name \
+			-e DISPLAY=$DISPLAY \
+			-e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
+			-e TZ=$TIME_ZONE -e NAME=$project_name \
+			fonalex45/katet:$image_tag
 
 }
 
