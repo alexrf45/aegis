@@ -4,8 +4,6 @@
 
 katet guide - displays this guide
 
-katet install - installs dependencies
-
 katet build - build a custom image
 
 katet create - spins up a new container
