@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+set -e
+
+BACKGROUND="230"
+FOREGROUND="57"
+BORDER="rounded"
+BORDER_BACKGROUND="212"
+BORDER_FOREGROUND="250"
+PADDING="2 4"
+ALIGN="left"
+
+
+gum style --border $BORDER --margin "1" --padding "$PADDING" --border-foreground $BORDER_FOREGROUND \
+	"$(gum style --foreground $FOREGROUND '"A group of people bound by faith or destiny"')."
+
+project_name=$(gum input \
+	--prompt.bold \
+	--cursor.bold \
+	--prompt "> " \
+	--placeholder "Enter Project Name:")
+
+TIME_ZONE=$(gum input \
+	--prompt.bold \
+	--cursor.bold \
+	--prompt "> " \
+	--placeholder "Enter Desired Time Zone:")
+
+
+IMAGE=$(gum choose --cursor "[ ]" --selected-prefix "[✓]" "dev" "latest")
+
+gum confirm "Ready to start container ${project_name}?"
+
+gum spin --spinner pulse --title "Starting Container" -- sleep 2
+
+function folder_create() {
+	if [ ! -d $(pwd)/.kali-logs ]; then
+		mkdir .kali-logs
+	else
+		rm -r .kali-logs
+	fi
+}
+
+create() {
+	mkdir $project_name && cd $project_name &&
+		docker run --name $project_name -it \
+			--net=host --entrypoint=/bin/zsh \
+			--cap-add=NET_ADMIN \
+			-v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
+			-v /tmp/.X11-unix:/tmp/.X11-unix \
+			-v $(pwd)/.kali-logs:/root/.logs:rw -v $(pwd):/$project_name \
+			-w /$project_name \
+			-e DISPLAY=$DISPLAY \
+			-e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
+			-e TZ=$TIME_ZONE -e NAME=$project_name \
+			fonalex45/katet:$IMAGE 
+}
+
+
+enter() {
+	docker exec -it $NAME /bin/zsh
+}
+
+start() {
+	docker container start $NAME
+}
+
+stop () {
+	docker container stop $NAME
+}
+
+destroy() {
+	docker container rm $NAME
+}
+
+folder_create
+
