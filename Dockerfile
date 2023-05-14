@@ -2,7 +2,7 @@
 FROM kalilinux/kali-rolling:latest
 
 LABEL "author"="Sean Fontaine"
-LABEL "version"="v1.4.0"
+LABEL "version"="v1.5.0"
 LABEL "website"="https://r0land.link"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -48,9 +48,11 @@ ADD resources /home/kali/resources/
 
 RUN sudo chown -R kali:kali /home/kali/resources
 
-RUN mkdir .logs && mkdir .local && mkdir tools \
+RUN mkdir .logs && mkdir .local && mkdir tools && mkdir -p /home/kali/.config/tmuxp \
   && cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
-  && cp -r /home/kali/resources/.BurpSuite /home/kali/.BurpSuite
+  && cp -r /home/kali/resources/.BurpSuite /home/kali/.BurpSuite \
+  && cp /home/kali/resources/ctf.yaml /home/kali/.config/tmuxp/ctf.yaml \
+  && cp -r /home/kali/resources/bloodhound /home/kali/.config/bloodhound
 
 RUN sudo chmod +x /home/kali/sources/5-go.sh \
   && /home/kali/sources/5-go.sh install_go

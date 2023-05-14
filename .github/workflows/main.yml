@@ -26,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: fonalex45/katet:latest
+          tags: fonalex45/katet:main
       -
         name: Notify Slack Channel of finished build
         uses: act10ns/slack@v1

@@ -151,6 +151,8 @@ ms14-068.py -u "$USER"@"$DOMAIN" --rc4 "$NT_HASH" -s "$DOMAIN_SID" -d "$DC_HOST"
 mysql $IP -u $USER -p
 nbtscan -r 192.168.56.0/24
 nc -nvlp
+neo4j start
+neo4j stop
 netdiscover -i INTERFACE_NAME -r IP_RANGE/CIDR -p
 nfc-list
 nfc-scan-device -v
@@ -227,6 +229,8 @@ rlwrap nc -nvlp $PORT
 rpcclient -U "$DOMAIN"/"$USER" "$TARGET"
 rpcclient -U '' -N "$DC_HOST"
 rpcdump.py "$DC_HOST" | grep -A 6 MS-RPRN
+rustscan -a $CIDR -r 20-20000 -- -A -sC -sV > $NAME-scan-1.txt
+rustscan -a 'hosts.txt' -r 20-20000 -- -A -sC -sV > $NAME-scan-1.txt
 rustscan -a $IP -r 20-20000 -- -A -sC -sV > $NAME-scan-1.txt
 scp chisel -i id_rsa $USER@$DOMAIN:/dev/shm/chisel
 scp pspy64 -i id_rsa $USER@$DOMAIN:/dev/shm/psi

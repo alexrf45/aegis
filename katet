@@ -1,0 +1,169 @@
+#!/bin/bash
+
+##### Katet - Security research, penetration testing and CTFs made easy with Docker#####
+#Version: 1.5.0
+#Author: Sean Fontaine
+
+set -e
+
+BACKGROUND="230"
+FOREGROUND="57"
+BORDER="rounded"
+BORDER_BACKGROUND="212"
+BORDER_FOREGROUND="56"
+PADDING="2 4"
+ALIGN="left"
+
+### this functions displays a command reference
+guide() {
+	gum format --theme dracula <$HOME/.katet/USAGE.md
+}
+
+#### build custom image
+build() {
+	tag=$(gum input \
+		--prompt " " \
+		--placeholder "Enter Desired image tag:")
+	docker build -t katet:$tag .
+}
+
+### creates logging directory
+folder_create() {
+	if [ ! -d $(pwd)/.kali-logs ]; then
+		mkdir .kali-logs
+	else
+		sudo rm -r .kali-logs && mkdir .kali-logs
+	fi
+}
+
+### container creation w/ prompts for container name and time zone
+create() {
+	gum style --border $BORDER --margin "1" --padding "$PADDING" --border-foreground $BORDER_FOREGROUND \
+		"$(gum style --foreground $FOREGROUND '" Katet: A group of people bound by faith or destiny"')."
+
+	PROJECT_NAME=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "󰣞 " \
+		--placeholder "Enter Project Name:")
+
+	TIME_ZONE=$(gum input \
+		--prompt " " \
+		--placeholder "Enter Desired Time Zone:")
+
+	IMAGE=$(gum choose --header "Choose Desired Image" \
+		--selected.bold \
+		--cursor "[ ]" \
+		--selected-prefix "[✓]" "dev" "latest")
+
+	gum confirm "Ready to start project ${PROJECT_NAME}?"
+
+	gum spin --spinner pulse --title "Starting Container" -- sleep 1
+
+	mkdir $PROJECT_NAME && cd $PROJECT_NAME &&
+		docker run --name $PROJECT_NAME -it \
+			--net=host --entrypoint=/bin/zsh \
+			--cap-add=NET_ADMIN \
+			-v $XAUTHORITY:/home/kali/.Xauthority:ro \
+			-v /tmp/.X11-unix:/tmp/.X11-unix \
+			-v $(pwd)/.kali-logs:/root/.logs:rw -v $(pwd):/$PROJECT_NAME \
+			-w /$PROJECT_NAME \
+			-e DISPLAY=$DISPLAY \
+			-e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
+			-e TZ=$TIME_ZONE -e NAME=$PROJECT_NAME \
+			fonalex45/katet:$IMAGE
+
+}
+
+#### Creates container using user built image. Useful if you need to tweak the image for
+# tool versions or simply want to field your own
+custom-create() {
+	gum style --border $BORDER --margin "1" --padding "$PADDING" --border-foreground $BORDER_FOREGROUND \
+		"$(gum style --foreground $FOREGROUND '" Katet: A group of people bound by faith or destiny"')."
+
+	PROJECT_NAME=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "󰣞 " \
+		--placeholder "Enter Project Name:")
+
+	TIME_ZONE=$(gum input \
+		--prompt " " \
+		--placeholder "Enter Desired Time Zone:")
+
+	IMAGE_TAG=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "󰡨 " \
+		--placeholder "Enter custom image tag:")
+
+	gum confirm "Ready to start project ${PROJECT_NAME}?"
+
+	gum spin --spinner pulse --title "Starting Container" -- sleep 1
+
+	mkdir $PROJECT_NAME && cd $PROJECT_NAME &&
+		docker run --name $PROJECT_NAME -it \
+			--net=host --entrypoint=/bin/zsh \
+			--cap-add=NET_ADMIN \
+			-v $HOME/.katet:/home/kali/.katet \
+			-v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
+			-v /tmp/.X11-unix:/tmp/.X11-unix \
+			-v $(pwd)/.kali-logs:/root/.logs:rw -v $(pwd):/$PROJECT_NAME \
+			-w /$PROJECT_NAME \
+			-e DISPLAY=$DISPLAY \
+			-e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
+			-e TZ=$TIME_ZONE -e NAME=$PROJECT_NAME \
+			fonalex45/katet:$IMAGE_TAG
+
+}
+
+list() {
+	docker image ls --format json | jq -r '. | .Repository + "/" + .Tag' >images.json &&
+		gum pager --border-foreground $BORDER_FOREGROUND --bold <images.json &&
+		rm images.json
+}
+
+### starts existing container using it's name
+start() {
+	NAME=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "> " \
+		--placeholder "Enter Container Name:")
+	gum spin --spinner pulse --title "Starting Container {$NAME}" -- docker container start $NAME
+}
+
+### enters existing container using it's name
+enter() {
+	NAME=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "> " \
+		--placeholder "Enter Container Name:")
+	docker exec -it $NAME /bin/zsh
+}
+
+### stops existing container using it's name
+stop() {
+	NAME=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "> " \
+		--placeholder "Enter Container Name:")
+	gum spin --spinner pulse --title "Stopping container ${NAME}" -- docker container stop $NAME
+}
+
+### destroys existing container using it's name
+destroy() {
+	NAME=$(gum input \
+		--prompt.bold \
+		--cursor.bold \
+		--prompt "> " \
+		--placeholder "Enter Container Name:")
+	gum spin --spinner pulse --title "destroying Container ${NAME}" -- docker container rm $NAME
+}
+
+folder_create #checks for logging directory. always executes.Work in progress.
+
+#Allows you to call any of the specified functions such as create or build
+$1
