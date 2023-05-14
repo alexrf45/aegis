@@ -8,7 +8,7 @@ katet build - build a custom image
 
 katet create - spins up a new container
 
-katet custom-create - spinds up a new container with user built image
+katet custom-create - spins up a new container with user built image
 
 katet start - starts an specified container
 

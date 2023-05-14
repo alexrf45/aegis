@@ -61,7 +61,7 @@
   },
   "databaseInfo": {
     "url": "bolt://localhost:7687",
-    "user": "kali",
+    "user": "neo4j",
     "password": "kali"
   }
 }

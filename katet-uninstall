@@ -1,6 +1,7 @@
 #!/bin/bash
 
 sudo rm /usr/local/bin/katet
-sudo rm /usr/local/bin/katet-uninstall
 
 rm -r $HOME/.katet
+
+sudo rm /usr/local/bin/katet-uninstall

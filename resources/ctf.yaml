@@ -1,0 +1,25 @@
+session_name: ctf
+windows:
+- window_name: recon
+  layout: tiled
+  panes:
+   -
+
+- window_name: enum
+  layout: tiled
+  panes:
+    -
+
+- window_name: foothold_pivot
+  layout: tiled
+  panes:
+    -
+
+- window_name: privesc
+  layout: tiled
+  panes:
+    -
+- window_name: vpn
+  layout: tiled
+  panes:
+    -

@@ -151,6 +151,8 @@ ms14-068.py -u "$USER"@"$DOMAIN" --rc4 "$NT_HASH" -s "$DOMAIN_SID" -d "$DC_HOST"
 mysql $IP -u $USER -p
 nbtscan -r 192.168.56.0/24
 nc -nvlp
+neo4j start
+neo4j stop
 netdiscover -i INTERFACE_NAME -r IP_RANGE/CIDR -p
 nfc-list
 nfc-scan-device -v

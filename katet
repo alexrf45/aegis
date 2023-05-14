@@ -23,8 +23,17 @@ guide() {
 build() {
 	tag=$(gum input \
 		--prompt " " \
-		--placeholder "Enter Desired Time Zone:")
+		--placeholder "Enter Desired image tag:")
 	docker build -t katet:$tag .
+}
+
+### creates logging directory
+folder_create() {
+	if [ ! -d $(pwd)/.kali-logs ]; then
+		mkdir .kali-logs
+	else
+		sudo rm -r .kali-logs && mkdir .kali-logs
+	fi
 }
 
 ### container creation w/ prompts for container name and time zone
@@ -55,7 +64,7 @@ create() {
 		docker run --name $PROJECT_NAME -it \
 			--net=host --entrypoint=/bin/zsh \
 			--cap-add=NET_ADMIN \
-			-v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
+			-v $XAUTHORITY:/home/kali/.Xauthority:ro \
 			-v /tmp/.X11-unix:/tmp/.X11-unix \
 			-v $(pwd)/.kali-logs:/root/.logs:rw -v $(pwd):/$PROJECT_NAME \
 			-w /$PROJECT_NAME \
@@ -108,13 +117,10 @@ custom-create() {
 
 }
 
-### creates logging directory
-folder_create() {
-	if [ ! -d $(pwd)/.kali-logs ]; then
-		mkdir .kali-logs
-	else
-		sudo rm -r .kali-logs && mkdir .kali-logs
-	fi
+list() {
+	docker image ls --format json | jq -r '. | .Repository + "/" + .Tag' >images.json &&
+		gum pager --border-foreground $BORDER_FOREGROUND --bold <images.json &&
+		rm images.json
 }
 
 ### starts existing container using it's name
@@ -124,7 +130,7 @@ start() {
 		--cursor.bold \
 		--prompt "> " \
 		--placeholder "Enter Container Name:")
-	docker container start $NAME
+	gum spin --spinner pulse --title "Starting Container {$NAME}" -- docker container start $NAME
 }
 
 ### enters existing container using it's name
@@ -144,7 +150,7 @@ stop() {
 		--cursor.bold \
 		--prompt "> " \
 		--placeholder "Enter Container Name:")
-	docker container stop $NAME
+	gum spin --spinner pulse --title "Stopping container ${NAME}" -- docker container stop $NAME
 }
 
 ### destroys existing container using it's name
@@ -154,7 +160,7 @@ destroy() {
 		--cursor.bold \
 		--prompt "> " \
 		--placeholder "Enter Container Name:")
-	docker container rm $NAME
+	gum spin --spinner pulse --title "destroying Container ${NAME}" -- docker container rm $NAME
 }
 
 folder_create #checks for logging directory. always executes.Work in progress.
