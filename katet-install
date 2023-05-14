@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt update -y && sudo apt install curl git
+sudo apt update -y && sudo apt install -y curl git
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
 sudo mkdir -p /etc/apt/keyrings
@@ -10,5 +10,8 @@ sudo apt update && sudo apt install gum
 
 chmod +x katet &&
 	sudo cp katet /usr/local/bin
+
+chmod +x katet-uninstall &&
+	sudo cp katet-uninstall /usr/local/bin
 
 mkdir $HOME/.katet && cp USAGE.md $HOME/.katet/USAGE.md

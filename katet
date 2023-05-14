@@ -16,9 +16,7 @@ ALIGN="left"
 
 ### this functions displays a command reference
 guide() {
-	gum pager \
-		--theme dracula \
-		<$HOME/.katet/USAGE.md
+	gum format --theme dracula <$HOME/.katet/USAGE.md
 }
 
 #### build custom image
@@ -34,7 +32,7 @@ create() {
 	gum style --border $BORDER --margin "1" --padding "$PADDING" --border-foreground $BORDER_FOREGROUND \
 		"$(gum style --foreground $FOREGROUND '" Katet: A group of people bound by faith or destiny"')."
 
-	project_name=$(gum input \
+	PROJECT_NAME=$(gum input \
 		--prompt.bold \
 		--cursor.bold \
 		--prompt "󰣞 " \
@@ -49,30 +47,32 @@ create() {
 		--cursor "[ ]" \
 		--selected-prefix "[✓]" "dev" "latest")
 
-	gum confirm "Ready to start project ${project_name}?"
+	gum confirm "Ready to start project ${PROJECT_NAME}?"
 
 	gum spin --spinner pulse --title "Starting Container" -- sleep 1
 
-	mkdir $project_name && cd $project_name &&
-		docker run --name $project_name -it \
+	mkdir $PROJECT_NAME && cd $PROJECT_NAME &&
+		docker run --name $PROJECT_NAME -it \
 			--net=host --entrypoint=/bin/zsh \
 			--cap-add=NET_ADMIN \
 			-v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
 			-v /tmp/.X11-unix:/tmp/.X11-unix \
-			-v $(pwd)/.kali-logs:/root/.logs:rw -v $(pwd):/$project_name \
-			-w /$project_name \
+			-v $(pwd)/.kali-logs:/root/.logs:rw -v $(pwd):/$PROJECT_NAME \
+			-w /$PROJECT_NAME \
 			-e DISPLAY=$DISPLAY \
 			-e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
-			-e TZ=$TIME_ZONE -e NAME=$project_name \
+			-e TZ=$TIME_ZONE -e NAME=$PROJECT_NAME \
 			fonalex45/katet:$IMAGE
 
 }
 
+#### Creates container using user built image. Useful if you need to tweak the image for
+# tool versions or simply want to field your own
 custom-create() {
 	gum style --border $BORDER --margin "1" --padding "$PADDING" --border-foreground $BORDER_FOREGROUND \
 		"$(gum style --foreground $FOREGROUND '" Katet: A group of people bound by faith or destiny"')."
 
-	project_name=$(gum input \
+	PROJECT_NAME=$(gum input \
 		--prompt.bold \
 		--cursor.bold \
 		--prompt "󰣞 " \
@@ -82,28 +82,29 @@ custom-create() {
 		--prompt " " \
 		--placeholder "Enter Desired Time Zone:")
 
-	image_tag=$(gum input \
+	IMAGE_TAG=$(gum input \
 		--prompt.bold \
 		--cursor.bold \
 		--prompt "󰡨 " \
 		--placeholder "Enter custom image tag:")
 
-	gum confirm "Ready to start project ${project_name}?"
+	gum confirm "Ready to start project ${PROJECT_NAME}?"
 
 	gum spin --spinner pulse --title "Starting Container" -- sleep 1
 
-	mkdir $project_name && cd $project_name &&
-		docker run --name $project_name -it \
+	mkdir $PROJECT_NAME && cd $PROJECT_NAME &&
+		docker run --name $PROJECT_NAME -it \
 			--net=host --entrypoint=/bin/zsh \
 			--cap-add=NET_ADMIN \
+			-v $HOME/.katet:/home/kali/.katet \
 			-v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
 			-v /tmp/.X11-unix:/tmp/.X11-unix \
-			-v $(pwd)/.kali-logs:/root/.logs:rw -v $(pwd):/$project_name \
-			-w /$project_name \
+			-v $(pwd)/.kali-logs:/root/.logs:rw -v $(pwd):/$PROJECT_NAME \
+			-w /$PROJECT_NAME \
 			-e DISPLAY=$DISPLAY \
 			-e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
-			-e TZ=$TIME_ZONE -e NAME=$project_name \
-			fonalex45/katet:$image_tag
+			-e TZ=$TIME_ZONE -e NAME=$PROJECT_NAME \
+			fonalex45/katet:$IMAGE_TAG
 
 }
 
@@ -112,7 +113,7 @@ folder_create() {
 	if [ ! -d $(pwd)/.kali-logs ]; then
 		mkdir .kali-logs
 	else
-		rm -r .kali-logs
+		sudo rm -r .kali-logs && mkdir .kali-logs
 	fi
 }
 
@@ -156,7 +157,7 @@ destroy() {
 	docker container rm $NAME
 }
 
-folder_create
+folder_create #checks for logging directory. always executes.Work in progress.
 
-#Allows you to call a specific function
+#Allows you to call any of the specified functions such as create or build
 $1
