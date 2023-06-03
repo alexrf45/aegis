@@ -2,7 +2,7 @@
 FROM kalilinux/kali-rolling:latest
 
 LABEL "author"="Sean Fontaine"
-LABEL "version"="v1.5.0"
+LABEL "version"="v1.5.1"
 LABEL "website"="https://r0land.link"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -59,8 +59,6 @@ RUN sudo chmod +x /home/kali/sources/5-go.sh \
 
 RUN sudo chmod +x /home/kali/sources/6-tools.sh \
   && /home/kali/sources/6-tools.sh tools_install
-
-RUN sudo dpkg -i /home/kali/resources/rustscan_2.1.1_amd64.deb
 
 RUN git clone https://github.com/samratashok/nishang.git
 

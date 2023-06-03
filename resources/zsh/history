@@ -229,9 +229,6 @@ rlwrap nc -nvlp $PORT
 rpcclient -U "$DOMAIN"/"$USER" "$TARGET"
 rpcclient -U '' -N "$DC_HOST"
 rpcdump.py "$DC_HOST" | grep -A 6 MS-RPRN
-rustscan -a $CIDR -r 20-20000 -- -A -sC -sV > $NAME-scan-1.txt
-rustscan -a 'hosts.txt' -r 20-20000 -- -A -sC -sV > $NAME-scan-1.txt
-rustscan -a $IP -r 20-20000 -- -A -sC -sV > $NAME-scan-1.txt
 scp chisel -i id_rsa $USER@$DOMAIN:/dev/shm/chisel
 scp pspy64 -i id_rsa $USER@$DOMAIN:/dev/shm/psi
 secretsdump
