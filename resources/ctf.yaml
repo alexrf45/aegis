@@ -4,22 +4,30 @@ windows:
   layout: tiled
   panes:
    -
+   -
 
 - window_name: enum
   layout: tiled
   panes:
+    -
     -
 
 - window_name: foothold_pivot
   layout: tiled
   panes:
     -
+    -
+    -
+    -
 
 - window_name: privesc
   layout: tiled
   panes:
     -
-- window_name: vpn
+    -
+    -
+    -
+- window_name: web browser & burp
   layout: tiled
   panes:
     -

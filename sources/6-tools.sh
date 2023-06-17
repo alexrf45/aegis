@@ -12,15 +12,13 @@ function tools_install() {
 			"https://github.com/jpillora/chisel/releases/download/v1.8.1/chisel_1.8.1_windows_amd64.gz" &&
 		gunzip win-chisel.gz &&
 		wget -q -O l.sh \
-			"https://github.com/carlospolop/PEASS-ng/releases/download/20230219/linpeas_linux_amd64" &&
+			"https://github.com/carlospolop/PEASS-ng/releases/download/20230611-b11e87f7/linpeas_linux_amd64" &&
 		wget -q -O winpeas.exe \
-			"https://github.com/carlospolop/PEASS-ng/releases/download/20230219/winPEASx64.exe" &&
+			"https://github.com/carlospolop/PEASS-ng/releases/download/20230611-b11e87f7/winPEASany.exe" &&
 		wget -q -O sharp.ps1 \
 			"https://github.com/BloodHoundAD/BloodHound/raw/master/Collectors/SharpHound.ps1" &&
 		wget -q -O nc.exe \
 			"https://github.com/ShutdownRepo/Exegol-resources/raw/main/windows/nc.exe" &&
-		wget -q \
-			"https://github.com/rivermont/spidy/releases/download/1.4.0/spidy.zip" && unzip spidy.zip -d ./spidy && rm spidy.zip &&
 		wget -q -O SharpHound.exe \
 			"https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/SharpHound.exe" &&
 		wget -q -O nc.exe \
