@@ -52,7 +52,8 @@ RUN mkdir .logs && mkdir .local && mkdir tools && mkdir -p /home/kali/.config/tm
   && cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
   && cp -r /home/kali/resources/.BurpSuite /home/kali/.BurpSuite \
   && cp /home/kali/resources/ctf.yaml /home/kali/.config/tmuxp/ctf.yaml \
-  && cp -r /home/kali/resources/bloodhound /home/kali/.config/bloodhound
+  && cp -r /home/kali/resources/bloodhound /home/kali/.config/bloodhound \
+  && cp -r /home/kali/resources/shell-upgrade.sh /home/kali/tools/shell-upgrade.sh
 
 RUN sudo chmod +x /home/kali/sources/5-go.sh \
   && /home/kali/sources/5-go.sh install_go
