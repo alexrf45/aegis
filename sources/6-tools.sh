@@ -31,8 +31,8 @@ function tools_install() {
 		wget -q -O cme.zip \
 			"https://github.com/Porchetta-Industries/CrackMapExec/releases/download/v5.4.0/cme-ubuntu-latest-3.11.zip" &&
 		unzip cme.zip && chmod +x cme && sudo mv cme /home/kali/.local/cme && rm cme.zip &&
-		wget https://github.com/fortra/impacket/releases/download/impacket_0_10_0/impacket-0.10.0.tar.gz -O impacket.tar.gz &&
-		gunzip impacket.tar.gz && tar -xvf impacket.tar && mv impacket/ /home/kali/.local/ && rm impacket.tar &&
+		wget "https://github.com/fortra/impacket/releases/download/impacket_0_10_0/impacket-0.10.0.tar.gz" &&
+		gunzip impacket-0.10.tar.gz && tar -xvf impacket-0.10.0.tar && mv impacket-0.10.0/ /home/kali/.local/ && rm impacket-0.10.tar &&
 		wget -q -O rubeus.exe "https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Rubeus.exe" &&
 		wget -q -O certify.exe "https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Certify.exe"
 }
