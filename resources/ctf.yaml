@@ -3,7 +3,7 @@ windows:
 - window_name: recon
   layout: tiled
   panes:
-   -
+   - recon.sh
    -
 
 - window_name: enum
@@ -15,8 +15,8 @@ windows:
 - window_name: foothold_pivot
   layout: tiled
   panes:
-    -
-    -
+    - python3 -m http.server 8000
+    - ssh-keygen -t ed25519 -C "htb" -N '' -f ctf
     -
     -
 
@@ -30,4 +30,5 @@ windows:
 - window_name: web browser & burp
   layout: tiled
   panes:
-    -
+    - firefox -P f0zy &
+    - burpsuite &
