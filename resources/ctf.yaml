@@ -3,7 +3,7 @@ windows:
 - window_name: recon
   layout: tiled
   panes:
-   - recon.sh
+   -
    -
 
 - window_name: enum
@@ -15,7 +15,7 @@ windows:
 - window_name: foothold_pivot
   layout: tiled
   panes:
-    - python3 -m http.server 8000
+    - mkdir www/ && cd www/ && python3 -m http.server 8000
     - ssh-keygen -t ed25519 -C "htb" -N '' -f ctf
     -
     -
