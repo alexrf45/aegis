@@ -2,7 +2,7 @@
 FROM kalilinux/kali-rolling:latest
 
 LABEL "author"="f0nzy"
-LABEL "version"="v2.0.4"
+LABEL "version"="v2.1.0"
 LABEL "website"="https://r0land-sec.com"
 
 ENV DEBIAN_FRONTEND noninteractive
