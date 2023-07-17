@@ -4,8 +4,7 @@
 ***"A group of people bound by faith or destiny"*** 
 
 ![Logo](https://img.shields.io/docker/image-size/fonalex45/katet)                                                                                                                             
-![Logo](https://img.shields.io/docker/pulls/fonalex45/katet)                                                                                                                                  
-[![Publish Docker Image](https://github.com/alexrf45/Ka-tet/actions/workflows/dockerhub.yml/badge.svg?branch=main)](https://github.com/alexrf45/Ka-tet/actions/workflows/dockerhub.yml)       
+![Logo](https://img.shields.io/docker/pulls/fonalex45/katet)       
 
 ## Repeatable, immutable, and scalable Security Research w/ Docker 
 ## Acknowledgements
@@ -46,44 +45,42 @@
 
 ## Installation
 
-`Katet` comes with an install script. The install script will install docker, git, curl and gum if not already installed and copy the `katet` & `katet-uninstall` to /usr/local/bin. 
+1. `git clone https://github.com/alexrf45/Ka-tet.git && cd Ka-tet`
 
-NOTE: **installation location can be modified by modifying `katet-install`.** 
+2. Copy the kali function script to a desired location:
+
+**Example:**
 
 ```bash
-
-$ git clone https://github.com/alexrf45/Ka-tet.git
-
-$ cd Ka-tet
-
-$ sh katet-install
-
-$ katet guide #shows list of avaliable commands
-
+$ cp kali.sh ~/.zsh/. 
 ```
-    
+
+3. Source the script in .zshrc or desired shell:
+
+**Example:**
+`echo 'source "$HOME/.zsh/kali.sh"' >> .zshrc`
+
+4. Refresh the shell:
+
+Example: 
+```bash
+. ~/.zshrc 
+```
+
 ## Usage/Examples
 
-Katet features user prompts for ease of use: 
+Spawn a new container: `kali <CONTAINER_NAME>`
 
-`katet guide` - displays avaliable commands
+Start an existing container: `kali-start <CONTAINER_NAME>`
 
-`katet build` - build a custom image
+Enter an existing container: `kali-enter <CONTAINER_NAME>`
 
-`katet create` - spin up a new container using the latest or dev image
+Stop an existing container: `kali-stop <CONTAINER_NAME>`
 
-`katet custom-create` - spin up new container using user built image
+Destroy an existing container: `kali-destroy <CONTAINER_NAME>`
 
-`katet start` - starts specified container
-
-`katet enter` - enters specified container
-
-`katet stop` - stops specified container
-
-`katet destroy` - destroys specificed container
-
-
-
+Update image **This will not update the image of an existing container, only for new ones**: 
+`kali-pull`
 
 Logging within container:
 
@@ -107,6 +104,4 @@ alias commands='history | cut -c 6-'
 ```
 ## Demo
 
-`katet create`
-
-[![asciicast](https://asciinema.org/a/QfqdrYlf5gCFIx70ZMEu4XBHV.svg)](https://asciinema.org/a/QfqdrYlf5gCFIx70ZMEu4XBHV)
+[![asciicast](https://asciinema.org/a/39p4LvRuGCbyG9afkzjnA2wlJ.svg)](https://asciinema.org/a/39p4LvRuGCbyG9afkzjnA2wlJ)
