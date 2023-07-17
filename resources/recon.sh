@@ -1,5 +1,8 @@
 #!/bin/bash
 
+IP=$1
+NAME=$2
+
 whatweb -a 1 -U=$AGENT -t 10 --wait=0.2 http://$IP/ >whatweb.txt
 
 mkdir -p $NAME-nmap/$NAME

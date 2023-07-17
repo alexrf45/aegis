@@ -1,8 +1,8 @@
 # latest kali base image
 FROM kalilinux/kali-rolling:latest
 
-LABEL "author"="Sean Fontaine"
-LABEL "version"="v2.0.3"
+LABEL "author"="f0nzy"
+LABEL "version"="v2.0.4"
 LABEL "website"="https://r0land-sec.com"
 
 ENV DEBIAN_FRONTEND noninteractive
