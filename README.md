@@ -1,7 +1,6 @@
-# Katet
+# Kali-D
 
-![Logo](https://ka-tet.s3.amazonaws.com/ka-tet.png)                                                                                                                                           
-***"A group of people bound by faith or destiny"*** 
+![Logo](https://ka-tet.s3.amazonaws.com/docker.png)                                                                                                                                           
 
 ![Logo](https://img.shields.io/docker/image-size/fonalex45/katet)                                                                                                                             
 ![Logo](https://img.shields.io/docker/pulls/fonalex45/katet)       
@@ -45,7 +44,7 @@
 
 ## Installation
 
-1. `git clone https://github.com/alexrf45/Ka-tet.git && cd Ka-tet`
+1. `git clone https://github.com/alexrf45/kali-d.git && cd kali-d`
 
 2. Copy the kali function script to a desired location:
 

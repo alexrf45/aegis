@@ -1,13 +1,14 @@
 # latest kali base image
 FROM kalilinux/kali-rolling:latest
 
+LABEL "project"="kali-d"
 LABEL "author"="f0nzy"
-LABEL "version"="v2.1.0"
+LABEL "version"="v1.0.0"
 LABEL "website"="https://r0land-sec.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update -y && apt-get install -y sudo wireshark
+RUN apt-get update && apt-get install sudo
 
 RUN groupadd --gid 1000 kali \
   && useradd --home-dir /home/kali --create-home --uid 1000 \
@@ -25,42 +26,26 @@ WORKDIR /home/kali/
 
 USER kali
 
-ADD sources /home/kali/sources/
+ADD sources/ /tmp/sources
 
-RUN sudo chown -R kali:kali /home/kali/sources
+RUN sudo chown -R kali:kali /tmp/sources
 
-RUN sudo chmod +x /home/kali/sources/0-base-pkgs.sh && \
-  /home/kali/sources/0-base-pkgs.sh base
+RUN mkdir .logs && mkdir .local && mkdir tools && mkdir -p /home/kali/.config/tmuxp
 
-RUN sudo chmod +x /home/kali/sources/1-ntwk-pkgs.sh && \
-  /home/kali/sources/1-ntwk-pkgs.sh network
-
-RUN sudo chmod +x /home/kali/sources/2-web-pkgs.sh && \
-  /home/kali/sources/2-web-pkgs.sh web
-
-RUN sudo chmod +x /home/kali/sources/3-AD-pkgs.sh && \
-  /home/kali/sources/3-AD-pkgs.sh active_directory
-
-RUN sudo chmod +x /home/kali/sources/4-password-pkgs.sh && \
-  /home/kali/sources/4-password-pkgs.sh password
+RUN sudo chmod +x /tmp/sources/*.sh && \
+  /tmp/sources/0-base.sh && \
+  /tmp/sources/1-tools.sh
 
 ADD resources /home/kali/resources/
 
 RUN sudo chown -R kali:kali /home/kali/resources
 
-RUN mkdir .logs && mkdir .local && mkdir tools && mkdir -p /home/kali/.config/tmuxp \
-  && cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
+RUN cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
   && cp -r /home/kali/resources/.BurpSuite /home/kali/.BurpSuite \
   && cp /home/kali/resources/ctf.yaml /home/kali/.config/tmuxp/ctf.yaml \
   && cp -r /home/kali/resources/bloodhound /home/kali/.config/bloodhound \
   && cp -r /home/kali/resources/shell-upgrade.sh /home/kali/tools/shell-upgrade.sh \
   && cp -r /home/kali/resources/recon.sh /home/kali/.local/recon.sh && chmod +x /home/kali/.local/recon.sh
-
-RUN sudo chmod +x /home/kali/sources/5-go.sh \
-  && /home/kali/sources/5-go.sh install_go
-
-RUN sudo chmod +x /home/kali/sources/6-tools.sh \
-  && /home/kali/sources/6-tools.sh tools_install
 
 RUN git clone https://github.com/samratashok/nishang.git
 
@@ -69,7 +54,7 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
 
 RUN cp /home/kali/resources/zsh/zshrc /home/kali/.zshrc
 
-RUN cp /home/kali/resources/zsh/ka-tet.zsh-theme /home/kali/.oh-my-zsh/themes/. \
+RUN cp /home/kali/resources/zsh/kali.zsh-theme /home/kali/.oh-my-zsh/themes/. \
   && cp /home/kali/resources/zsh/history /home/kali/.kali_history
 
 RUN tar -xvf /home/kali/resources/mozilla.tar.bz2 -C /home/kali/
@@ -82,7 +67,7 @@ RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
 
 RUN git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-RUN sudo rm -rf /home/kali/sources && sudo rm -rf /home/kali/resources
+RUN sudo rm -rf /tmp/sources && sudo rm -rf /home/kali/resources
 
 USER kali
 
