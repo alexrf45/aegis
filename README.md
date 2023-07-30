@@ -44,7 +44,7 @@
 
 ## Installation
 
-1. `git clone https://github.com/alexrf45/kali-d.git && cd kali-d`
+1. `git clone https://github.com/alexrf45/Kali-D.git && cd Kali-D`
 
 2. Copy the kali function script to a desired location:
 
