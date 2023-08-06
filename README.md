@@ -2,8 +2,8 @@
 
 ![Logo](https://ka-tet.s3.amazonaws.com/docker.png)                                                                                                                                           
 
-![Logo](https://img.shields.io/docker/image-size/fonalex45/katet)                                                                                                                             
-![Logo](https://img.shields.io/docker/pulls/fonalex45/katet)       
+![Logo](https://img.shields.io/docker/image-size/fonalex45/kali-d)                                                                                                                             
+![Logo](https://img.shields.io/docker/pulls/fonalex45/kali-d)       
 
 ## Repeatable, immutable, and scalable Security Research w/ Docker 
 ## Acknowledgements
