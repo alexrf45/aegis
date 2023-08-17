@@ -1,5 +1,3 @@
-
-# -=-=-=-=-=-=-=- YOUR COMMANDS BELOW -=-=-=-=-=-=-=- #
 ./chisel server -p 8000 --reverse
 ./kerbrute userenum --dc $DC -d "$DOMAIN" user.txt
 .\Certify.exe find /vulnerable
