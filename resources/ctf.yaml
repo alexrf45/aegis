@@ -1,4 +1,4 @@
-session_name: ctf
+session_name: kali
 windows:
 - window_name: recon
   layout: tiled
