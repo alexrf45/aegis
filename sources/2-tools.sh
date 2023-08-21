@@ -1,6 +1,5 @@
 #!/bin/bash
 
-sudo apt-get install amass -y
 
 httprobe_install() {
 	wget -q https://github.com/tomnomnom/httprobe/releases/download/v0.2/httprobe-linux-amd64-0.2.tgz -O httprobe.tgz &&
@@ -56,6 +55,8 @@ notify_install() {
 	wget https://github.com/projectdiscovery/notify/releases/download/v1.0.5/notify_1.0.5_linux_amd64.zip \
 		-O notify.zip && unzip -o notify && mv notify $HOME/.local/notify && rm notify.zip && rm LICENSE.md README.md
 }
+
+sudo apt-get install amass -y
 
 httprobe_install
 go-dorks_install
