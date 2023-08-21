@@ -1,21 +1,20 @@
 #!/bin/bash
 
-# Installs commonly used tools in the tools subdirectory of the kali home directory
+web() {
+	sudo apt-get install -y whatweb ffuf sqlmap \
+		exiftool default-mysql-client hurl postgresql arjun \
+		burpsuite
+}
+
+password() {
+	sudo apt-get install -y seclists crunch john
+}
 
 install_go() {
 	wget https://go.dev/dl/go1.21.0.linux-amd64.tar.gz &&
 		rm -rf /usr/local/go &&
 		sudo tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz &&
 		rm go1.21.0.linux-amd64.tar.gz
-}
-
-waybackurls_install() {
-	wget -q -O waybackurls.tgz https://github.com/tomnomnom/waybackurls/releases/download/v0.1.0/waybackurls-linux-amd64-0.1.0.tgz &&
-		gunzip waybackurls.tgz &&
-		tar -C /home/kali/.local -xf waybackurls.tar &&
-		chmod +x /home/kali/.local/waybackurls &&
-		rm /home/kali/tools/waybackurls.tar
-
 }
 
 httpx_install() {
@@ -74,10 +73,11 @@ privesc() {
 }
 
 echo -e "Installing tools..."
+web
+password
 payload
 active_directory
 pivot
 privesc
 install_go
-waybackurls_install
 httpx_install

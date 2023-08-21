@@ -56,7 +56,7 @@ source $ZSH/oh-my-zsh.sh
 #Custom ENV
 export EDITOR=vim
 export AGENT='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
-export PATH=$PATH:/home/kali/bin:/usr/local/go/bin:/home/kali/.local
+export PATH=$PATH:$HOME/bin:/usr/local/go/bin:$HOME/.local
 
 #daily drivers for day to day tasks
 alias http='python3 -m http.server 80'
@@ -65,6 +65,7 @@ alias update='sudo apt-get update -y'
 alias t='tmux -f ~/.tmux.conf'
 alias t-session='tmux new -f ~/.tmux.conf -s $1'
 alias ctf='tmuxp load ~/.config/tmuxp/ctf.yaml'
+alias bounty='tmuxp load ~/.config/tmuxp/bounty.yaml'
 alias i='sudo apt-get install -y'
 alias public='curl wtfismyip.com/text'
 alias py='python3'

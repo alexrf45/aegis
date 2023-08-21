@@ -20,26 +20,16 @@ active_directory() {
 		powershell ldap-utils
 }
 
-web() {
-	sudo apt-get install -y whatweb ffuf sqlmap \
-		exiftool default-mysql-client hurl postgresql arjun httprobe \
-		burpsuite
-}
-
-password() {
-	sudo apt-get install -y seclists crunch hashcat
-}
-
 echo -e "Installing base packages"
 base
 echo -e "Installing network packages"
 network
 echo -e "Installing AD tools"
 active_directory
-echo -e "Installing web tools"
-web
-echo -e "Installing password tools"
-password
+#echo -e "Installing web tools"
+#web
+#echo -e "Installing password tools"
+#password
 
 #sublime install
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg |
