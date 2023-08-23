@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 httprobe_install() {
 	wget -q https://github.com/tomnomnom/httprobe/releases/download/v0.2/httprobe-linux-amd64-0.2.tgz -O httprobe.tgz &&
 		tar -xzf httprobe.tgz && chmod +x httprobe && mv httprobe $HOME/.local/httprobe && rm httprobe.tgz
@@ -15,6 +14,7 @@ go-dorks_install() {
 rush_install() {
 	wget https://github.com/shenwei356/rush/releases/download/v0.5.2/rush_linux_amd64.tar.gz -O rush.tar.gz &&
 		gunzip rush.tar.gz && tar -xf rush.tar && rm rush.tar && mv rush $HOME/.local/rush && chmod +x $HOME/.local/rush
+}
 
 katana_install() {
 	wget https://github.com/projectdiscovery/katana/releases/download/v1.0.3/katana_1.0.3_linux_amd64.zip -O katana.zip &&
@@ -38,7 +38,6 @@ waybackurls_install() {
 		tar -C $HOME/.local -xf waybackurls.tar &&
 		chmod +x $HOME/.local/waybackurls &&
 		rm $HOME/waybackurls.tar
-
 }
 
 unfurl_install() {
