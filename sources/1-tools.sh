@@ -7,7 +7,7 @@ web() {
 }
 
 password() {
-	sudo apt-get install -y seclists crunch john
+	sudo apt-get install -y seclists crunch
 }
 
 install_go() {
