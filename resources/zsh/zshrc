@@ -75,3 +75,14 @@ alias commands='history | cut -c 6-'
 alias secretsdump='impacket-secretsdump'
 alias ps-shell='cp ~/nishang/Shells/Invoke-PowerShellTcpOneLine.ps1 .'
 alias portscan='cp ~/nishang/Scan/Invoke-PortScan.ps1 .'
+
+ffuf_subdomain () {
+ 
+ffuf -c -t 5 -rate 30 -p 0.2 \
+  -H "User-Agent: $AGENT" -o $NAME_domains.json -of json \
+  -H "Host:FUZZ.$DOMAIN" \
+  -mc 200,403 -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://$DOMAIN/
+}
+
+
+

@@ -18,9 +18,9 @@ install_go() {
 }
 
 httpx_install() {
-	wget -q https://github.com/projectdiscovery/httpx/releases/download/v1.3.4/httpx_1.3.4_linux_amd64.zip &&
-		unzip httpx_1.3.4_linux_amd64.zip -d ./httpx &&
-		rm httpx_1.3.4_linux_amd64.zip &&
+	wget -q https://github.com/projectdiscovery/httpx/releases/download/v1.3.4/httpx_1.3.5_linux_amd64.zip &&
+		unzip httpx_1.3.5_linux_amd64.zip -d ./httpx &&
+		rm httpx_1.3.5_linux_amd64.zip &&
 		mv httpx/httpx /home/kali/.local/http-x &&
 		rm -r httpx/
 
@@ -55,19 +55,19 @@ active_directory() {
 pivot() {
 	cd /home/kali/tools/ &&
 		wget -q -O chisel.gz \
-			"https://github.com/jpillora/chisel/releases/download/v1.8.1/chisel_1.8.1_linux_amd64.gz" &&
+			"https://github.com/jpillora/chisel/releases/download/v1.8.1/chisel_1.9.1_linux_amd64.gz" &&
 		gunzip chisel.gz &&
 		wget -q -O win-chisel.gz \
-			"https://github.com/jpillora/chisel/releases/download/v1.8.1/chisel_1.8.1_windows_amd64.gz" &&
+			"https://github.com/jpillora/chisel/releases/download/v1.8.1/chisel_1.9.1_windows_amd64.gz" &&
 		gunzip win-chisel.gz
 }
 
 privesc() {
 	cd /home/kali/tools/ &&
 		wget -q -O linpeas.sh \
-			"https://github.com/carlospolop/PEASS-ng/releases/download/20230813-dc8384b3/linpeas_linux_amd64" &&
+			"https://github.com/carlospolop/PEASS-ng/releases/download/20230910-ae32193f/linpeas_linux_amd64" &&
 		wget -q -O winpeas.exe \
-			"https://github.com/carlospolop/PEASS-ng/releases/download/20230813-dc8384b3/winPEASany.exe" &&
+			"https://github.com/carlospolop/PEASS-ng/releases/download/20230910-ae32193f/winPEASany.exe" &&
 		wget -q -O pspy \
 			"https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy64s"
 }

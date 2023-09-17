@@ -46,7 +46,7 @@ unfurl_install() {
 }
 
 subfinder_install() {
-	wget https://github.com/projectdiscovery/subfinder/releases/download/v2.6.2/subfinder_2.6.2_linux_amd64.zip \
+	wget https://github.com/projectdiscovery/subfinder/releases/download/v2.6.3/subfinder_2.6.3_linux_amd64.zip \
 		-O subfinder.zip && unzip subfinder.zip && chmod +x subfinder && mv subfinder $HOME/.local/subfinder && rm subfinder.zip
 }
 
