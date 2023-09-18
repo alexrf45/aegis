@@ -18,7 +18,7 @@ install_go() {
 }
 
 httpx_install() {
-	wget -q https://github.com/projectdiscovery/httpx/releases/download/v1.3.4/httpx_1.3.5_linux_amd64.zip &&
+	wget -q https://github.com/projectdiscovery/httpx/releases/download/v1.3.5/httpx_1.3.5_linux_amd64.zip &&
 		unzip httpx_1.3.5_linux_amd64.zip -d ./httpx &&
 		rm httpx_1.3.5_linux_amd64.zip &&
 		mv httpx/httpx /home/kali/.local/http-x &&
@@ -55,10 +55,10 @@ active_directory() {
 pivot() {
 	cd /home/kali/tools/ &&
 		wget -q -O chisel.gz \
-			"https://github.com/jpillora/chisel/releases/download/v1.8.1/chisel_1.9.1_linux_amd64.gz" &&
+			"https://github.com/jpillora/chisel/releases/download/v1.9.1/chisel_1.9.1_linux_amd64.gz" &&
 		gunzip chisel.gz &&
 		wget -q -O win-chisel.gz \
-			"https://github.com/jpillora/chisel/releases/download/v1.8.1/chisel_1.9.1_windows_amd64.gz" &&
+			"https://github.com/jpillora/chisel/releases/download/v1.9.1/chisel_1.9.1_windows_amd64.gz" &&
 		gunzip win-chisel.gz
 }
 
