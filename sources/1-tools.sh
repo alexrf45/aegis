@@ -11,10 +11,10 @@ password() {
 }
 
 install_go() {
-	wget https://go.dev/dl/go1.21.0.linux-amd64.tar.gz &&
+	wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz &&
 		rm -rf /usr/local/go &&
-		sudo tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz &&
-		rm go1.21.0.linux-amd64.tar.gz
+		sudo tar -C /usr/local -xzf go1.21.1.linux-amd64.tar.gz &&
+		rm go1.21.1.linux-amd64.tar.gz
 }
 
 httpx_install() {
@@ -27,7 +27,7 @@ httpx_install() {
 }
 
 payload() {
-	cd /home/kali/tools/ &&
+	cd $HOME/tools/ &&
 		wget -q -O nc.exe \
 			"https://github.com/ShutdownRepo/Exegol-resources/raw/main/windows/nc.exe" &&
 		wget -q -O nc \
@@ -35,7 +35,7 @@ payload() {
 }
 
 active_directory() {
-	cd /home/kali/tools/ &&
+	cd $HOME/tools/ &&
 		wget -q -O rubeus.exe \
 			"https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Rubeus.exe" &&
 		wget -q -O certify.exe \
@@ -53,7 +53,7 @@ active_directory() {
 }
 
 pivot() {
-	cd /home/kali/tools/ &&
+	cd $HOME/tools/ &&
 		wget -q -O chisel.gz \
 			"https://github.com/jpillora/chisel/releases/download/v1.9.1/chisel_1.9.1_linux_amd64.gz" &&
 		gunzip chisel.gz &&
@@ -63,13 +63,15 @@ pivot() {
 }
 
 privesc() {
-	cd /home/kali/tools/ &&
+	cd $HOME/tools/ &&
 		wget -q -O linpeas.sh \
 			"https://github.com/carlospolop/PEASS-ng/releases/download/20230910-ae32193f/linpeas_linux_amd64" &&
 		wget -q -O winpeas.exe \
 			"https://github.com/carlospolop/PEASS-ng/releases/download/20230910-ae32193f/winPEASany.exe" &&
+		wget -q -O pspys \
+			"https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy64s" &&
 		wget -q -O pspy \
-			"https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy64s"
+			"https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy64"
 }
 
 echo -e "Installing tools..."
