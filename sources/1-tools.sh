@@ -6,6 +6,11 @@ web() {
 		burpsuite
 }
 
+snyk-cli() {
+	curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk &&
+		chmod +x ./snyk && mv ./snyk $HOME/.local/.
+}
+
 password() {
 	sudo apt-get install -y seclists crunch
 }
