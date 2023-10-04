@@ -54,7 +54,10 @@ active_directory() {
 		wget -q -O sharp.ps1 \
 			"https://github.com/BloodHoundAD/BloodHound/raw/master/Collectors/SharpHound.ps1" &&
 		wget -q -O SharpHound.exe \
-			"https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/SharpHound.exe"
+			"https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/SharpHound.exe" &&
+		wget -q -O netexec \
+			"https://github.com/Pennyw0rth/NetExec/releases/download/v1.0.0/nxc-ubuntu-latest" &&
+		chmod +x netexec && sudo mv netexec /home/kali/.local/netexec
 }
 
 pivot() {
