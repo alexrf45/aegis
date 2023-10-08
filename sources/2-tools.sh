@@ -11,6 +11,12 @@ go-dorks_install() {
 		chmod +x $HOME/.local/go-dork
 }
 
+gron_install() {
+	wget https://github.com/tomnomnom/gron/releases/download/v0.7.1/gron-linux-amd64-0.7.1.tgz &&
+		tar xzf gron-linux-amd64-0.7.1.tgz &&
+		mv gron $HOME/.local/gron
+}
+
 rush_install() {
 	wget https://github.com/shenwei356/rush/releases/download/v0.5.2/rush_linux_amd64.tar.gz -O rush.tar.gz &&
 		gunzip rush.tar.gz && tar -xf rush.tar && rm rush.tar && mv rush $HOME/.local/rush && chmod +x $HOME/.local/rush
