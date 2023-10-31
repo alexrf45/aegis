@@ -16,16 +16,16 @@ password() {
 }
 
 install_go() {
-	wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz &&
+	wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz &&
 		rm -rf /usr/local/go &&
-		sudo tar -C /usr/local -xzf go1.21.1.linux-amd64.tar.gz &&
-		rm go1.21.1.linux-amd64.tar.gz
+		sudo tar -C /usr/local -xzf go1.21.3.linux-amd64.tar.gz &&
+		rm go1.21.3.linux-amd64.tar.gz
 }
 
 httpx_install() {
-	wget -q https://github.com/projectdiscovery/httpx/releases/download/v1.3.5/httpx_1.3.5_linux_amd64.zip &&
-		unzip httpx_1.3.5_linux_amd64.zip -d ./httpx &&
-		rm httpx_1.3.5_linux_amd64.zip &&
+	wget -q https://github.com/projectdiscovery/httpx/releases/download/v1.3.6/httpx_1.3.6_linux_amd64.zip &&
+		unzip httpx_1.3.6_linux_amd64.zip -d ./httpx &&
+		rm httpx_1.3.6_linux_amd64.zip &&
 		mv httpx/httpx /home/kali/.local/http-x &&
 		rm -r httpx/
 
@@ -45,9 +45,6 @@ active_directory() {
 			"https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Rubeus.exe" &&
 		wget -q -O certify.exe \
 			"https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Certify.exe" &&
-		wget -q -O cme.zip \
-			"https://github.com/Porchetta-Industries/CrackMapExec/releases/download/v5.4.0/cme-ubuntu-latest-3.11.zip" &&
-		unzip cme.zip && chmod +x cme && sudo mv cme /home/kali/.local/cme && rm cme.zip &&
 		wget "https://github.com/fortra/impacket/releases/download/impacket_0_11_0/impacket-0.11.0.tar.gz" &&
 		gunzip impacket-0.11.0.tar.gz && tar -xvf impacket-0.11.0.tar &&
 		mv impacket-0.11.0/ /home/kali/.local/ && rm impacket-0.11.0.tar &&
@@ -72,10 +69,10 @@ pivot() {
 
 privesc() {
 	cd $HOME/tools/ &&
-		wget -q -O linpeas.sh \
-			"https://github.com/carlospolop/PEASS-ng/releases/download/20230910-ae32193f/linpeas_linux_amd64" &&
+		wget -q -O linpeas \
+			"https://github.com/carlospolop/PEASS-ng/releases/download/20231029-83b8fbe1/linpeas_linux_amd64" &&
 		wget -q -O winpeas.exe \
-			"https://github.com/carlospolop/PEASS-ng/releases/download/20230910-ae32193f/winPEASany.exe" &&
+			"https://github.com/carlospolop/PEASS-ng/releases/download/20231029-83b8fbe1/winPEASany.exe" &&
 		wget -q -O pspys \
 			"https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy64s" &&
 		wget -q -O pspy \

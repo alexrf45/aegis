@@ -23,7 +23,7 @@ rush_install() {
 }
 
 katana_install() {
-	wget https://github.com/projectdiscovery/katana/releases/download/v1.0.3/katana_1.0.3_linux_amd64.zip -O katana.zip &&
+	wget https://github.com/projectdiscovery/katana/releases/download/v1.0.4/katana_1.0.4_linux_amd64.zip -O katana.zip &&
 		unzip katana.zip && chmod +x katana && mv katana $HOME/.local/. && rm katana.zip
 }
 

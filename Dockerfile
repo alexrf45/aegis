@@ -3,7 +3,7 @@ FROM kalilinux/kali-rolling:latest
 
 LABEL "project"="Kali-D"
 LABEL "author"="f0nzy"
-LABEL "version"="v1.1.0"
+LABEL "version"="v1.1.1"
 LABEL "website"="https://f0nzy.com"
 
 ENV DEBIAN_FRONTEND noninteractive

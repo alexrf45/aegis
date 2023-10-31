@@ -17,12 +17,12 @@ network() {
 active_directory() {
 	sudo apt-get install -y \
 		smbclient smbmap evil-winrm bloodhound responder \
-		powershell ldap-utils
+		powershell ldap-utils crackmapexec
 }
 
-misc_tools () {
-  sudo apt-get install -y \
-    csvtool vinetto sqlitebrowser
+misc_tools() {
+	sudo apt-get install -y \
+		csvtool vinetto sqlitebrowser
 }
 
 base
