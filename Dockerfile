@@ -1,7 +1,7 @@
 # latest kali base image
 FROM kalilinux/kali-rolling:latest
 
-LABEL "project"="Kali-D"
+LABEL "project"="kali-sec"
 LABEL "author"="f0nzy"
 LABEL "version"="v1.1.1"
 LABEL "website"="https://f0nzy.com"

@@ -1,4 +1,4 @@
-# Kali-D
+# kali-sec
 
 ![Logo](https://ka-tet.s3.amazonaws.com/docker.png)                                                                                                                                           
 
@@ -44,7 +44,7 @@
 
 ## Installation
 
-1. `git clone https://github.com/alexrf45/Kali-D.git && cd Kali-D`
+1. `git clone https://github.com/alexrf45/kali-sec.git && cd kali-sec`
 
 2. Copy the kali function script to a desired location:
 
