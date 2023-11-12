@@ -27,8 +27,3 @@ windows:
     -
     -
     -
-- window_name: web browser & burp
-  layout: tiled
-  panes:
-    - firefox -P f0zy &
-    - burpsuite &

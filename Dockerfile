@@ -56,7 +56,6 @@ ADD resources /home/kali/resources/
 RUN sudo chown -R kali:kali /home/kali/resources
 
 RUN cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
-  && cp -r /home/kali/resources/.BurpSuite /home/kali/.BurpSuite \
   && cp /home/kali/resources/ctf.yaml /home/kali/.config/tmuxp/ctf.yaml \
   && cp /home/kali/resources/bounty.yaml /home/kali/.config/tmuxp/bounty.yaml \
   && cp -r /home/kali/resources/bloodhound /home/kali/.config/bloodhound \
@@ -72,8 +71,6 @@ RUN cp /home/kali/resources/zsh/zshrc /home/kali/.zshrc
 
 RUN cp /home/kali/resources/zsh/kali.zsh-theme /home/kali/.oh-my-zsh/themes/. \
   && cp /home/kali/resources/zsh/history /home/kali/.kali_history
-
-RUN tar -xvf /home/kali/resources/mozilla.tar.bz2 -C /home/kali/
 
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions \
   ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
