@@ -26,7 +26,7 @@ WORKDIR /home/kali/
 
 USER kali
 
-RUN mkdir .logs && mkdir .local && mkdir tools && mkdir -p /home/kali/.config/tmuxp
+RUN mkdir .logs && mkdir -p .local/bin && mkdir tools && mkdir -p /home/kali/.config/tmuxp
 
 ADD sources/0-base.sh /tmp/sources/0-base.sh
 
