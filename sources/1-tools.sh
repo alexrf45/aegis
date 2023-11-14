@@ -15,22 +15,6 @@ password() {
 	sudo apt-get install -y seclists crunch
 }
 
-install_go() {
-	wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz &&
-		rm -rf /usr/local/go &&
-		sudo tar -C /usr/local -xzf go1.21.3.linux-amd64.tar.gz &&
-		rm go1.21.3.linux-amd64.tar.gz
-}
-
-httpx_install() {
-	wget -q https://github.com/projectdiscovery/httpx/releases/download/v1.3.6/httpx_1.3.6_linux_amd64.zip &&
-		unzip httpx_1.3.6_linux_amd64.zip -d ./httpx &&
-		rm httpx_1.3.6_linux_amd64.zip &&
-		mv httpx/httpx /home/kali/.local/http-x &&
-		rm -r httpx/
-
-}
-
 payload() {
 	cd $HOME/tools/ &&
 		wget -q -O nc.exe \
@@ -79,12 +63,9 @@ privesc() {
 			"https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy64"
 }
 
-echo -e "Installing tools..."
 web
 password
 payload
 active_directory
 pivot
 privesc
-install_go
-httpx_install

@@ -46,9 +46,9 @@ ADD sources/hakrawler /tmp/sources/hakrawler
 
 ADD sources/jsleak /tmp/sources/jsleak
 
-RUN cp /tmp/sources/hakrawler /home/kali/.local/hakrawler \
-  && chmod +x /home/kali/.local/hakrawler && \
-  cp /tmp/sources/jsleak /home/kali/.local/jsleak && chmod +x /home/kali/.local/jsleak
+RUN cp /tmp/sources/hakrawler /home/kali/.local/bin/hakrawler \
+  && chmod +x /home/kali/.local/bin/hakrawler && \
+  cp /tmp/sources/jsleak /home/kali/.local/bin/jsleak && chmod +x /home/kali/.local/bin/jsleak
 
 
 ADD resources /home/kali/resources/
@@ -60,7 +60,7 @@ RUN cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
   && cp /home/kali/resources/bounty.yaml /home/kali/.config/tmuxp/bounty.yaml \
   && cp -r /home/kali/resources/bloodhound /home/kali/.config/bloodhound \
   && cp -r /home/kali/resources/shell-upgrade.sh /home/kali/tools/shell-upgrade.sh \
-  && cp -r /home/kali/resources/recon.sh /home/kali/.local/recon.sh && chmod +x /home/kali/.local/recon.sh
+  && cp -r /home/kali/resources/recon.sh /home/kali/.local/bin/recon.sh && chmod +x /home/kali/.local/bin/recon.sh
 
 RUN git clone https://github.com/samratashok/nishang.git
 
