@@ -1,6 +1,6 @@
 #!/bin/bash
 
-kali-directory $1 () {
+directory $1 () {
  mkdir -p $1/{recon,www,exploit,pivot,report} && cd $1
 }
 
@@ -31,24 +31,24 @@ kali $1 () {
 	fi
 }
 
-kali-start $1 ()
+start $1 ()
 {
  docker container start $1 && docker container exec -it $1 /bin/zsh
 }
 
-kali-enter $1 ()
+enter $1 ()
 {
 docker exec -it $1 /bin/zsh
 }
 
-kali-stop $1 () {
+stop $1 () {
  docker container stop $1
 }
 
-kali-destory $1 () {
+destory $1 () {
  docker container rm $1
 }
 
-kali-pull () {
+pull () {
   docker pull fonalex45/kali-sec:latest
 }
