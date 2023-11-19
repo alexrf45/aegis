@@ -58,6 +58,7 @@ export EDITOR=vim
 export AGENT='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
 export PATH=$PATH:$HOME/bin:$HOME/.local/bin:$HOME/.local:$HOME/.local/bin/go/bin
 
+
 #daily drivers for day to day tasks
 alias http='python3 -m http.server 80'
 alias reload='. ~/.zshrc'
@@ -80,7 +81,7 @@ alias cme='netexec'
 
 ffuf_subdomain () {
  
-ffuf -c -t 5 -rate 30 -p 0.2 \
+ffuf -c -t 5 -rate 20 -p 0.2 \
   -H "User-Agent: $AGENT" -o $NAME_domains.json -of json \
   -H "Host:FUZZ.$DOMAIN" \
   -mc 200,403 -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://$DOMAIN/

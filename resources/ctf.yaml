@@ -18,6 +18,7 @@ windows:
     - ssh-keygen -t ed25519 -C "htb" -N '' -f ctf
     -
     -
+    -
 
 - window_name: privesc
   layout: tiled
@@ -26,8 +27,3 @@ windows:
     -
     -
     -
-- window_name: web browser & burp
-  layout: tiled
-  panes:
-    - firefox -P f0zy &
-    - burpsuite &

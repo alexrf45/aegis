@@ -62,7 +62,7 @@ http_probe() {
 
 httpx_live_hosts() {
 	echo -e "${BOLDRED}probing hosts on $project...${ENDCOLOR}\n"
-	http-x -list $project-live-hosts.txt -silent -probe -tech-detect -status-code -t 3 -H "User-Agent: $AGENT" -o $project-probed-hosts.txt
+	http-x -list $project-live-hosts.txt -silent -probe -tech-detect -status-code -t 20 -H "User-Agent: $AGENT" -o $project-probed-hosts.txt
 }
 file_format_1() {
 	echo -e "${BOLDYELLOW}Formatting httpx results${ENDCOLOR}\n"
@@ -92,5 +92,5 @@ tool_banner "links and secrets search complete"
 tool_banner "Running hakrawler"
 cat $project-targets.txt | hakrawler \
 	-h "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36;;X-Bug-Bounty: r0land" \
-	-d 4 -t 2 -timeout 5 -u >$project-endpoints.txt
+	-d 4 -t 20 -timeout 5 -u >$project-endpoints.txt
 tool_banner "Recon on $project Finished"

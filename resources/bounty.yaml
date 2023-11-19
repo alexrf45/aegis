@@ -15,7 +15,6 @@ windows:
 - window_name: foothold_pivot
   layout: tiled
   panes:
-    - mkdir www/ && cd www/
     - ssh-keygen -t ed25519 -C "bounty" -N '' -f bounty
     -
     -

@@ -1,5 +1,12 @@
 #!/bin/bash
 
+install_go() {
+	wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz &&
+		rm -rf /usr/local/go &&
+		tar -C $HOME/.local/bin -xzf go1.21.3.linux-amd64.tar.gz &&
+		rm go1.21.3.linux-amd64.tar.gz
+}
+
 httprobe_install() {
 	wget -q https://github.com/tomnomnom/httprobe/releases/download/v0.2/httprobe-linux-amd64-0.2.tgz -O httprobe.tgz &&
 		tar -xzf httprobe.tgz && chmod +x httprobe && mv httprobe $HOME/.local/bin/httprobe && rm httprobe.tgz
@@ -9,8 +16,8 @@ httpx_install() {
 	wget -q https://github.com/projectdiscovery/httpx/releases/download/v1.3.6/httpx_1.3.6_linux_amd64.zip &&
 		unzip httpx_1.3.6_linux_amd64.zip -d ./httpx &&
 		rm httpx_1.3.6_linux_amd64.zip &&
-		mv httpx/httpx /home/kali/.local/bin/http-x &&
-		rm -r httpx/
+		mv httpx/httpx /home/kali/.local/bin/http-x && 
+    rm -r httpx/
 
 }
 
@@ -34,6 +41,7 @@ rush_install() {
 katana_install() {
 	wget https://github.com/projectdiscovery/katana/releases/download/v1.0.4/katana_1.0.4_linux_amd64.zip -O katana.zip &&
 		unzip katana.zip && chmod +x katana && mv katana $HOME/.local/bin/katana && rm katana.zip
+
 }
 
 chaos_install() {
@@ -45,6 +53,7 @@ chaos_install() {
 dnsx_install() {
 	wget https://github.com/projectdiscovery/dnsx/releases/download/v1.1.4/dnsx_1.1.4_linux_amd64.zip -O dnsx.zip &&
 	unzip dnsx.zip dnsx && chmod +x dnsx && mv dnsx $HOME/.local/bin/dnsx && rm dnsx.zip
+
 }
 
 waybackurls_install() {

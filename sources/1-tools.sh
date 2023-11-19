@@ -69,7 +69,6 @@ privesc() {
 			"https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy64"
 }
 
-echo -e "Installing tools..."
 web
 install_go
 password
