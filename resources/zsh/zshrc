@@ -56,12 +56,8 @@ source $ZSH/oh-my-zsh.sh
 #Custom ENV
 export EDITOR=vim
 export AGENT='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
+export PATH=$PATH:$HOME/bin:$HOME/.local/bin:$HOME/.local:$HOME/.local/bin/go/bin
 
-export PATH=$PATH:$HOME/.local/bin:$GOROOT/bin:$HOME/.local:GOPATH/bin
-
-#GO
-export GOPATH=$HOME/.local/projects/go
-export GOROOT=$HOME/.local/bin/go
 
 #daily drivers for day to day tasks
 alias http='python3 -m http.server 80'
@@ -74,11 +70,14 @@ alias i='sudo apt-get install -y'
 alias public='curl wtfismyip.com/text'
 alias py='python3'
 alias commands='history | cut -c 6-'
+alias proxy='proxychains'
 
 #basic shortcuts with a windows target flavor
 alias secretsdump='impacket-secretsdump'
 alias ps-shell='cp ~/nishang/Shells/Invoke-PowerShellTcpOneLine.ps1 .'
 alias portscan='cp ~/nishang/Scan/Invoke-PortScan.ps1 .'
+alias cme='netexec'
+
 
 ffuf_subdomain () {
  

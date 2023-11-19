@@ -16,8 +16,8 @@ httpx_install() {
 	wget -q https://github.com/projectdiscovery/httpx/releases/download/v1.3.6/httpx_1.3.6_linux_amd64.zip &&
 		unzip httpx_1.3.6_linux_amd64.zip -d ./httpx &&
 		rm httpx_1.3.6_linux_amd64.zip &&
-		mv httpx/httpx $HOME/.local/bin/http-x &&
-		rm -r httpx/
+		mv httpx/httpx /home/kali/.local/bin/http-x && 
+    rm -r httpx/
 
 }
 
@@ -40,7 +40,8 @@ rush_install() {
 
 katana_install() {
 	wget https://github.com/projectdiscovery/katana/releases/download/v1.0.4/katana_1.0.4_linux_amd64.zip -O katana.zip &&
-		unzip katana.zip && chmod +x katana && mv katana $HOME/.local/bin/. && rm katana.zip
+		unzip katana.zip && chmod +x katana && mv katana $HOME/.local/bin/katana && rm katana.zip
+
 }
 
 chaos_install() {
@@ -51,13 +52,14 @@ chaos_install() {
 
 dnsx_install() {
 	wget https://github.com/projectdiscovery/dnsx/releases/download/v1.1.4/dnsx_1.1.4_linux_amd64.zip -O dnsx.zip &&
-		unzip dnsx.zip dnsx && chmod +x dnsx && mv dnsx $HOME/.local/bin/dnsx && rm dnsx.zip
+	unzip dnsx.zip dnsx && chmod +x dnsx && mv dnsx $HOME/.local/bin/dnsx && rm dnsx.zip
+
 }
 
 waybackurls_install() {
 	wget -q -O waybackurls.tgz https://github.com/tomnomnom/waybackurls/releases/download/v0.1.0/waybackurls-linux-amd64-0.1.0.tgz &&
 		gunzip waybackurls.tgz &&
-		tar -C $HOME/.local -xf waybackurls.tar &&
+		tar -C $HOME/.local/bin -xf waybackurls.tar &&
 		chmod +x $HOME/.local/bin/waybackurls &&
 		rm $HOME/waybackurls.tar
 }

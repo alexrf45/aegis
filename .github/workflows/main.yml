@@ -31,7 +31,7 @@ jobs:
           tags: fonalex45/kali-sec:latest
       -
         name: Notify Slack Channel of finished build
-        uses: act10ns/slack@v1
+        uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
           channel: '#general'

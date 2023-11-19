@@ -26,7 +26,11 @@ WORKDIR /home/kali/
 
 USER kali
 
-RUN mkdir .logs && mkdir -p .local/bin && mkdir tools && mkdir -p /home/kali/.config/tmuxp
+RUN mkdir .logs && \
+  mkdir -p .local/bin && \
+  mkdir tools && \
+  mkdir -p /home/kali/.config/tmuxp && \
+  mkdir -p $HOME/.proxychains
 
 ADD sources/0-base.sh /tmp/sources/0-base.sh
 
@@ -39,6 +43,10 @@ RUN sudo chmod +x /tmp/sources/1-tools.sh &&  /tmp/sources/1-tools.sh
 ADD sources/2-tools.sh /tmp/sources/2-tools.sh
 
 RUN sudo chmod +x /tmp/sources/2-tools.sh && /tmp/sources/2-tools.sh
+
+ADD sources/3-wordlists.sh /tmp/sources/3-wordlists.sh
+
+RUN sudo chmod +x /tmp/sources/3-wordlists.sh && /tmp/sources/3-wordlists.sh
 
 RUN sudo chown -R kali:kali /tmp/sources/*
 
@@ -60,9 +68,12 @@ RUN cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
   && cp /home/kali/resources/bounty.yaml /home/kali/.config/tmuxp/bounty.yaml \
   && cp -r /home/kali/resources/bloodhound /home/kali/.config/bloodhound \
   && cp -r /home/kali/resources/shell-upgrade.sh /home/kali/tools/shell-upgrade.sh \
-  && cp -r /home/kali/resources/recon.sh /home/kali/.local/bin/recon.sh && chmod +x /home/kali/.local/bin/recon.sh
+  && cp -r /home/kali/resources/recon.sh /home/kali/.local/bin/recon.sh && chmod +x /home/kali/.local/bin/recon.sh \
+  && cp -r /home/kali/resources/proxychains.conf /home/kali/.proxychains/proxychains.conf
 
 RUN git clone https://github.com/samratashok/nishang.git
+
+RUN git clone https://github.com/aniqfakhrul/powerview.py
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" \
   --unattended

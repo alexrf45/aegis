@@ -2,17 +2,23 @@
 
 web() {
 	sudo apt-get install -y whatweb ffuf sqlmap \
-		exiftool default-mysql-client hurl postgresql arjun \
-		burpsuite
-}
+		exiftool default-mysql-client hurl postgresql arjun
+		}
 
 snyk-cli() {
 	curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk &&
-		chmod +x ./snyk && mv ./snyk $HOME/.local/.
+		chmod +x ./snyk && mv ./snyk $HOME/.local/bin/snyk
 }
 
 password() {
-	sudo apt-get install -y seclists crunch
+	sudo apt-get install -y crunch
+}
+
+install_go() {
+	wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz &&
+		sudo rm -rf /usr/local/go &&
+	  tar -C $HOME/.local/bin -xzf go1.21.3.linux-amd64.tar.gz &&
+		rm go1.21.3.linux-amd64.tar.gz 
 }
 
 payload() {
@@ -38,7 +44,7 @@ active_directory() {
 			"https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/SharpHound.exe" &&
 		wget -q -O netexec \
 			"https://github.com/Pennyw0rth/NetExec/releases/download/v1.0.0/nxc-ubuntu-latest" &&
-		chmod +x netexec && sudo mv netexec /home/kali/.local/netexec
+		chmod +x netexec && sudo mv netexec /home/kali/.local/bin/netexec
 }
 
 pivot() {
@@ -64,6 +70,7 @@ privesc() {
 }
 
 web
+install_go
 password
 payload
 active_directory

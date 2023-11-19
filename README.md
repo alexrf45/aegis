@@ -33,9 +33,7 @@
 | reload     | '. ~/.zshrc'                                  |
 | update     | 'sudo apt-get update'                         |
 | t          | 'tmux -f ~/.tmux.conf'                        |
-| t-session  | 'tmux new -f ~/.tmux.conf -s $1'              |
 | ctf        | 'tmuxp load ~/.config/tmuxp/ctf.yaml'         |
-| zcopy      | 'cp .zshrc .zlogin && cp .zlogin .zprofile'   |
 | i          | 'sudo apt-get install'                        |
 | public     | 'curl wtfismyip.com/text'                     |
 | portscan   | 'cp /home/kali/nishang/Scan/Invoke-PortScan.ps1 .' |
