@@ -15,7 +15,6 @@ windows:
 - window_name: foothold_pivot
   layout: tiled
   panes:
-    - mkdir www/ && cd www/ && python3 -m http.server 8000
     - ssh-keygen -t ed25519 -C "htb" -N '' -f ctf
     -
     -

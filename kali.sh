@@ -1,24 +1,6 @@
 #!/bin/bash
 
-# kali $1 ()
-# {
-#   mkdir $1 && cd $1 && \
-#     docker run --name $1 -it \
-#       --net=host --entrypoint=/bin/zsh \
-#       --cap-add=NET_ADMIN \
-#       -v $HOME/.katet:/home/kali/.katet \
-#       -v $HOME/.Xauthority:/home/kali/.Xauthority:ro \
-#       -v /tmp/.X11-unix:/tmp/.X11-unix \
-#       -v `pwd`/.kali-logs:/root/.logs:rw \
-#       -v `pwd`:/$1 \
-#       -w /$1 \
-#       -e DISPLAY=$DISPLAY \
-#       -e TARGET=$TARGET -e IP=$IP -e DOMAIN=$DOMAIN \
-#       -e TZ=$TIME_ZONE -e NAME=$1 \
-#       fonalex45/kali-d:latest
-# }
-
-kali-directory $1 () {
+directory $1 () {
  mkdir -p $1/{recon,www,exploit,pivot,report} && cd $1
 }
 
@@ -49,24 +31,24 @@ kali $1 () {
 	fi
 }
 
-kali-start $1 ()
+start $1 ()
 {
- docker container start $1
+ docker container start $1 && docker container exec -it $1 /bin/zsh
 }
 
-kali-enter $1 ()
+enter $1 ()
 {
 docker exec -it $1 /bin/zsh
 }
 
-kali-stop $1 () {
+stop $1 () {
  docker container stop $1
 }
 
-kali-destory $1 () {
+destory $1 () {
  docker container rm $1
 }
 
-kali-pull () {
+pull () {
   docker pull fonalex45/kali-sec:latest
 }
