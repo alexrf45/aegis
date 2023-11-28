@@ -87,5 +87,11 @@ ffuf -c -t 5 -rate 20 -p 0.2 \
   -mc 200,403 -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://$DOMAIN/
 }
 
+ffuf_directory () {
 
+    ffuf -c -t 10 -rate 20 -p 0.2 -H "User-Agent: $AGENT" \
+    -ac -mc 200,302,422,403,401,301 \
+    -w $HOME/.wordlists/common.txt \
+    -u http://$DOMAIN/FUZZ
 
+}
