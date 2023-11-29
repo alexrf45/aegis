@@ -22,3 +22,6 @@ wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Fuzzing/L
 
 wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Fuzzing/SQLi/Generic-BlindSQLi.fuzzdb.txt" -q -O $HOME/.wordlists/SQL.txt
 
+wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/DNS/subdomains-top1million-20000.txt" -q -O $HOME/.wordlists/dns.txt
+
+wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/DNS/bitquark-subdomains-top100000.txt" -q -O $HOME/.wordlists/dns-1.txt
