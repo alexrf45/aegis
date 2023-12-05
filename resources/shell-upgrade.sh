@@ -4,6 +4,8 @@ python3 -c 'import pty; pty.spawn("/bin/bash")'
 
 export LS_OPTIONS='--color=auto'
 
+export TERM="xterm-256color"
+
 eval "$(dircolors)"
 
 alias ls='ls $LS_OPTIONS'
