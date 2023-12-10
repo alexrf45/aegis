@@ -25,3 +25,5 @@ wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Fuzzing/S
 wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/DNS/subdomains-top1million-20000.txt" -q -O $HOME/.wordlists/dns.txt
 
 wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/DNS/bitquark-subdomains-top100000.txt" -q -O $HOME/.wordlists/dns-1.txt
+
+wget "https://raw.githubusercontent.com/jeanphorn/wordlist/master/usernames.txt" -q -O $HOME/.wordlists/usernames.txt

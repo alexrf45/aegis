@@ -68,7 +68,8 @@ RUN cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
   && cp -r /home/kali/resources/bloodhound /home/kali/.config/bloodhound \
   && cp -r /home/kali/resources/shell-upgrade.sh /home/kali/tools/shell-upgrade.sh \
   && cp -r /home/kali/resources/recon.sh /home/kali/.local/bin/recon.sh && chmod +x /home/kali/.local/bin/recon.sh \
-  && cp -r /home/kali/resources/proxychains.conf /home/kali/.proxychains/proxychains.conf
+  && cp -r /home/kali/resources/proxychains.conf /home/kali/.proxychains/proxychains.conf \
+  && cp -r /home/kali/resources/kerbrute /home/kali/.local/bin/kerbrute && chmod +x /home/kali/.local/bin/kerbrute
 
 RUN git clone https://github.com/samratashok/nishang.git
 
