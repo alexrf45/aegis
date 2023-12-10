@@ -11,7 +11,7 @@ network() {
 	sudo apt-get install -y netcat-traditional socat rlwrap nmap \
 		netdiscover masscan dnsutils onesixtyone braa tcpdump \
 		ftp telnet swaks snmpcheck snmpcheck snmp-mibs-downloader \
-		iputils-ping iproute2 proxychains sendmail ltrace raven
+		iputils-ping iproute2 proxychains sendmail ltrace raven faketime
 }
 
 active_directory() {

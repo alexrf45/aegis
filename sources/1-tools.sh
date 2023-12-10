@@ -2,8 +2,8 @@
 
 web() {
 	sudo apt-get install -y whatweb ffuf sqlmap \
-		exiftool default-mysql-client hurl postgresql arjun
-		}
+		exiftool default-mysql-client hurl postgresql arjun sqsh
+}
 
 snyk-cli() {
 	curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk &&
@@ -17,8 +17,8 @@ password() {
 install_go() {
 	wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz &&
 		sudo rm -rf /usr/local/go &&
-	  tar -C $HOME/.local/bin -xzf go1.21.3.linux-amd64.tar.gz &&
-		rm go1.21.3.linux-amd64.tar.gz 
+		tar -C $HOME/.local/bin -xzf go1.21.3.linux-amd64.tar.gz &&
+		rm go1.21.3.linux-amd64.tar.gz
 }
 
 payload() {
