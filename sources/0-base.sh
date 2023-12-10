@@ -16,8 +16,8 @@ network() {
 
 active_directory() {
 	sudo apt-get install -y \
-		smbclient smbmap evil-winrm bloodhound responder \
-		powershell ldap-utils enum4linux-ng
+		smbclient smbmap evil-winrm responder \
+		powershell ldap-utils enum4linux-ng bloodhound.py
 }
 
 osint_tools() {

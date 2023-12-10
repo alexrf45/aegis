@@ -65,7 +65,6 @@ RUN sudo chown -R kali:kali /home/kali/resources
 
 RUN cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
   && cp /home/kali/resources/bounty.yaml /home/kali/.config/tmuxp/bounty.yaml \
-  && cp -r /home/kali/resources/bloodhound /home/kali/.config/bloodhound \
   && cp -r /home/kali/resources/shell-upgrade.sh /home/kali/tools/shell-upgrade.sh \
   && cp -r /home/kali/resources/recon.sh /home/kali/.local/bin/recon.sh && chmod +x /home/kali/.local/bin/recon.sh \
   && cp -r /home/kali/resources/proxychains.conf /home/kali/.proxychains/proxychains.conf \
