@@ -72,6 +72,8 @@ RUN cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
 
 RUN git clone https://github.com/samratashok/nishang.git
 
+RUN git clone https://github.com/gustanini/PowershellTools.git
+
 RUN git clone https://github.com/aniqfakhrul/powerview.py
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" \
