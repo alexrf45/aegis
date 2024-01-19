@@ -15,10 +15,10 @@ password() {
 }
 
 install_go() {
-	wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz &&
+	wget https://go.dev/dl/go1.21.6.linux-amd64.tar.gz &&
 		sudo rm -rf /usr/local/go &&
-		tar -C $HOME/.local/bin -xzf go1.21.3.linux-amd64.tar.gz &&
-		rm go1.21.3.linux-amd64.tar.gz
+		tar -C $HOME/.local/bin -xzf go1.21.6.linux-amd64.tar.gz &&
+		rm go1.21.6.linux-amd64.tar.gz
 }
 
 payload() {
@@ -43,7 +43,7 @@ active_directory() {
 		wget -q -O SharpHound.exe \
 			"https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/SharpHound.exe" &&
 		wget -q -O netexec \
-			"https://github.com/Pennyw0rth/NetExec/releases/download/v1.0.0/nxc-ubuntu-latest" &&
+			"https://github.com/Pennyw0rth/NetExec/releases/download/v1.1.0/nxc" &&
 		chmod +x netexec && sudo mv netexec /home/kali/.local/bin/netexec
 }
 

@@ -88,16 +88,16 @@ export NAME=
 export TARGET=
 export USER=
 fcrackzip -u -v -D -p /usr/share/wordlists/rockyou.txt file.zip
-ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -o $NAME.json -of json -mc 200,302,422,403 -w $HOME/.wordlists/common.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -o $NAME.json -of json -mc 200,302,422,403,401 -w $HOME/.wordlists/api.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -o $NAME.json -of json -mc 200,302,422,403,401 -w $HOME/.wordlists/dir-list.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -o $NAME.json -of json -mc 200,302,422,403,401 -w $HOME/.wordlists/raft-small.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -o $NAME.json -of json -mc 200,302,422,403,401 -w $HOME/.wordlists/api-wild.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -o $NAME.json -of json -mc 200,302,422,403,401 -w $HOME/.wordlists/fuzz-1.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -o $NAME.json -of json -mc 200,302,422,403,401 -w $HOME/.wordlists/LFI.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -o $NAME.json -of json -mc 200,503,500,400 -w $HOME/.wordlists/SQL.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 30 -p 0.2 -H "User-Agent: $AGENT" -o $NAME_domains.json -of json -H "Host:FUZZ.$DOMAIN" -mc 200,403 -w $HOME/.wordlists/dns.txt -u http://$DOMAIN/
-ffuf -c -t 5 -rate 30 -p 0.2 -H "User-Agent: $AGENT" -o $NAME_domains.json -of json -H "Host:FUZZ.$DOMAIN" -mc 200,403 -w $HOME/.wordlists/dns-1.txt -u http://$DOMAIN/
+ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -mc 200,302,422,403 -w $HOME/.wordlists/common.txt -u http://$DOMAIN/FUZZ
+ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -mc 200,302,422,403,401 -w $HOME/.wordlists/api.txt -u http://$DOMAIN/FUZZ
+ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -mc 200,302,422,403,401 -w $HOME/.wordlists/dir-list.txt -u http://$DOMAIN/FUZZ
+ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -mc 200,302,422,403,401 -w $HOME/.wordlists/raft-small.txt -u http://$DOMAIN/FUZZ
+ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -mc 200,302,422,403,401 -w $HOME/.wordlists/api-wild.txt -u http://$DOMAIN/FUZZ
+ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -mc 200,302,422,403,401 -w $HOME/.wordlists/fuzz-1.txt -u http://$DOMAIN/FUZZ
+ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -mc 200,302,422,403,401 -w $HOME/.wordlists/LFI.txt -u http://$DOMAIN/FUZZ
+ffuf -c -t 5 -rate 20 -p 0.2 -H "User-Agent: $AGENT" -ac -mc 200,503,500,400 -w $HOME/.wordlists/SQL.txt -u http://$DOMAIN/FUZZ
+ffuf -c -t 5 -rate 30 -p 0.2 -H "User-Agent: $AGENT" -H "Host:FUZZ.$DOMAIN" -mc 200,403 -w $HOME/.wordlists/dns.txt -u http://$DOMAIN/
+ffuf -c -t 5 -rate 30 -p 0.2 -H "User-Agent: $AGENT" -H "Host:FUZZ.$DOMAIN" -mc 200,403 -w $HOME/.wordlists/dns-1.txt -u http://$DOMAIN/
 ffuf -request REQUESTFILE -request-proto http -w PATH/TO/WORDLIST -fs 0 -c
 find DIR -type f -newermt YYYY-MM-DD ! -newermt YYYY-MM-DD > /dev/null
 gMSADumper.py -d "$DOMAIN" -l "$DC_HOST" -u "$USER" -p "$PASSWORD"
