@@ -5,6 +5,11 @@ web() {
 		exiftool default-mysql-client hurl postgresql arjun sqsh
 }
 
+web_server() {
+	wget https://github.com/svenstaro/miniserve/releases/download/v0.26.0/miniserve-0.26.0-x86_64-unknown-linux-gnu -q \
+		-O miniserve && chmod +x ./miniserve && mv ./miniserve $HOME/.local/bin/miniserve
+}
+
 snyk-cli() {
 	curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk &&
 		chmod +x ./snyk && mv ./snyk $HOME/.local/bin/snyk
@@ -70,6 +75,7 @@ privesc() {
 }
 
 web
+web_server
 install_go
 password
 payload
