@@ -1,0 +1,85 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Use custom format
+format = """$container
+$time $directory $python $git_branch $git_commit $git_status $aws $azure $terraform $kubernetes
+\\$ """
+# Wait 10 milliseconds for starship to check files under the current directory.
+scan_timeout = 5
+
+# Disable the blank line at the start of the prompt
+add_newline = true
+
+[line_break]
+disabled = false
+
+[container]
+format = '[$symbol \[$name\]]($style) '
+style = "bold red dimmed"
+
+[python]
+symbol = "👾 "
+pyenv_version_name = true
+style = "#FF5555"
+
+[aws]
+format = '[$symbol  ($profile )(\($region\) )]($style)'
+style = "bold orange"
+symbol = "☁️"
+[aws.region_aliases]
+us-east-1 = "va"
+[aws.profile_aliases]
+Admin = 'Administrator'
+acct-admin= 'account-admin'
+
+[gcloud]
+disabled = false
+format = ' IAM: [$symbol$account(@$domain)(\($project\))]($style) '
+style = "#FEFB61"
+symbol = ""
+
+[time]
+disabled = false
+format = " [$time]($style) "
+style = "bold white"
+use_12hr = false
+time_format = "%Y/%m/%d %T"
+utc_time_offset = "+9"
+time_range="-"  # always: time_range="00:00:00-23:59:59"
+
+[directory]
+read_only = " "
+truncation_length = 2
+truncate_to_repo = true # truncates directory to root folder if in github repo
+style = "green"
+
+[git_branch]
+format = " [$symbol $branch]($style) "
+symbol = "🌳"
+style = "bold pink"
+
+
+[git_commit]
+commit_hash_length = 8
+style = "bold white"
+
+[pulumi]
+symbol = "⚙️ "
+format = " [$symbol $stack]($style)"
+style = "bright-purple"
+disabled = false
+
+[terraform]
+format = " [ 󱁢 $version $workspace]($style) "
+style = "#BD93F9"
+
+[kubernetes]
+format = 'on [⛵ ($user on )($cluster in )$context \($namespace\)](dimmed green) '
+disabled = false
+
+[azure]
+disabled = true
+format = "on [$symbol($subscription)]($style) "
+symbol = "ﴃ "
+style = "blue bold"

@@ -2,11 +2,12 @@
 FROM kalilinux/kali-rolling:latest
 
 LABEL "project"="kali-sec"
-LABEL "author"="f0nzy"
-LABEL "version"="v1.1.1"
-LABEL "website"="https://f0nzy.com"
+LABEL "author"="fr3d"
+LABEL "version"="v1.2.0"
+LABEL "website"="https://fr3d.dev"
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV TZ="America/New_York"
 
 RUN apt-get update && apt-get install sudo -y
 
@@ -68,7 +69,8 @@ RUN cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf \
   && cp -r /home/kali/resources/shell-upgrade.sh /home/kali/tools/shell-upgrade.sh \
   && cp -r /home/kali/resources/recon.sh /home/kali/.local/bin/recon.sh && chmod +x /home/kali/.local/bin/recon.sh \
   && cp -r /home/kali/resources/proxychains.conf /home/kali/.proxychains/proxychains.conf \
-  && cp -r /home/kali/resources/kerbrute /home/kali/.local/bin/kerbrute && chmod +x /home/kali/.local/bin/kerbrute
+  && cp -r /home/kali/resources/kerbrute /home/kali/.local/bin/kerbrute && chmod +x /home/kali/.local/bin/kerbrute \
+  && cp -r /home/kali/resources/starship.toml /home/kali/.config/starship.toml
 
 RUN git clone https://github.com/samratashok/nishang.git
 
@@ -91,6 +93,8 @@ RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
   ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 RUN git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+RUN  curl -O https://starship.rs/install.sh && chmod +x install.sh && ./install.sh -b $HOME/.local/bin --yes
 
 RUN sudo rm -rf /tmp/sources && sudo rm -rf /home/kali/resources
 
