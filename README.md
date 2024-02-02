@@ -2,8 +2,8 @@
 
 ![Logo](https://ka-tet.s3.amazonaws.com/docker.png)                                                                                                                                           
 
-![Logo](https://img.shields.io/docker/image-size/fonalex45/kali-d)                                                                                                                             
-![Logo](https://img.shields.io/docker/pulls/fonalex45/kali-d)       
+![Logo](https://img.shields.io/docker/image-size/fonalex45/kali-sec)                                                                                                                             
+![Logo](https://img.shields.io/docker/pulls/fonalex45/kali-sec)       
 
 ## Repeatable, immutable, and scalable Security Research w/ Docker 
 ## Acknowledgements
@@ -14,16 +14,13 @@
 
 ## Features
 
-- Bash wrapper for installation, custom image build, uninstall, and operations
+- Bash wrapper
 - Command history logging via script
 - Persistant containers, volumes and workspaces
 - Customizable resources and tooling, config files are located in the `resources/` & `sources/` directories
 - Non-root container w/ sudo
-- Tmux inside the container 
-- Firefox w/ custom foxyproxy settings for Burpsuite and Socks Proxy
+- Tmux inside the container
 - Wireshark
-- Bloodhound w/ custom queries
-- Burpsuite (For https: recommend importing certs)
 
 ### Custom zsh aliases included:                                                                                                                                                              
                                                                                                                                                                                               
@@ -68,16 +65,16 @@ Example:
 
 Spawn a new container: `kali <CONTAINER_NAME>`
 
-Start an existing container: `kali-start <CONTAINER_NAME>`
+Start an existing container: `start <CONTAINER_NAME>`
 
-Enter an existing container: `kali-enter <CONTAINER_NAME>`
+Enter an existing container: `enter <CONTAINER_NAME>`
 
-Stop an existing container: `kali-stop <CONTAINER_NAME>`
+Stop an existing container: `stop <CONTAINER_NAME>`
 
-Destroy an existing container: `kali-destroy <CONTAINER_NAME>`
+Destroy an existing container: `destroy <CONTAINER_NAME>`
 
 Update image **This will not update the image of an existing container, only for new ones**: 
-`kali-pull`
+`pull`
 
 Logging within container:
 

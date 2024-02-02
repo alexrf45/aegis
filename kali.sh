@@ -13,7 +13,7 @@ kali $1 () {
     --net=host --entrypoint=/bin/zsh \
 		--cap-add=NET_ADMIN \
     -e DISPLAY=$DISPLAY -e DOMAIN=$DOMAIN \
-		-e TARGET=$TARGET -e IP=$IP -e TZ=$TIME_ZONE -e NAME=$1 \
+		-e TARGET=$1 -e IP=$IP -e TZ=$TIME_ZONE -e NAME=$1 \
     -v `pwd`/.kali-logs:$HOME/.logs:rw -v `pwd`:/$1 \
     -v $HOME/.Xauthority:$HOME/.Xauthority:ro \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
@@ -23,7 +23,7 @@ kali $1 () {
 		--net=host --entrypoint=/bin/zsh \
 		--cap-add=NET_ADMIN \
 		-e DOMAIN=$DOMAIN -e DISPLAY=$DISPLAY \
-    -e TARGET=$TARGET -e IP=$IP \
+    -e TARGET=$1 -e IP=$IP \
     -e TZ=$TIME_ZONE -e NAME=$1 \
 		-v `pwd`/.kali-logs:/root/.logs:rw -v `pwd`:/$1 \
 		-v $HOME/.Xauthority:$HOME/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix \
