@@ -20,10 +20,10 @@ password() {
 }
 
 install_go() {
-	wget https://go.dev/dl/go1.21.6.linux-amd64.tar.gz &&
+	wget https://go.dev/dl/go1.22.0.linux-amd64.tar.gz &&
 		sudo rm -rf /usr/local/go &&
-		tar -C $HOME/.local/bin -xzf go1.21.6.linux-amd64.tar.gz &&
-		rm go1.21.6.linux-amd64.tar.gz
+		tar -C $HOME/.local/bin -xzf go1.22.0.linux-amd64.tar.gz &&
+		rm go1.22.0.linux-amd64.tar.gz
 }
 
 payload() {
