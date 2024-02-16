@@ -1,31 +1,64 @@
 #!/bin/bash
 
 base() {
-	sudo apt-get install -y wget curl man git zsh lolcat figlet \
-		tmux tree mousepad hexcurse file ruby ruby-dev vim nano p7zip-full kali-themes \
-		djvulibre-bin python3-pip python3-virtualenv libpcap-dev jq \
-		git xpdf man-db exploitdb rpcbind nfs-common feh cmake recordmydesktop
+	sudo apt-get install -y \
+		wget curl \
+		man git \
+		zsh lolcat \
+		figlet tmux \
+		tree mousepad \
+		hexcurse file \
+		ruby ruby-dev \
+		vim nano \
+		p7zip-full kali-themes \
+		djvulibre-bin python3-pip \
+		python3-virtualenv libpcap-dev \
+		jq xpdf \
+		man-db exploitdb \
+		rpcbind nfs-common \
+		feh cmake
 }
 
 network() {
-	sudo apt-get install -y netcat-traditional socat rlwrap nmap \
-		netdiscover masscan dnsutils onesixtyone braa tcpdump \
-		ftp telnet swaks snmpcheck snmpcheck snmp-mibs-downloader \
-		iputils-ping iproute2 proxychains sendmail ltrace raven faketime
+	sudo apt-get install -y \
+		netcat-traditional socat \
+		rlwrap nmap \
+		netdiscover masscan \
+		dnsutils onesixtyone \
+		braa tcpdump \
+		ftp telnet swaks \
+		snmpcheck snmpcheck \
+		snmp-mibs-downloader iputils-ping \
+		iproute2 proxychains \
+		sendmail ltrace \
+		raven faketime
 }
 
 active_directory() {
 	sudo apt-get install -y \
-		smbclient smbmap evil-winrm responder \
-		powershell ldap-utils enum4linux-ng bloodhound.py
+		smbclient evil-winrm \
+		responder powershell \
+		ldap-utils enum4linux-ng \
+		bloodhound.py
 }
 
 osint_tools() {
 	sudo apt-get install -y \
-		csvtool vinetto sqlitebrowser exiflooter h8mail reconspider sn0int
+		csvtool vinetto \
+		sqlitebrowser exiflooter \
+		h8mail reconspider \
+		sn0int
 }
 
 base
 network
 active_directory
 osint_tools
+
+mkdir -p $HOME/.local/bin
+
+mkdir -p $HOME/.logs
+
+mkdir -p $HOME/tools
+
+mkdir -p $HOME/.proxychains
