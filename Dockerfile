@@ -10,7 +10,7 @@ LABEL "website"="https://fr3d.dev"
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ="America/New_York"
 
-RUN apt-get update && apt-get install sudo git curl wget -y
+RUN apt-get update && apt-get install sudo -y
 
 RUN groupadd --gid 1000 kali \
   && useradd --home-dir /home/kali --create-home --uid 1000 \
