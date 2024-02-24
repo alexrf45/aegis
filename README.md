@@ -85,3 +85,6 @@ Command list:
 ```
 alias command='cat $HOME/.commands'
 ```
+
+TODO:
+- add quick https server script
