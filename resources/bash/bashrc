@@ -1,0 +1,26 @@
+shopt -s histappend
+shopt -s checkwinsize
+HISTFILE="$HOME/.history"
+HISTSIZE=1000
+HISTFILESIZE=2000
+HISTCONTROL=ignoreboth
+HISTTIMEFORMAT='%Y-%m-%d %T - '
+
+force_color_prompt=yes
+
+source "$HOME/.profile"
+
+source "$HOME/.aliases"
+
+for file in $HOME/.bash/*; do
+	source "$file"
+done
+
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
+
+PROMPT_COMMAND='PS1_CMD1=$(git branch 2>/dev/null | grep '"'"'*'"'"' | colrm 1 2)'
+PS1='[\D{%-d-%-b-%y}] \t \W \[\e[97m\]${PS1_CMD1}\n\[\e[0m\] \$ '
+
+# if you have a need to set up ssh presistance
+#eval $(ssh-agent) >/dev/null 2>&1

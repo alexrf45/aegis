@@ -14,16 +14,17 @@
 
 ## Features
 
-- Bash wrapper
+- Bash functions for easy spin up and spin down
 - Command history logging via script
 - Persistant containers, volumes and workspaces
 - Customizable resources and tooling, config files are located in the `resources/` & `sources/` directories
 - Non-root container w/ sudo
 - Tmux inside the container
-- Wireshark
 
-### Custom zsh aliases included:                                                                                                                                                              
-                                                                                                                                                                                              
+### Custom aliases included:
+
+
+
 | alias      | command |
 |------------|-----------------------------------------------|
 | http       | 'sudo python3 -m http.server 80'              |
@@ -52,13 +53,14 @@ $ cp kali.sh ~/.zsh/.
 3. Source the script in .zshrc or desired shell:
 
 **Example:**
+
 `echo 'source "$HOME/.zsh/kali.sh"' >> .zshrc`
 
 4. Refresh the shell:
 
 Example: 
 ```bash
-. ~/.zshrc 
+. ~/.bashrc or . ~/.zshrc 
 ```
 
 ## Usage/Examples
@@ -76,26 +78,10 @@ Destroy an existing container: `destroy <CONTAINER_NAME>`
 Update image **This will not update the image of an existing container, only for new ones**: 
 `pull`
 
-Logging within container:
-
-```bash 
-
-[ Sun Dec 04 2022  2:21PM ]  [ kali@dev-local:/engagement-20xx-xx-xx-company.com ]
-$ logfile $NAME
-
-[ Sun Dec 04 2022  2:21PM ]  [ kali@dev-local:/engagement-20xx-xx-xx-company.com ]
-$ cd $NAME
-
-```
-
-
 Command list:
 
-- Tired of looking for a specific command or long one liner? You can use this handy alias to search the prebuilt zsh history for commonly used commands, comes included in the container .zshrc.
+- Tired of looking for a specific command or long one liner? You can use this handy alias to search the prebuilt history for commonly used commands
 
 ```
-alias commands='history | cut -c 6-'
+alias command='cat $HOME/.commands'
 ```
-## Demo
-
-[![asciicast](https://asciinema.org/a/39p4LvRuGCbyG9afkzjnA2wlJ.svg)](https://asciinema.org/a/39p4LvRuGCbyG9afkzjnA2wlJ)
