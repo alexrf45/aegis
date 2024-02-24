@@ -1,8 +1,12 @@
 #!/bin/bash
 
 web() {
-	sudo apt-get install -y whatweb ffuf sqlmap \
-		exiftool default-mysql-client hurl postgresql arjun sqsh
+	sudo apt-get install -y \
+		whatweb ffuf \
+		sqlmap exiftool \
+		default-mysql-client \
+		hurl postgresql \
+		arjun sqsh
 }
 
 web_server() {
@@ -74,6 +78,13 @@ privesc() {
 			"https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy64"
 }
 
+extra() {
+	cd $HOME/tools/ &&
+		git clone https://github.com/samratashok/nishang.git tools/nishang &&
+		git clone https://github.com/gustanini/PowershellTools.git tools/powershelltools &&
+		git clone https://github.com/aniqfakhrul/powerview.py tools/powerview
+}
+
 web
 web_server
 install_go
@@ -82,3 +93,4 @@ payload
 active_directory
 pivot
 privesc
+extra
