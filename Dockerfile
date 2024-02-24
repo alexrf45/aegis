@@ -2,7 +2,7 @@
 FROM kalilinux/kali-rolling:latest
 
 LABEL "project"="kali-sec"
-LABEL "branch"="dev"
+LABEL "branch"="main"
 LABEL "author"="fr3d"
 LABEL "version"="v1.3.0_dev"
 LABEL "website"="https://fr3ds-dev.pgs.sh/"
