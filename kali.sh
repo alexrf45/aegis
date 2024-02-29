@@ -10,7 +10,7 @@ kali $1 () {
     mkdir -p $1/{recon,www,exploit,pivot,report} && cd $1 && \
     mkdir .kali-logs \
     && docker run --name $1 -it \
-    --net=host --entrypoint=/bin/zsh \
+    --net=host --entrypoint=/bin/bash \
 		--cap-add=NET_ADMIN \
     -e DISPLAY=$DISPLAY -e DOMAIN=$DOMAIN \
 		-e TARGET=$1 -e IP=$IP -e TZ=$TIME_ZONE -e NAME=$1 \
