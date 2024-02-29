@@ -20,7 +20,7 @@ kali $1 () {
     -w /$1 fonalex45/kali-sec:latest
 	else
 		docker run --name $1 -it \
-		--net=host --entrypoint=/bin/zsh \
+		--net=host --entrypoint=/bin/bash \
 		--cap-add=NET_ADMIN \
 		-e DOMAIN=$DOMAIN -e DISPLAY=$DISPLAY \
     -e TARGET=$1 -e IP=$IP \
@@ -33,12 +33,12 @@ kali $1 () {
 
 start $1 ()
 {
- docker container start $1 && docker container exec -it $1 /bin/zsh
+ docker container start $1 && docker container exec -it $1 /bin/bash
 }
 
 enter $1 ()
 {
-docker exec -it $1 /bin/zsh
+docker exec -it $1 /bin/bash
 }
 
 stop $1 () {
