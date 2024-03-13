@@ -28,13 +28,11 @@
 | alias      | command |
 |------------|-----------------------------------------------|
 | http       | 'sudo python3 -m http.server 80'              |
-| reload     | '. ~/.zshrc'                                  |
+| reload     | '. ~/.bashrc'                                  |
 | update     | 'sudo apt-get update'                         |
 | t          | 'tmux -f ~/.tmux.conf'                        |
-| ctf        | 'tmuxp load ~/.config/tmuxp/ctf.yaml'         |
 | i          | 'sudo apt-get install'                        |
 | public     | 'curl wtfismyip.com/text'                     |
-| portscan   | 'cp /home/kali/nishang/Scan/Invoke-PortScan.ps1 .' |
 | py         | 'python3                                      |
 
 
@@ -60,7 +58,7 @@ $ cp kali.sh ~/.zsh/.
 
 Example: 
 ```bash
-. ~/.bashrc or . ~/.zshrc 
+. ~/.bashrc or . ~/.zshrc
 ```
 
 ## Usage/Examples

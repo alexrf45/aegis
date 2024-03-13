@@ -1,2 +1,0 @@
-miniserve --tls-cert my.cert --tls-key my.key
- - TODO: add to commands. figure out to install on kali image
