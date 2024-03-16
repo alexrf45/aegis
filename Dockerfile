@@ -3,7 +3,7 @@ FROM kalilinux/kali-rolling:latest
 
 LABEL "project"="kali-sec"
 LABEL "author"="fr3d"
-LABEL "version"="v1.3.0"
+LABEL "version"="v1.3.1"
 LABEL "website"="https://fr3ds-dev.pgs.sh/"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -40,6 +40,8 @@ RUN sudo chown -R kali:kali /home/kali/resources && /tmp/sources/4-home.sh
 RUN sudo rm -rf /tmp/sources && sudo rm -rf /home/kali/resources
 
 USER kali
+
+RUN pipx ensurepath && pipx install impacket certipy-ad git+https://github.com/Pennyw0rth/NetExec
 
 RUN bash
 

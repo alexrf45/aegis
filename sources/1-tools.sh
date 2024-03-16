@@ -44,16 +44,16 @@ active_directory() {
 			"https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Rubeus.exe" &&
 		wget -q -O certify.exe \
 			"https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Certify.exe" &&
-		wget "https://github.com/fortra/impacket/releases/download/impacket_0_11_0/impacket-0.11.0.tar.gz" &&
-		gunzip impacket-0.11.0.tar.gz && tar -xvf impacket-0.11.0.tar &&
-		mv impacket-0.11.0/ /home/kali/.local/ && rm impacket-0.11.0.tar &&
+		#wget "https://github.com/fortra/impacket/releases/download/impacket_0_11_0/impacket-0.11.0.tar.gz" &&
+		#gunzip impacket-0.11.0.tar.gz && tar -xvf impacket-0.11.0.tar &&
+		#	mv impacket-0.11.0/ /home/kali/.local/ && rm impacket-0.11.0.tar &&
 		wget -q -O sharp.ps1 \
 			"https://github.com/BloodHoundAD/BloodHound/raw/master/Collectors/SharpHound.ps1" &&
 		wget -q -O SharpHound.exe \
-			"https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/SharpHound.exe" &&
-		wget -q -O netexec \
-			"https://github.com/Pennyw0rth/NetExec/releases/download/v1.1.0/nxc" &&
-		chmod +x netexec && sudo mv netexec /home/kali/.local/bin/netexec
+			"https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/SharpHound.exe"
+	#wget -q -O netexec \
+	#	"https://github.com/Pennyw0rth/NetExec/releases/download/v1.1.0/nxc" &&
+	#chmod +x netexec && sudo mv netexec /home/kali/.local/bin/netexec
 }
 
 pivot() {
@@ -80,9 +80,9 @@ privesc() {
 
 extra() {
 	cd $HOME/tools/ &&
-		git clone https://github.com/samratashok/nishang.git tools/nishang &&
-		git clone https://github.com/gustanini/PowershellTools.git tools/powershelltools &&
-		git clone https://github.com/aniqfakhrul/powerview.py tools/powerview
+		git clone https://github.com/samratashok/nishang.git nishang &&
+		git clone https://github.com/gustanini/PowershellTools.git powershelltools &&
+		git clone https://github.com/aniqfakhrul/powerview.py powerview
 }
 
 web
