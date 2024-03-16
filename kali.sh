@@ -12,6 +12,7 @@ kali $1 () {
     && docker run --name $1 -it \
     --net=host --entrypoint=/bin/bash \
 		--cap-add=NET_ADMIN \
+    --cap-add=CAP_SYS_TIME \
     -e DISPLAY=$DISPLAY -e DOMAIN=$DOMAIN \
 		-e TARGET=$1 -e IP=$IP -e TZ=$TIME_ZONE -e NAME=$1 \
     -v `pwd`/.kali-logs:$HOME/.logs:rw -v `pwd`:/$1 \
@@ -22,6 +23,7 @@ kali $1 () {
 		docker run --name $1 -it \
 		--net=host --entrypoint=/bin/bash \
 		--cap-add=NET_ADMIN \
+    --cap-add=CAP_SYS_TIME \
 		-e DOMAIN=$DOMAIN -e DISPLAY=$DISPLAY \
     -e TARGET=$1 -e IP=$IP \
     -e TZ=$TIME_ZONE -e NAME=$1 \

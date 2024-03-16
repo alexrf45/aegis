@@ -16,7 +16,8 @@ base() {
 		jq xpdf \
 		man-db exploitdb \
 		rpcbind nfs-common \
-		feh cmake
+		feh cmake \
+		ntp ntpdate
 }
 
 network() {
