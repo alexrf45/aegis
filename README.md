@@ -5,7 +5,7 @@
 ![Logo](https://img.shields.io/docker/image-size/fonalex45/kali-sec)                                                                                                                             
 ![Logo](https://img.shields.io/docker/pulls/fonalex45/kali-sec)       
 
-## Repeatable, immutable, and scalable Security Research w/ Docker 
+## Repeatable, immutable, and scalable Security Research w/ Docker
 ## Acknowledgements
 
  I pulled alot of inspiration from this awesome project and can only hope my project is as awesome as this one is.
@@ -14,27 +14,34 @@
 
 ## Features
 
-- Bash functions for easy spin up and spin down
-- Command history logging via script
+- Bash functions for easy deployment and image update
+- Command history logging via `script`
 - Persistant containers, volumes and workspaces
 - Customizable resources and tooling, config files are located in the `resources/` & `sources/` directories
 - Non-root container w/ sudo
-- Tmux inside the container
+- Tmux inside the container (my favorite feature)
 
 ### Custom aliases included:
 
-
-
-| alias      | command |
-|------------|-----------------------------------------------|
-| http       | 'sudo python3 -m http.server 80'              |
-| reload     | '. ~/.bashrc'                                  |
-| update     | 'sudo apt-get update'                         |
-| t          | 'tmux -f ~/.tmux.conf'                        |
-| i          | 'sudo apt-get install'                        |
-| public     | 'curl wtfismyip.com/text'                     |
-| py         | 'python3                                      |
-
+```
+alias cme='nxc'
+alias port-scan='sudo nmap -sC -sV -p- $IP > scan.txt'
+alias udp-scan='sudo nmap -sU --top-ports 10 $IP -v > udp.scan.txt'
+alias stealth-scan='sudo nmap --data-length 6 -T3 -A -ttl 64 -p- $IP > stealth-scan.txt'
+alias public='curl wtfismyip.com/text'
+alias t='tmux new -f ~/.tmux.conf -s $1'
+alias webserver="miniserve -p 8001"
+alias :q='exit'
+alias home='cd ~'
+alias :r='. ~/.bashrc'
+alias update='sudo apt update'
+alias upgrade='sudo apt-get upgrade -y'
+alias i='sudo apt install -y'
+alias ls='ls --color=auto'
+alias command='cat $HOME/.commands'
+alias proxy='proxychains'
+alias serve='sudo python3 -m http.server 80'
+```
 
 ## Installation
 
@@ -73,7 +80,7 @@ Stop an existing container: `stop <CONTAINER_NAME>`
 
 Destroy an existing container: `destroy <CONTAINER_NAME>`
 
-Update image **This will not update the image of an existing container, only for new ones**: 
+Update image **This will not update the image of an existing container, only for new ones**:
 `pull`
 
 Command list:
