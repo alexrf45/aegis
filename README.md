@@ -1,9 +1,9 @@
-# kali-sec
+# aegis
 
 ![Logo](https://ka-tet.s3.amazonaws.com/docker.png)                                                                                                                                           
 
-![Logo](https://img.shields.io/docker/image-size/fonalex45/kali-sec)                                                                                                                             
-![Logo](https://img.shields.io/docker/pulls/fonalex45/kali-sec)       
+![Logo](https://img.shields.io/docker/image-size/fonalex45/aegis)                                                                                                                             
+![Logo](https://img.shields.io/docker/pulls/fonalex45/aegis)       
 
 ## Repeatable, immutable, and scalable Security Research w/ Docker
 ## Acknowledgements
@@ -45,7 +45,7 @@ alias serve='sudo python3 -m http.server 80'
 
 ## Installation
 
-1. `git clone https://github.com/alexrf45/kali-sec.git && cd kali-sec`
+1. `git clone https://github.com/alexrf45/aegis.git && cd aegis`
 
 2. Copy the kali function script to a desired location:
 
