@@ -19,8 +19,4 @@ cp /home/kali/resources/bash/history .commands
 
 mkdir .bash
 
-cp /home/kali/resources/bash/virtualenv.sh .bash/virtualenv.sh
-
 cp /home/kali/resources/bash/functions.sh .bash/functions.sh
-
-cp /home/kali/resources/bash/virtualenv.sh .bash/virtualenv.sh
