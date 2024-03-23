@@ -93,5 +93,6 @@ alias command='cat $HOME/.commands'
 
 TODO:
 - add quick https server script
-- Python wrapper
+- Python wrapper (FUTURE)
+- Revamp bash function into script
 - slim testing
