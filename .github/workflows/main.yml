@@ -34,5 +34,5 @@ jobs:
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
-          channel: '#general'
+          channel: '#docker-build'
         if: always()
