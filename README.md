@@ -95,4 +95,3 @@ TODO:
 - add quick https server script
 - Python wrapper (FUTURE)
 - Revamp bash function into script
-- slim testing
