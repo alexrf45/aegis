@@ -1,11 +1,9 @@
-# aegis
+![Logo](https://ka-tet.s3.amazonaws.com/logo_long.png)                                                                                                                                           
+![Logo](https://img.shields.io/docker/image-size/fonalex45/aegis) ![Logo](https://img.shields.io/docker/pulls/fonalex45/aegis)       
 
-![Logo](https://ka-tet.s3.amazonaws.com/docker.png)                                                                                                                                           
+Aegis is a docker image designed for any engagement. Gone are the days of spinning up an entire Kali virtual machine or installing on bare metal. This image offers a flexible, repeatable environment for penetration testers, security researchers and analysts alike.
 
-![Logo](https://img.shields.io/docker/image-size/fonalex45/aegis)                                                                                                                             
-![Logo](https://img.shields.io/docker/pulls/fonalex45/aegis)       
 
-## Repeatable, immutable, and scalable Security Research w/ Docker
 ## Acknowledgements
 
  I pulled alot of inspiration from this awesome project and can only hope my project is as awesome as this one is.
@@ -14,7 +12,7 @@
 
 ## Features
 
-- Bash functions for easy deployment and image update
+- Bash script executable
 - Command history logging via `script`
 - Persistant containers, volumes and workspaces
 - Customizable resources and tooling, config files are located in the `resources/` & `sources/` directories
@@ -45,43 +43,31 @@ alias serve='sudo python3 -m http.server 80'
 
 ## Installation
 
-1. `git clone https://github.com/alexrf45/aegis.git && cd aegis`
 
-2. Copy the kali function script to a desired location:
+1. Clone the repo:
+`git clone https://github.com/alexrf45/aegis.git && cd aegis`
 
-**Example:**
+2. Run the following commands to make the script ready for use:
 
 ```bash
-$ cp kali.sh ~/.zsh/. 
+$ cp aegis $HOME/.local/bin/. \
+&& chmod +x $HOME/.local/bin/aegis \
+&& source $HOME/.bashrc
 ```
 
-3. Source the script in .zshrc or desired shell:
-
-**Example:**
-
-`echo 'source "$HOME/.zsh/kali.sh"' >> .zshrc`
-
-4. Refresh the shell:
-
-Example: 
-```bash
-. ~/.bashrc or . ~/.zshrc
-```
 
 ## Usage/Examples
 
-Spawn a new container: `kali <CONTAINER_NAME>`
+```bash
+aegis start - start a container
+aegis stop - stop a container
+aegis enter- enter running container
+aegis destory - destory a container
+aegis backup - backup shared volume
+aegis pull - update to latest image (dev, latest)
+aegis help - view this help menu
 
-Start an existing container: `start <CONTAINER_NAME>`
-
-Enter an existing container: `enter <CONTAINER_NAME>`
-
-Stop an existing container: `stop <CONTAINER_NAME>`
-
-Destroy an existing container: `destroy <CONTAINER_NAME>`
-
-Update image **This will not update the image of an existing container, only for new ones**:
-`pull`
+```
 
 Command list:
 
@@ -94,4 +80,4 @@ alias command='cat $HOME/.commands'
 TODO:
 - add quick https server script
 - Python wrapper (FUTURE)
-- Revamp bash function into script
+- Revamp bash function into script (alpha)
