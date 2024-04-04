@@ -94,3 +94,6 @@ active_directory
 pivot
 privesc
 extra
+
+wget -q -O $HOME/.local/bin/busybox \
+	"https://busybox.net/downloads/binaries/1.35.0-x86_64-linux-musl/busybox"
