@@ -31,16 +31,16 @@ ffuf_subdomain() {
 
 	ffuf -c -t 5 -rate 20 -p 0.2 \
 		-H "User-Agent: $AGENT" -o $NAME_domains.json -of json \
-		-H "Host: FUZZ.$DOMAIN" \
-		-mc 200,403,401,503,500,302 -w $HOME/.wordlists/dns.txt -u http://$DOMAIN/
+		-H "Host: FUZZ.$2" \
+		-mc 200,403,401,503,500,302 -w $1 -u $2 $3
 }
 
 ffuf_directory() {
 
 	ffuf -c -t 10 -rate 20 -p 0.2 -H "User-Agent: $AGENT" \
 		-ac -mc 200,302,422,403,401,301 \
-		-w $HOME/.wordlists/common.txt \
-		-u http://$DOMAIN/FUZZ
+		-w $2 \
+		-u $1/FUZZ $3
 
 }
 
@@ -51,7 +51,7 @@ ffuf_directory() {
 ffuf_recursive() {
 	mkdir -p recursive
 	dom=$(echo $1 | unfurl format %s%d)
-	ffuf -c -v -u $1/FUZZ -w $2 \
+	ffuf -c -rate 20 -p 0.3 -t 5 -v -u $1/FUZZ -w $2 \
 		-H "User-Agent: Firefox" \
 		-H "X-Bug-Bounty: rez0"
 	-recursion -recursion-depth 5 \
@@ -61,7 +61,7 @@ ffuf_recursive() {
 
 ffuf_all() {
 	mkdir -p all
-	xargs -P5 -I {} sh -c 'dom=$(echo {} | unfurl format %s%d);ffuf -c -u {}/FUZZ -w quick.txt -mc all -ac -o all/all_$dom.csv -of csv -maxtime 600 -v' <$1
+	xargs -P5 -I {} sh -c 'dom=$(echo {} | unfurl format %s%d);ffuf -c -u {}/FUZZ -w quick.txt -rate 15 -p 0.2 -t 10 -mc all -ac -o all/all_$dom.csv -of csv -maxtime 600 -v' <$1
 }
 
 ffuf_basicauth() {

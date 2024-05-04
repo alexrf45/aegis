@@ -3,7 +3,7 @@ FROM kalilinux/kali-rolling:latest
 
 LABEL "project"="aegis"
 LABEL "author"="fr3d"
-LABEL "version"="v1.3.1"
+LABEL "version"="v1.3.2"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ="America/New_York"
