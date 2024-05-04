@@ -52,6 +52,7 @@ alias serve='sudo python3 -m http.server 80'
 
 ## Installation
 
+
 **The script has one dependency: gum. this can be installed via your distro's package manager**
 
 1. Clone the repo:
@@ -64,8 +65,6 @@ $ cp aegis $HOME/.local/bin/. \
 && chmod +x $HOME/.local/bin/aegis \
 && source $HOME/.bashrc
 ```
-
-
 ## Usage/Examples
 
 ```bash
