@@ -42,5 +42,5 @@ jobs:
         with:
           status: ${{ job.status }}
           channel: '#docker-build'
-          message: {{env.GITHUB_REF_NAME }} Build Complete
+          message: BUILD COMPLETE {{env.GITHUB_REF_NAME }}
         if: always()
