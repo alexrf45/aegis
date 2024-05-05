@@ -15,7 +15,7 @@ web_server() {
 }
 
 snyk-cli() {
-	curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk &&
+	curl --compressed "https://static.snyk.io/cli/latest/snyk-linux?_gl=1*1elhg4m*_ga*MTI5NzM0MzE4LjE3MTQ5MTg0NDY.*_ga_X9SH3KP7B4*MTcxNDkyOTE4Ni4yLjEuMTcxNDkyOTU5NC41Ni4wLjA." -o snyk &&
 		chmod +x ./snyk && mv ./snyk $HOME/.local/bin/snyk
 }
 
