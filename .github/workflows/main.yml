@@ -42,5 +42,5 @@ jobs:
         with:
           status: ${{ job.status }}
           channel: '#docker-build'
-          message: Building aegis {{env.GITHUB_REF_NAME }} branch
+          message: {{env.GITHUB_REF_NAME }} Build Complete
         if: always()
