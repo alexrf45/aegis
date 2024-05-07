@@ -31,8 +31,8 @@ ffuf_subdomain() {
 
 	ffuf -c -t 5 -rate 20 -p 0.2 \
 		-H "User-Agent: $AGENT" -o $NAME_domains.json -of json \
-		-H "Host: FUZZ.$2" \
-		-mc 200,403,401,503,500,302 -w $1 -u $2 $3
+		-H "Host: FUZZ.$DOMAIN" \
+		-mc 200,403,401,503,500,302 -w $1 -u http://$DOMAIN/ $2
 }
 
 ffuf_directory() {
@@ -40,7 +40,7 @@ ffuf_directory() {
 	ffuf -c -t 10 -rate 20 -p 0.2 -H "User-Agent: $AGENT" \
 		-ac -mc 200,302,422,403,401,301 \
 		-w $2 \
-		-u $1/FUZZ $3
+		-u http://$1/FUZZ $3
 
 }
 
