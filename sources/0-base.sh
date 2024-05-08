@@ -25,7 +25,7 @@ network() {
 		snmp-mibs-downloader iputils-ping \
 		iproute2 proxychains \
 		sendmail ltrace \
-		raven faketime
+		raven faketime mitmproxy
 }
 
 active_directory() {
