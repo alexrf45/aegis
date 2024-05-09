@@ -42,6 +42,7 @@ ffuf_directory() {
 		-w $2 \
 		-u http://$1/FUZZ $3
 
+
 }
 
 # $1 - SITE
