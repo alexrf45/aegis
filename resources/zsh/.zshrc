@@ -47,4 +47,4 @@ echo "
 #persistant ssh agent
 eval $(ssh-agent) &> /dev/null
 
-
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
