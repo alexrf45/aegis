@@ -25,12 +25,12 @@ done
 
 fpath=(/tmp/zsh-completions/src $fpath)
 
-plugins= (
+plugins=(
 git
 docker
 )
 
-source $ZSH/oh-my-zsh.sh
+source $HOME/.oh-my-zsh/oh-my-zsh.sh
 
 #displays saying in every new prompt
 
@@ -47,6 +47,4 @@ echo "
 #persistant ssh agent
 eval $(ssh-agent) &> /dev/null
 
-
-complete -C '/usr/local/bin/aws_completer' aws
 
