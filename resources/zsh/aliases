@@ -1,0 +1,22 @@
+#docker
+alias d='docker'
+alias dimls='docker image ls'
+alias dim='docker image'
+alias dc='docker container'
+alias dps='docker ps'
+alias dnt='docker network'
+alias dnuke="docker stop \$(docker ps -a -q); docker rm -f \$(docker ps -a -q); docker rmi -f \$(docker images -a -q); docker volume rm -f \$(docker volume ls -q)"
+
+#daily use
+alias t='tmux new -f ~/.tmux.conf -s $1'
+alias :q='exit'
+alias c='clear'
+alias :r='. ~/.zshrc'
+alias home='cd ~'
+
+#python3
+alias py-virt='python3 -m venv .venv && source .venv/bin/activate'
+alias freeze='pip freeze > requirements.txt'
+alias py-install='pip install -r requirements.txt'
+alias py-list='pipx list | grep package'
+
