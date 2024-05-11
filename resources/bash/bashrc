@@ -1,6 +1,6 @@
 shopt -s histappend
 shopt -s checkwinsize
-HISTFILE="$HOME/.history"
+HISTFILE="$HOME/.kali_history"
 HISTSIZE=1000
 HISTFILESIZE=2000
 HISTCONTROL=ignoreboth
