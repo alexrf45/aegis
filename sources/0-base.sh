@@ -41,7 +41,7 @@ osint_tools() {
 		csvtool vinetto \
 		sqlitebrowser exiflooter \
 		h8mail reconspider \
-		sn0int
+		sn0int cewl seclists
 }
 
 base
