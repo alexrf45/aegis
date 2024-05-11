@@ -25,3 +25,6 @@ PS1="\[\033[0;31m\]\342\224\214\342\224\200$([[ $? != 0 ]] && echo "[\[\033[0;31
 
 # if you have a need to set up ssh presistance
 #eval $(ssh-agent) >/dev/null 2>&1
+#
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
