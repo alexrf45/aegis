@@ -28,6 +28,8 @@ fpath=(/tmp/zsh-completions/src $fpath)
 plugins=(
 git
 docker
+zsh-autosuggestions
+zsh-syntax-highlighting
 )
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh

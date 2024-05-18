@@ -23,12 +23,12 @@ password() {
 	sudo apt-get install -y crunch
 }
 
-install_go() {
-	wget https://go.dev/dl/go1.22.0.linux-amd64.tar.gz &&
-		sudo rm -rf /usr/local/go &&
-		tar -C $HOME/.local/bin -xzf go1.22.0.linux-amd64.tar.gz &&
-		rm go1.22.0.linux-amd64.tar.gz
-}
+# install_go() {
+# 	wget https://go.dev/dl/go1.22.0.linux-amd64.tar.gz &&
+# 		sudo rm -rf /usr/local/go &&
+# 		tar -C $HOME/.local/bin -xzf go1.22.0.linux-amd64.tar.gz &&
+# 		rm go1.22.0.linux-amd64.tar.gz
+# }
 
 payload() {
 	cd $HOME/tools/ &&
@@ -87,7 +87,7 @@ extra() {
 
 web
 web_server
-install_go
+#install_go
 password
 payload
 active_directory

@@ -10,7 +10,7 @@ base() {
 		python3-virtualenv libpcap-dev \
 		jq xpdf pipx man-db exploitdb \
 		rpcbind nfs-common feh cmake \
-		ntp ntpdate bash-completion
+		ntp ntpdate bash-completion zsh
 }
 
 home_brew() {
