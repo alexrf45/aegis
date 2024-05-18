@@ -2,7 +2,7 @@ name: Publish Docker Image
 on: 
   push:
     branches:
-      - 'dev'
+      - '*'
 jobs:
   docker:
     runs-on: ubuntu-latest

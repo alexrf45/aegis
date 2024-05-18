@@ -29,8 +29,7 @@ RUN sudo chown -R kali:kali /tmp/sources/* && sudo chmod +x /tmp/sources/*.sh
 
 RUN /tmp/sources/0-base.sh && \
     /tmp/sources/1-tools.sh && \
-    /tmp/sources/2-tools.sh && \
-    /tmp/sources/3-wordlists.sh
+    /tmp/sources/2-tools.sh
 
 COPY resources /home/kali/resources/
 
@@ -42,7 +41,7 @@ USER kali
 
 RUN pipx ensurepath && pipx install impacket certipy-ad git+https://github.com/Pennyw0rth/NetExec
 
-RUN bash
+RUN zsh
 
 
 

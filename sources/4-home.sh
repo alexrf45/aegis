@@ -10,14 +10,20 @@ mkdir -p $HOME/.config && cp /home/kali/resources/tmux.conf /home/kali/.tmux.con
 
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
-cp /home/kali/resources/bash/bashrc $HOME/.bashrc
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-cp /home/kali/resources/bash/profile .profile
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-cp /home/kali/resources/bash/aliases .aliases
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+cp /home/kali/resources/zsh/.zshrc $HOME/.zshrc
+
+cp /home/kali/resources/zsh/.zprofile $HOME/.zprofile
+
+cp /home/kali/resources/zsh/aliases $HOME/aliases
 
 cp /home/kali/resources/bash/history .commands
 
-mkdir .bash
+mkdir .zsh
 
-cp /home/kali/resources/bash/functions.sh .bash/functions.sh
+cp /home/kali/resources/bash/functions.sh $HOME/.zsh/functions.sh

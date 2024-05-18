@@ -10,7 +10,11 @@ base() {
 		python3-virtualenv libpcap-dev \
 		jq xpdf pipx man-db exploitdb \
 		rpcbind nfs-common feh cmake \
-		ntp ntpdate bash-completion
+		ntp ntpdate bash-completion zsh
+}
+
+home_brew() {
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
 home_brew() {
@@ -45,7 +49,7 @@ osint_tools() {
 		csvtool vinetto \
 		sqlitebrowser exiflooter \
 		h8mail reconspider \
-		sn0int
+		sn0int cewl seclists
 }
 
 base
