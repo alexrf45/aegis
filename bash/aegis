@@ -32,7 +32,7 @@ start_container() {
 			-v $(pwd)/.aegis-logs:$HOME/.logs:rw -v $(pwd):/$project \
 			-v $HOME/.Xauthority:$HOME/.Xauthority:ro \
 			-v /tmp/.X11-unix:/tmp/.X11-unix \
-			-w /$project fonalex45/aegis:$image
+			-w /$project fonalex45/aegis:$image /bin/zsh
 }
 
 # starts the container if stopped and enters it

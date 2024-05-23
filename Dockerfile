@@ -43,6 +43,8 @@ USER kali
 
 RUN pipx ensurepath && pipx install impacket certipy-ad git+https://github.com/Pennyw0rth/NetExec
 
+RUN chsh $USER -s /bin/zsh
+
 RUN zsh
 
 
