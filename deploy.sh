@@ -17,8 +17,8 @@ echo -e "pulling image now..."
 
 docker pull fonalex45/aegis:latest
 
-cp sources/kali.sh $HOME/.config/.
+cp bash/aegis $HOME/.local/.
 
-echo 'source "$HOME/.config/kali.sh"' >>.bashrc
+echo 'source "$HOME/.local/aegis"' >>.bashrc
 
 . ~/.bashrc

@@ -10,7 +10,7 @@ kali $1 () {
     mkdir -p $1/{recon,www,exploit,pivot,report} && cd $1 && \
     mkdir .kali-logs \
     && docker run --name $1 -it \
-    --net=host --entrypoint=/bin/bash \
+    --net=host --entrypoint=/bin/zsh \
 		--cap-add=NET_ADMIN \
     --cap-add=CAP_SYS_TIME \
     -e DISPLAY=$DISPLAY -e DOMAIN=$DOMAIN \
@@ -21,7 +21,7 @@ kali $1 () {
     -w /$1 fonalex45/aegis:latest
 	else
 		docker run --name $1 -it \
-		--net=host --entrypoint=/bin/bash \
+		--net=host --entrypoint=/bin/zsh \
 		--cap-add=NET_ADMIN \
     --cap-add=CAP_SYS_TIME \
 		-e DOMAIN=$DOMAIN -e DISPLAY=$DISPLAY \
@@ -35,12 +35,12 @@ kali $1 () {
 
 start $1 ()
 {
- docker container start $1 && docker container exec -it $1 /bin/bash
+ docker container start $1 && docker container exec -it $1 /bin/zsh
 }
 
 enter $1 ()
 {
-docker exec -it $1 /bin/bash
+docker exec -it $1 /bin/zsh
 }
 
 stop $1 () {
