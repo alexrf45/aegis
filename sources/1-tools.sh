@@ -6,7 +6,7 @@ web() {
 		sqlmap exiftool \
 		default-mysql-client \
 		hurl postgresql \
-		arjun sqsh
+		arjun sqsh burpsuite
 }
 
 web_server() {
@@ -88,6 +88,7 @@ extra() {
 web
 web_server
 #install_go
+snyk-cli
 password
 payload
 active_directory
