@@ -3,7 +3,7 @@ FROM kalilinux/kali-rolling:latest
 
 LABEL "project"="aegis"
 LABEL "author"="fr3d"
-LABEL "version"="v1.3.2"
+LABEL "version"="v1.4.0"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ="America/New_York"
@@ -27,9 +27,11 @@ COPY sources/ /tmp/sources
 
 RUN sudo chown -R kali:kali /tmp/sources/* && sudo chmod +x /tmp/sources/*.sh
 
-RUN /tmp/sources/0-base.sh && \
-    /tmp/sources/1-tools.sh && \
-    /tmp/sources/2-tools.sh
+RUN /tmp/sources/0-base.sh
+
+RUN /tmp/sources/1-tools.sh
+
+RUN  /tmp/sources/2-tools.sh
 
 COPY resources /home/kali/resources/
 
@@ -41,7 +43,9 @@ USER kali
 
 RUN pipx ensurepath && pipx install impacket certipy-ad git+https://github.com/Pennyw0rth/NetExec
 
-RUN bash
+RUN sudo chsh $USER -s /bin/zsh
+
+RUN zsh
 
 
 

@@ -24,7 +24,7 @@ start_container() {
 		cd $project &&
 		mkdir .aegis-logs &&
 		docker run --name $project -it \
-			--net=host --entrypoint=/bin/bash \
+			--net=host --entrypoint=/bin/zsh \
 			--cap-add=NET_ADMIN \
 			--cap-add=CAP_SYS_TIME \
 			-e DISPLAY=$DISPLAY -e DOMAIN=$DOMAIN \
@@ -32,7 +32,7 @@ start_container() {
 			-v $(pwd)/.aegis-logs:$HOME/.logs:rw -v $(pwd):/$project \
 			-v $HOME/.Xauthority:$HOME/.Xauthority:ro \
 			-v /tmp/.X11-unix:/tmp/.X11-unix \
-			-w /$project fonalex45/aegis:$image
+			-w /$project fonalex45/aegis:$image /bin/zsh
 }
 
 # starts the container if stopped and enters it
@@ -42,7 +42,7 @@ enter() {
 		--title "Starting..." \
 		-- sleep 3
 	docker container start $project &&
-		docker exec -it $project /bin/bash
+		docker exec -it $project /bin/zsh
 }
 
 #stops container

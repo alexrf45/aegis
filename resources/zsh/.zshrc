@@ -28,6 +28,8 @@ fpath=(/tmp/zsh-completions/src $fpath)
 plugins=(
 git
 docker
+zsh-autosuggestions
+zsh-syntax-highlighting
 )
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
@@ -46,5 +48,3 @@ echo "
 
 #persistant ssh agent
 eval $(ssh-agent) &> /dev/null
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

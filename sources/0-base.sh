@@ -10,11 +10,7 @@ base() {
 		python3-virtualenv libpcap-dev \
 		jq xpdf pipx man-db exploitdb \
 		rpcbind nfs-common feh cmake \
-		ntp ntpdate bash-completion
-}
-
-home_brew() {
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+		ntp ntpdate bash-completion zsh
 }
 
 network() {
@@ -49,6 +45,7 @@ osint_tools() {
 }
 
 base
+#homebrew
 network
 active_directory
 osint_tools
