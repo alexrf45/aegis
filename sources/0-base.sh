@@ -25,7 +25,8 @@ network() {
 		snmp-mibs-downloader iputils-ping \
 		iproute2 proxychains \
 		sendmail ltrace \
-		raven faketime mitmproxy
+		raven faketime mitmproxy \
+		netexec
 }
 
 active_directory() {
@@ -41,11 +42,10 @@ osint_tools() {
 		csvtool vinetto \
 		sqlitebrowser exiflooter \
 		h8mail reconspider \
-		sn0int cewl seclists
+		sn0int cewl seclists sploitscan
 }
 
 base
-#homebrew
 network
 active_directory
 osint_tools

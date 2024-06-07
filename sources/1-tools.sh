@@ -6,11 +6,11 @@ web() {
 		sqlmap exiftool \
 		default-mysql-client \
 		hurl postgresql \
-		arjun sqsh burpsuite
+		arjun sqsh
 }
 
 web_server() {
-	wget https://github.com/svenstaro/miniserve/releases/download/v0.26.0/miniserve-0.26.0-x86_64-unknown-linux-gnu -q \
+	wget "https://github.com/svenstaro/miniserve/releases/download/v0.26.0/miniserve-0.26.0-x86_64-unknown-linux-gnu" -q \
 		-O miniserve && chmod +x ./miniserve && mv ./miniserve $HOME/.local/bin/miniserve
 }
 
@@ -22,13 +22,6 @@ snyk-cli() {
 password() {
 	sudo apt-get install -y crunch
 }
-
-# install_go() {
-# 	wget https://go.dev/dl/go1.22.0.linux-amd64.tar.gz &&
-# 		sudo rm -rf /usr/local/go &&
-# 		tar -C $HOME/.local/bin -xzf go1.22.0.linux-amd64.tar.gz &&
-# 		rm go1.22.0.linux-amd64.tar.gz
-# }
 
 payload() {
 	cd $HOME/tools/ &&
@@ -44,16 +37,10 @@ active_directory() {
 			"https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Rubeus.exe" &&
 		wget -q -O certify.exe \
 			"https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Certify.exe" &&
-		#wget "https://github.com/fortra/impacket/releases/download/impacket_0_11_0/impacket-0.11.0.tar.gz" &&
-		#gunzip impacket-0.11.0.tar.gz && tar -xvf impacket-0.11.0.tar &&
-		#	mv impacket-0.11.0/ /home/kali/.local/ && rm impacket-0.11.0.tar &&
 		wget -q -O sharp.ps1 \
 			"https://github.com/BloodHoundAD/BloodHound/raw/master/Collectors/SharpHound.ps1" &&
 		wget -q -O SharpHound.exe \
 			"https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/SharpHound.exe"
-	#wget -q -O netexec \
-	#	"https://github.com/Pennyw0rth/NetExec/releases/download/v1.1.0/nxc" &&
-	#chmod +x netexec && sudo mv netexec /home/kali/.local/bin/netexec
 }
 
 pivot() {
@@ -69,9 +56,9 @@ pivot() {
 privesc() {
 	cd $HOME/tools/ &&
 		wget -q -O linpeas \
-			"https://github.com/carlospolop/PEASS-ng/releases/download/20231029-83b8fbe1/linpeas_linux_amd64" &&
+			"https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh" &&
 		wget -q -O winpeas.exe \
-			"https://github.com/carlospolop/PEASS-ng/releases/download/20231029-83b8fbe1/winPEASany.exe" &&
+			"https://github.com/peass-ng/PEASS-ng/releases/download/20240602-829055f0/winPEASx64_ofs.exe" &&
 		wget -q -O pspys \
 			"https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy64s" &&
 		wget -q -O pspy \
@@ -87,7 +74,6 @@ extra() {
 
 web
 web_server
-#install_go
 snyk-cli
 password
 payload

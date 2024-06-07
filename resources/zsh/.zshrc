@@ -12,7 +12,7 @@ unsetopt beep
 #vi key bindings
 bindkey -v
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="kali"
 
 zstyle ':omz:update' mode auto      # update automatically without asking
 
