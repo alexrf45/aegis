@@ -3,7 +3,7 @@ FROM kalilinux/kali-rolling:latest
 
 LABEL "project"="aegis"
 LABEL "author"="fr3d"
-LABEL "version"="v1.4.0"
+LABEL "version"="v1.4.1"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ="America/New_York"
@@ -41,7 +41,7 @@ RUN sudo rm -rf /tmp/sources && sudo rm -rf /home/kali/resources
 
 USER kali
 
-RUN pipx ensurepath && pipx install impacket certipy-ad git+https://github.com/Pennyw0rth/NetExec
+RUN pipx ensurepath && pipx install impacket certipy-ad
 
 RUN sudo chsh $USER -s /bin/zsh
 
