@@ -20,14 +20,6 @@ Aegis is a docker image designed for any engagement. Gone are the days of spinni
 - Tmux inside the container (my favorite feature)
 
 
-## Tmux environment
-
-
-![Logo](https://ka-tet.s3.amazonaws.com/arch.png)                                                                                                                                           
-
-
-
-
 ### Custom aliases included:
 
 ```
