@@ -8,7 +8,7 @@ mkdir -p $HOME/.config && cp /home/kali/resources/tmux.conf /home/kali/.tmux.con
   cp -r /home/kali/resources/smbserver.py /home/kali/tools/smbserver.py &&
   cp -r /home/kali/resources/bash/history /home/kali/.history
 
-git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
