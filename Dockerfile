@@ -5,7 +5,7 @@ LABEL "project"="aegis"
 LABEL "author"="fr3d"
 LABEL "version"="v1.4.1"
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ="America/New_York"
 
 RUN apt-get update && apt-get install sudo -y
@@ -15,9 +15,9 @@ RUN groupadd --gid 1000 kali \
   --gid 1000 --shell /bin/bash --skel /dev/null kali
 
 RUN chown -R kali:kali /home/kali/ \
-    && echo kali:kali | chpasswd \
-    && usermod -aG sudo kali \
-    && echo 'kali  ALL=(ALL) NOPASSWD:ALL' >>  /etc/sudoers.d/kali
+  && echo kali:kali | chpasswd \
+  && usermod -aG sudo kali \
+  && echo 'kali  ALL=(ALL) NOPASSWD:ALL' >>  /etc/sudoers.d/kali
 
 WORKDIR /home/kali/
 

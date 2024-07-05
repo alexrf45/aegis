@@ -1,12 +1,12 @@
 #!/bin/bash
 
 mkdir -p $HOME/.config && cp /home/kali/resources/tmux.conf /home/kali/.tmux.conf &&
-	cp -r /home/kali/resources/shell-upgrade.sh /home/kali/tools/shell-upgrade.sh &&
-	cp -r /home/kali/resources/recon.sh /home/kali/.local/bin/recon.sh && chmod +x /home/kali/.local/bin/recon.sh &&
-	cp -r /home/kali/resources/proxychains.conf /home/kali/.proxychains/proxychains.conf &&
-	cp -r /home/kali/resources/kerbrute /home/kali/.local/bin/kerbrute && chmod +x /home/kali/.local/bin/kerbrute &&
-	cp -r /home/kali/resources/smbserver.py /home/kali/tools/smbserver.py &&
-	cp -r /home/kali/resources/bash/history /home/kali/.history
+  cp -r /home/kali/resources/shell-upgrade.sh /home/kali/tools/shell-upgrade.sh &&
+  cp -r /home/kali/resources/recon.sh /home/kali/.local/bin/recon.sh && chmod +x /home/kali/.local/bin/recon.sh &&
+  cp -r /home/kali/resources/proxychains.conf /home/kali/.proxychains/proxychains.conf &&
+  cp -r /home/kali/resources/kerbrute /home/kali/.local/bin/kerbrute && chmod +x /home/kali/.local/bin/kerbrute &&
+  cp -r /home/kali/resources/smbserver.py /home/kali/tools/smbserver.py &&
+  cp -r /home/kali/resources/bash/history /home/kali/.history
 
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
@@ -29,3 +29,9 @@ mkdir .zsh
 cp /home/kali/resources/zsh/functions.sh $HOME/.zsh/functions.sh
 
 cp -r /home/kali/resources/zsh/aliases $HOME/.zsh/aliases
+
+cp /home/kali/resources/starship.toml $HOME/.config/starship.toml
+
+curl -O https://starship.rs/install.sh &&
+  chmod +x install.sh &&
+  ./install.sh --yes -b $HOME/.local/bin

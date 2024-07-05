@@ -48,3 +48,5 @@ echo "
 
 #persistant ssh agent
 eval $(ssh-agent) &> /dev/null
+
+eval "$(starship init zsh)"
