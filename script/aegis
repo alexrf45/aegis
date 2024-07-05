@@ -1,0 +1,123 @@
+#!/bin/bash
+
+# aegis is a simple bash wrapper integrated with gum for a clean interactive TUI experience.
+#
+#GUM variables
+
+export GUM_INPUT_CURSOR_FOREGROUND="#FF0"
+export GUM_INPUT_PROMPT_FOREGROUND="#00FF00"
+export GUM_INPUT_PLACEHOLDER="<project>"
+export GUM_INPUT_PROMPT="enter project name: "
+export GUM_INPUT_WIDTH=80
+#export BORDER_BACKGROUND="212"
+export BORDER_FOREGROUND="255"
+export BORDER="rounded"
+export BACKGROND="212"
+export FOREGROUND="67"
+
+#starts a container with host networking, X11 and a shared volume
+start_container() {
+  project=$(gum input --prompt "$GUM_INPUT_PROMPT" --placeholder "$GUM_INPUT_PLACEHOLDER")
+  image=$(gum choose "dev" "latest")
+
+  mkdir -p $project/{recon,www,exploit,pivot,privesc,report} &&
+    cd $project &&
+    mkdir .aegis-logs &&
+    docker run --name $project -it \
+      --net=host --entrypoint=/bin/zsh \
+      --cap-add=NET_ADMIN \
+      --cap-add=CAP_SYS_TIME \
+      -e DISPLAY=$DISPLAY -e DOMAIN=$DOMAIN \
+      -e TARGET=$project -e IP=$IP -e TZ=$TIME_ZONE -e NAME=$project \
+      -v $(pwd)/.aegis-logs:$HOME/.logs:rw -v $(pwd):/$project \
+      -v $HOME/.Xauthority:$HOME/.Xauthority:ro \
+      -v /tmp/.X11-unix:/tmp/.X11-unix \
+      -w /$project fonalex45/aegis:$image
+}
+
+# starts the container if stopped and enters it
+enter() {
+  project=$(gum input --prompt "$GUM_INPUT_PROMPT" --placeholder "$GUM_INPUT_PLACEHOLDER")
+  gum spin --spinner line \
+    --title "Starting..." \
+    -- sleep 3
+  docker container start $project &&
+    docker exec -it $project /bin/zsh
+}
+
+#stops container
+stop() {
+  project=$(gum input --prompt "$GUM_INPUT_PROMPT" --placeholder "$GUM_INPUT_PLACEHOLDER")
+  gum spin --spinner line \
+    --title "Stopping..." \
+    -- sleep 3
+
+  docker container stop $project
+}
+
+#destroys contaienr and removes shared volume
+destroy() {
+  project=$(gum input --prompt "$GUM_INPUT_PROMPT" --placeholder "$GUM_INPUT_PLACEHOLDER")
+  gum spin --spinner line \
+    --title "POOF" \
+    -- sleep 3
+  gum style --align center --border $BORDER --width 15 --border-foreground $BORDER_FOREGROUND $(docker container rm $project && rm -r $project)
+}
+
+#backs up shared volume and compresses it. useful for saving engagement artifacts
+backup() {
+  project=$(gum input --prompt "$GUM_INPUT_PROMPT" --placeholder "$GUM_INPUT_PLACEHOLDER")
+  tar -zcvf "$(date '+%Y-%m-%d_%H-%M-%S%z(%Z)')_$project.tar.gz" $project
+}
+
+#pulls latest or dev image
+pull() {
+
+  project=$(gum input --prompt "enter image tag: (dev, latest) " --placeholder "<dev> <latest>")
+  gum spin --spinner meter --title "pulling $project" -- docker pull -q fonalex45/aegis:$project
+}
+
+#help menu
+show_help() {
+  echo 'aegis' | figlet -f shadow | lolcat &&
+    gum style \
+      --foreground $FOREGROUND --border-foreground $BORDER_FOREGROUND --border double \
+      --align left --width 85 --margin "1 2" --bold --padding "1 2" \
+      '
+      aegis start - start a container
+      aegis stop - stop a container
+      aegis enter- enter running container
+      aegis destory - destory a container
+      aegis backup - backup shared volume
+      aegis pull - update to latest image (dev, latest)
+      aegis help - view this help menu'
+}
+
+# Parse the command-line arguments
+case "$1" in
+"start")
+  start_container
+  ;;
+"enter")
+  enter
+  ;;
+"stop")
+  stop
+  ;;
+"destroy")
+  destroy
+  ;;
+"backup")
+  backup
+  ;;
+"pull")
+  pull
+  ;;
+"help")
+  show_help
+  ;;
+*)
+  show_help
+  exit 1
+  ;;
+esac
