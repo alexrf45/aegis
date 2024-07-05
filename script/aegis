@@ -61,7 +61,7 @@ destroy() {
   gum spin --spinner line \
     --title "POOF" \
     -- sleep 3
-  gum style --align center --border $BORDER --width 10 --border-foreground $BORDER_FOREGROUND $(docker container rm $project && rm -r $project)
+  gum style --align center --border $BORDER --width 15 --border-foreground $BORDER_FOREGROUND $(docker container rm $project && rm -r $project)
 }
 
 #backs up shared volume and compresses it. useful for saving engagement artifacts
