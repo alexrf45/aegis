@@ -1,8 +1,9 @@
 #daily use
 alias t='tmux new -f ~/.tmux.conf -s $1'
-alias update='sudo apt get update'
-alias upgrade='sudo apt get upgrade'
-alias i='sudo apt get install -y'
+alias update='sudo apt update'
+alias upgrade='sudo apt upgrade'
+alias i='sudo apt install -y'
+alias cat='batcat'
 alias :q='exit'
 alias c='clear'
 alias :r='. ~/.zshrc'
@@ -14,7 +15,6 @@ alias stealth-scan='sudo nmap --data-length 6 -T3 -A -ttl 64 -p- $IP > stealth-s
 alias public='curl wtfismyip.com/text'
 alias proxy='proxychains'
 alias serve='sudo python3 -m http.server 80'
-alias webserver="miniserve -p 8001"
 alias notepad='mousepad notes.md > /dev/null 2>&1 &'
 #python3
 alias py-virt='python3 -m venv .venv && source .venv/bin/activate'

