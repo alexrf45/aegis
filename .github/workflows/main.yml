@@ -2,7 +2,9 @@ name: Publish Docker Image
 on: 
   push:
     branches:
-      - 'dev'
+      - 'main'
+  schedule:
+    - cron: '00 00 * * SUN'
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -14,8 +16,8 @@ jobs:
         uses: act10ns/slack@v2
         with:
           status: starting
-          channel: '#dev'
-          message: Starting aegis dev build and push...
+          channel: '#docker-build'
+          message: Starting aegis main build and push...
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -33,12 +35,12 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: fonalex45/aegis:dev
+          tags: fonalex45/aegis:latest
       -
         name: Notify Slack Channel of finished build
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
-          channel: '#dev'
-          message: Build Complete
+          channel: '#prod'
+          message: BUILD COMPLETE {{env.GITHUB_REF_NAME }}
         if: always()
