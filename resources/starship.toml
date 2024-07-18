@@ -1,0 +1,109 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Use custom format
+# format = """
+# (bold white)$custom $git_branch $git_commit $git_status $line_break
+# $python $aws $azure $terraform $kubernetes $pulumi $docker $line_break
+# $directory  > 
+#
+# """
+
+#right_format = '$aws $terraform'
+
+# Wait 10 milliseconds for starship to check files under the current directory.
+scan_timeout = 5
+
+# Disable the blank line at the start of the prompt
+add_newline = true
+
+[line_break]
+disabled = false
+
+[custom.tztime]
+command = 'date +"%a %b %d %Y %T"'
+when = "true"
+format = ' [\[🕙 $symbol($output)\]]($style)'
+style= "italic white"
+disabled= true
+
+[python]
+symbol = "👾 "
+pyenv_version_name = true
+
+[aws]
+format = '[$symbol ($profile )(\($region\) )]($style)'
+style = "#bf5700"
+symbol = "☁️"
+[aws.region_aliases]
+us-east-1 = "us-east-1"
+[aws.profile_aliases]
+Admin = 'Administrator'
+
+[gcloud]
+disabled = false
+format = ' IAM: [$symbol$account(@$domain)(\($project\))]($style) '
+style = "#FEFB61"
+symbol = ""
+
+[time]
+disabled = true
+style = "bold purple"
+format = "🕙 $time($style) "
+time_format = "%T"
+utc_time_offset = "-5"
+
+[username]
+style_user = "green bold"
+style_root = "red bold"
+format = " [$user]($style) "
+disabled = true
+show_always = true
+
+[directory]
+read_only = " "
+truncation_length = 3
+truncate_to_repo = true # truncates directory to root folder if in github repo
+style = "bold italic blue"
+
+[git_branch]
+format = " [$symbol $branch]($style) "
+symbol = "🪵 "
+style = "bold yellow"
+
+[git_status]
+conflicted = "⚔️ "
+ahead = "🏎️ 💨 ×${count}"
+behind = "🐢 ×${count}"
+diverged = "🔱 🏎️ 💨 ×${ahead_count} 🐢 ×${behind_count}"
+untracked = "🛤️  ×${count}"
+stashed = "📦 "
+modified = "📜 ×${count} "
+staged = "🗃️  ×${count} "
+renamed = "📛 ×${count}"
+deleted = "🗑️  ×${count}"
+style = "bright-white"
+format = "$all_status$ahead_behind"
+
+[git_commit]
+commit_hash_length = 8
+style = "bold white"
+
+[pulumi]
+symbol = "⚙️ "
+format = " [$symbol $stack]($style)"
+style = "bright-purple"
+disabled = false
+
+[terraform]
+format = " [🏎💨 $version $workspace]($style) "
+
+[kubernetes]
+format = 'on [⛵ ($user on )($cluster in )$context \($namespace\)](dimmed green) '
+disabled = false
+
+[azure]
+disabled = false
+format = "on [$symbol($subscription)]($style) "
+symbol = "ﴃ "
+style = "blue bold"

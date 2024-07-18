@@ -29,12 +29,11 @@ alias udp-scan='sudo nmap -sU --top-ports 10 $IP -v > udp.scan.txt'
 alias stealth-scan='sudo nmap --data-length 6 -T3 -A -ttl 64 -p- $IP > stealth-scan.txt'
 alias public='curl wtfismyip.com/text'
 alias t='tmux new -f ~/.tmux.conf -s $1'
-alias webserver="miniserve -p 8001"
 alias :q='exit'
 alias home='cd ~'
 alias :r='. ~/.bashrc'
 alias update='sudo apt update'
-alias upgrade='sudo apt-get upgrade -y'
+alias upgrade='sudo apt upgrade -y'
 alias i='sudo apt install -y'
 alias ls='ls --color=auto'
 alias command='cat $HOME/.commands'
@@ -67,18 +66,15 @@ aegis destory - destory a container
 aegis backup - backup shared volume
 aegis pull - update to latest image (dev, latest)
 aegis help - view this help menu
-
 ```
 
-Command list:
+## Command history
+- Useful commands are already built into the container history. Simple type `CTRL+r' to pull up the fzf window where you can filter for the needed command. fzf makes navigating commands and files a breeze.
 
-- Tired of looking for a specific command or long one liner? You can use this handy alias to search the prebuilt history for commonly used commands
-
-```
-alias command='cat $HOME/.commands'
-```
 
 TODO:
 - add quick https server script
 - Python wrapper (FUTURE)
-- Revamp bash function into script (alpha)
+- Revamp bash function into script (beta)
+- fzf usage (only works in zsh)
+- miniserve quick web server w/ TLS function (done) 

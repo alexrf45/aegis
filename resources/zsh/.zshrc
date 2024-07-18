@@ -35,16 +35,9 @@ zsh-syntax-highlighting
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
 
 #displays saying in every new prompt
+source <(fzf --zsh)
 
-echo "
-   __  ___                  
-  / _|/ _ \ _ __  _____   _ 
- | |_| | | | '_ \|_  / | | |
- |  _| |_| | | | |/ /| |_| |
- |_|  \___/|_| |_/___|\__, |
-                      |___/ 
-"
-
+eval "$(starship init zsh)"
 
 #persistant ssh agent
 eval $(ssh-agent) &> /dev/null

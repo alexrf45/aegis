@@ -2,7 +2,7 @@ name: Publish Docker Image
 on: 
   push:
     branches:
-      - '*'
+      - 'dev'
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -10,14 +10,21 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
       -
+        name: Job Start
+        uses: act10ns/slack@v2
+        with:
+          status: starting
+          channel: '#dev'
+          message: Starting aegis dev build and push...
+      -
         name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
       -
         name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       -
         name: Login to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -33,4 +40,5 @@ jobs:
         with:
           status: ${{ job.status }}
           channel: '#dev'
+          message: Build Complete
         if: always()

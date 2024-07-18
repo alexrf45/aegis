@@ -17,7 +17,7 @@ jobs:
         with:
           status: starting
           channel: '#docker-build'
-          message: Starting aegis build and push...
+          message: Starting aegis main build and push...
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -41,6 +41,6 @@ jobs:
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
-          channel: '#docker-build'
+          channel: '#prod'
           message: BUILD COMPLETE {{env.GITHUB_REF_NAME }}
         if: always()
