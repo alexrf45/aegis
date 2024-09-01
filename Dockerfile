@@ -4,7 +4,6 @@ FROM kalilinux/kali-rolling:latest
 LABEL "project"="aegis"
 LABEL "author"="fr3d"
 LABEL "version"="v1.4.2"
-LABEL "environment"="dev"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ="America/New_York"
@@ -32,11 +31,12 @@ RUN /tmp/sources/0-base.sh
 
 RUN /tmp/sources/1-tools.sh
 
-RUN  /tmp/sources/2-tools.sh
+#uncomment for bug bounty usage
+#RUN  /tmp/sources/2-tools.sh
 
 COPY resources /home/kali/resources/
 
-RUN sudo chown -R kali:kali /home/kali/resources && /tmp/sources/4-home.sh
+RUN sudo chown -R kali:kali /home/kali/resources && /tmp/sources/3-home.sh
 
 RUN sudo rm -rf /tmp/sources && sudo rm -rf /home/kali/resources
 

@@ -27,7 +27,6 @@ fpath=(/tmp/zsh-completions/src $fpath)
 
 plugins=(
 git
-docker
 zsh-autosuggestions
 zsh-syntax-highlighting
 )
@@ -37,7 +36,9 @@ source $HOME/.oh-my-zsh/oh-my-zsh.sh
 #displays saying in every new prompt
 source <(fzf --zsh)
 
-eval "$(starship init zsh)"
-
 #persistant ssh agent
 eval $(ssh-agent) &> /dev/null
+
+#starship prompt
+eval "$(starship init zsh)"
+

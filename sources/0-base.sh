@@ -3,7 +3,7 @@
 base() {
   sudo apt-get install -y \
     wget curl man git lolcat \
-    figlet tmux tree mousepad \
+    figlet tmux mousepad \
     hexcurse file ruby ruby-dev \
     vim nano p7zip-full kali-themes \
     djvulibre-bin python3-pip \
@@ -25,7 +25,7 @@ network() {
     snmp-mibs-downloader iputils-ping \
     iproute2 proxychains \
     sendmail ltrace \
-    raven faketime mitmproxy \
+    raven mitmproxy \
     netexec
 }
 
@@ -42,7 +42,7 @@ osint_tools() {
     csvtool vinetto \
     sqlitebrowser exiflooter \
     h8mail \
-    sn0int cewl seclists sploitscan
+    sn0int cewl seclists
 }
 
 base
