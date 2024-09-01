@@ -10,7 +10,7 @@ web() {
 }
 
 web_server() {
-  wget "https://github.com/svenstaro/miniserve/releases/download/v0.26.0/miniserve-0.26.0-x86_64-unknown-linux-gnu" -q \
+  wget "https://github.com/svenstaro/miniserve/releases/download/v0.26.0/miniserve-0.27.1-x86_64-unknown-linux-gnu" -q \
     -O miniserve && chmod +x ./miniserve && mv ./miniserve $HOME/.local/bin/miniserve
 }
 
@@ -46,10 +46,10 @@ active_directory() {
 pivot() {
   cd $HOME/.tools/ &&
     wget -q -O chisel.gz \
-      "https://github.com/jpillora/chisel/releases/download/v1.9.1/chisel_1.9.1_linux_amd64.gz" &&
+      "https://github.com/jpillora/chisel/releases/download/v1.10.0/chisel_1.10.0_linux_amd64.gz" &&
     gunzip chisel.gz &&
     wget -q -O win-chisel.gz \
-      "https://github.com/jpillora/chisel/releases/download/v1.9.1/chisel_1.9.1_windows_amd64.gz" &&
+      "https://github.com/jpillora/chisel/releases/download/v1.10.0/chisel_1.10.0_windows_amd64.gz" &&
     gunzip win-chisel.gz
 }
 
@@ -58,7 +58,7 @@ privesc() {
     wget -q -O linpeas \
       "https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh" &&
     wget -q -O winpeas.exe \
-      "https://github.com/peass-ng/PEASS-ng/releases/download/20240602-829055f0/winPEASx64_ofs.exe" &&
+      "https://github.com/peass-ng/PEASS-ng/releases/download/20240901-df0685e9/winPEASx64_ofs.exe" &&
     wget -q -O pspys \
       "https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy64s" &&
     wget -q -O pspy \

