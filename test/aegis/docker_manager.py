@@ -1,6 +1,6 @@
 import docker
 import os
-import constants
+from . import constants
 from tqdm import tqdm
 
 

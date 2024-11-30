@@ -1,7 +1,7 @@
 import docker
 import questionary
 from .docker_manager import pull_image, create_project_dir, run_container
-import constants
+from . import constants
 
 
 def main():
