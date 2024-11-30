@@ -9,7 +9,7 @@ web() {
     arjun sqsh
 }
 
-web_server() {
+web-server() {
   wget "https://github.com/svenstaro/miniserve/releases/download/v0.26.0/miniserve-0.27.1-x86_64-unknown-linux-gnu" -q \
     -O miniserve && chmod +x ./miniserve && mv ./miniserve $HOME/.local/bin/miniserve
 }
@@ -43,6 +43,19 @@ active_directory() {
       "https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/SharpHound.exe"
 }
 
+linpeas-install() {
+  get_latest_release() {
+    curl -s "https://api.github.com/repositories/165548191/releases/latest" |
+      grep "browser_download_url.*linpeas.sh" |
+      cut -d '"' -f 4
+  }
+
+  latest_linpeas_url=$(get_latest_release)
+
+  curl -Lo $HOME/.tools/linpeas-test.sh "$latest_linpeas_url"
+
+}
+
 pivot() {
   cd $HOME/.tools/ &&
     wget -q -O chisel.gz \
@@ -73,7 +86,7 @@ extra() {
 }
 
 web
-web_server
+web-server
 snyk-cli
 password
 payload
