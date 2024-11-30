@@ -1,5 +1,6 @@
 import docker
 import os
+import constants
 from tqdm import tqdm
 
 
@@ -12,7 +13,7 @@ def pull_image(client, image_tag):
 
 def create_project_dir(project_name):
     os.makedirs(project_name, exist_ok=True)
-    for folder in DEFAULT_DIRECTORIES:
+    for folder in constants.DEFAULT_DIRECTORIES:
         os.makedirs(os.path.join(project_name, folder), exist_ok=True)
     print(f"Project directories created under {project_name}.")
 

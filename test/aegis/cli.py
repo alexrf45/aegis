@@ -1,6 +1,7 @@
-
+import docker
 import questionary
 from .docker_manager import pull_image, create_project_dir, run_container
+import constants
 
 
 def main():
@@ -17,7 +18,7 @@ def main():
     if action == "Pull Image":
         image_choice = questionary.select(
             "Select the image to pull:",
-            choices=list(IMAGE_TAGS.values())
+            choices=list(constants.IMAGE_TAGS.values())
         ).ask()
         pull_image(client, image_choice)
 
@@ -27,7 +28,7 @@ def main():
 
     elif action == "Run Container":
         image_choice = questionary.select(
-            "Select image to run:", choices=list(IMAGE_TAGS.values())).ask()
+            "Select image to run:", choices=list(constants.IMAGE_TAGS.values())).ask()
         project_dir = questionary.text("Enter project directory:").ask()
         host_network = questionary.confirm("Enable host networking?").ask()
         run_container(client, image_choice, project_dir, host_network)
