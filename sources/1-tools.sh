@@ -10,8 +10,16 @@ web() {
 }
 
 web-server() {
-  wget "https://github.com/svenstaro/miniserve/releases/download/v0.26.0/miniserve-0.27.1-x86_64-unknown-linux-gnu" -q \
-    -O miniserve && chmod +x ./miniserve && mv ./miniserve $HOME/.local/bin/miniserve
+  latest-release() {
+    curl -s https://api.github.com/repos/svenstaro/miniserve/releases/latest |
+      grep "browser_download_url" | grep "x86_64-unknown-linux-gnu" | cut -d '"' -f 4
+  }
+
+  release_url=$(latest-release)
+
+  curl -Lo $HOME/.local/bin/miniserve "$release_url"
+
+  chmod +x $HOME/.local/bin/miniserve
 }
 
 snyk-cli() {

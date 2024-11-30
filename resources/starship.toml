@@ -25,7 +25,7 @@ command = 'date +"%a %b %d %Y %T"'
 when = "true"
 format = ' [\[🕙 $symbol($output)\]]($style)'
 style= "italic white"
-disabled= true
+disabled= false
 
 [python]
 symbol = "👾 "
