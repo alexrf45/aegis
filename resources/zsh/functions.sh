@@ -46,6 +46,12 @@ webserver() {
     -c monokai \
     -p 9443 \
     --header "Cache-Control:no-cache" \
+    --header "Server: Server" \
+    --header "X-Frame-Options: DENY" \
+    --header "Referrer-Policy: strict-origin-when-cross-origin" \
+    --header "Content-Type: text/html; charset=UTF-8" \
+    --header "Strict-Transport-Security: max-age=63072000; includeSubDomains; preload" \
+    --header "Permissions-Policy: geolocation=(), camera=(), microphone=(), bluetooth=(), usb=(), payment=(), display-capture=()" \
     --auth-file ./auth.txt \
     --tls-cert $HOME/.local/$1-cert.pem \
     --tls-key $HOME/.local/$1-key.pem \
