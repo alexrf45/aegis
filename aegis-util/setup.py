@@ -9,7 +9,7 @@ setup(
         "docker==7.1.0",
         "tqdm==4.67.0",
         "questionary==2.0.1",
-        "pycrypto==2.6.1",
+        "pycryptodome==3.21.0",
         "fabric==3.2.2",
         "paramiko==3.5.0",
         "paramiko-jump==0.1.3"

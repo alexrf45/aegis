@@ -18,7 +18,7 @@ def run_cli():
         pull_images()
     elif action == "Start Container":
         image = questionary.select("Select an image", choices=[
-                                   "fonalex45/aegis:dev", "dfonalex45/aegis:latest"]).ask()
+                                   "fonalex45/aegis:dev", "fonalex45/aegis:latest"]).ask()
         use_host_network = questionary.confirm("Enable host networking?").ask()
         project_dir = questionary.text(
             "Enter the project directory path:").ask()
