@@ -42,7 +42,7 @@ def main():
                                                   'fonalex45/aegis:latest',
                                                   'Custom']
                                          ).ask(),
-                name=args.n or validated_name,
+                name=args.name or validated_name,
                 project_dir=project_dir,
                 host_network=args.host_network,
                 gui=args.gui
