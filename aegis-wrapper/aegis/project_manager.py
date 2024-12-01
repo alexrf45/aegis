@@ -13,3 +13,4 @@ class ProjectManager:
 
         print(f"Project directory created at {base_dir}")
         return base_dir
+        return project_name
