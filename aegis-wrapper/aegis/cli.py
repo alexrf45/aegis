@@ -50,6 +50,7 @@ def main():
                 host_network=args.host_network,
                 gui=args.gui
             )
+            docker_handler.attach()
         except ValueError as e:
             log_error(str(e))
             return
