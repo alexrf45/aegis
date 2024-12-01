@@ -45,9 +45,9 @@ def main():
             print(validated_name)
             docker_handler.start_container(
                 image_name=image_name,
-                name=validated_name,
+                project_name=validated_name,
                 # name=args.name or validated_name,
-                project_name=project_dir,
+                project_dir=project_dir,
                 host_network=args.host_network,
                 gui=args.gui
             )

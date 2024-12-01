@@ -57,12 +57,12 @@ class DockerHandler:
 
     def start_container(self,
                         image_name: str,
+                        project_dir: str,
                         project_name: str,
-                        name: str,
                         host_network: bool,
                         gui: bool):
         """Starts a container with specified options."""
-        volumes = {project_name: {'bind': '/project', 'mode': 'rw'}}
+        volumes = {project_dir: {'bind': '/project', 'mode': 'rw'}}
         environment = {}
 
         if gui:
@@ -78,7 +78,7 @@ class DockerHandler:
             stdin_open=True,
             network_mode="host" if host_network else None,
             volumes=volumes,
-            working_dir=project_name,
+            working_dir=project_dir,
             environment=environment,
             tty=True
         )
