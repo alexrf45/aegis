@@ -74,6 +74,8 @@ class DockerHandler:
             image=image_name,
             name=project_name,
             entrypoint="/bin/zsh",
+            stderr=True,
+            stdout=True,
             detach=False,
             network_mode="host" if host_network else None,
             volumes=volumes,
