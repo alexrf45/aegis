@@ -16,7 +16,7 @@ class DockerHandler:
             TextColumn("[bold blue]{task.fields[status]}", justify="right"),
             BarColumn(),
             "[progress.percentage]{task.percentage:>3.1f}%",
-            DownloadColumn(unit="MB"),
+            DownloadColumn(),
             TimeRemainingColumn(),
         ) as progress:
             task = progress.add_task(
