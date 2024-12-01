@@ -40,7 +40,6 @@ def main():
                 project_dir=project_dir,
                 host_network=args.host_network,
                 gui=args.gui
-                attach_shell=True
             )
         except ValueError as e:
             log_error(str(e))
