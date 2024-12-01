@@ -32,15 +32,18 @@ def main():
 
     elif args.command == 'start':
         project_name = questionary.text("Enter project name").ask()
+        image = questionary.select("Select an image to use",
+                                   choices=['fonalex45/aegis:dev',
+                                            'fonalex45/aegis:latest',
+                                            'Custom']
+                                   ).ask(),
+        if image == 'Custom':
+            image = questionary.text("Enter the custom image name").ask()
         try:
             validated_name = validate_project_name(project_name)
             project_dir = project_manager.create_project(validated_name)
             docker_handler.start_container(
-                image=questionary.select("Select an image to pull",
-                                         choices=['fonalex45/aegis:dev',
-                                                  'fonalex45/aegis:latest',
-                                                  'Custom']
-                                         ).ask(),
+                image=image,
                 name=args.name or validated_name,
                 project_dir=project_dir,
                 host_network=args.host_network,
