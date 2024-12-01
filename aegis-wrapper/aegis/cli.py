@@ -7,10 +7,9 @@ from aegis.utils import validate_project_name, log_error
 
 def main():
     parser = argparse.ArgumentParser(description="Aegis Docker Wrapper TUI")
-    parser.add_argument('command', choices=[
-                        'start', 'stop', 'destroy', 'pull'],
+    parser.add_argument('command', choices=['start', 'stop', 'destroy', 'pull'],
                         help="Action to perform")
-    # parser.add_argument('-img', help="Docker image to use")
+    parser.add_argument('-img', '--image', help="Docker image to use"),
     parser.add_argument('-n', '--name', help="project/container name")
     parser.add_argument('--host-network', action='store_true',
                         help="Enable host networking")

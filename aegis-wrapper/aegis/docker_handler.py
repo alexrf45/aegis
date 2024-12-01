@@ -56,6 +56,7 @@ class DockerHandler:
             progress.remove_task(task)
 
     def start_container(self,
+                        image_name: str,
                         project_name: str,
                         name: str,
                         host_network: bool,
@@ -70,6 +71,7 @@ class DockerHandler:
                 'bind': '/tmp/.X11-unix', 'mode': 'rw'}
 
         container = self.client.containers.run(
+            image=image_name,
             name=project_name,
             command="zsh",
             detach=False,
