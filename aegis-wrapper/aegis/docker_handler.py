@@ -75,7 +75,6 @@ class DockerHandler:
             name=project_name,
             command="zsh",
             detach=False,
-            stdin_open=True,
             network_mode="host" if host_network else None,
             volumes=volumes,
             working_dir=project_dir,
