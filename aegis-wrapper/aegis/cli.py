@@ -42,6 +42,7 @@ def main():
         try:
             validated_name = validate_project_name(project_name)
             project_dir = project_manager.create_project(validated_name)
+            print(validated_name)
             docker_handler.start_container(
                 image_name=image_name,
                 name=validated_name,
