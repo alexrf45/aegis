@@ -73,7 +73,7 @@ class DockerHandler:
         container = self.client.containers.run(
             image=image_name,
             name=project_name,
-            command="zsh",
+            entrypoint="/bin/zsh",
             detach=False,
             network_mode="host" if host_network else None,
             volumes=volumes,
