@@ -13,12 +13,14 @@ logging.basicConfig(
 
 def log_info(message: str):
     """Logs an info-level message."""
-    logging.info(message)
+    log = logging.getLogger("rich")
+    log.info(message)
 
 
 def log_error(message: str):
     """Logs an error-level message."""
-    logging.error(message)
+    log = logging.getLogger("rich")
+    log.error(message)
 
 
 def show_progress(task_name: str, total: int):
