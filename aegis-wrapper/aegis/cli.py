@@ -3,6 +3,7 @@ import questionary
 from aegis.docker_handler import DockerHandler
 from aegis.project_manager import ProjectManager
 from aegis.utils import validate_project_name, log_error
+from rich.console import Console
 
 
 def main():

@@ -1,11 +1,13 @@
 import logging
 import re
 from rich.progress import Progress
+from rich.logging import RichHandler
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[RichHandler(rich_tracebacks=True)]
 )
 
 
