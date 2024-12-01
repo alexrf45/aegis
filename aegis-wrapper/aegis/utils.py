@@ -1,4 +1,5 @@
 import logging
+import re
 from rich.progress import Progress
 
 # Configure logging
@@ -26,8 +27,10 @@ def show_progress(task_name: str, total: int):
             progress.update(task, advance=1)
 
 
-def validate_container_id(container_id: str):
-    """Validates the format of a Docker container ID."""
-    if len(container_id) != 12:
-        raise ValueError("Invalid container ID. Must be 12 characters.")
-    return container_id
+def validate_project_name(project_name: str):
+    """Validates the project name format."""
+    if not re.match("^[a-zA-Z0-9_-]+$", project_name):
+        raise ValueError(
+            """Invalid project name. Only letters, numbers,
+            hyphens, and underscores are allowed.""")
+    return project_name

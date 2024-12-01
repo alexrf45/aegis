@@ -2,9 +2,8 @@ import os
 
 
 class ProjectManager:
-    def create_project(self):
+    def create_project(self, project_name: str):
         """Creates a project directory with subfolders."""
-        project_name = input("Enter project name: ")
         base_dir = os.path.join(os.getcwd(), project_name)
         subfolders = ['recon', 'exploit', 'www', 'privesc', 'report', 'loot']
 
