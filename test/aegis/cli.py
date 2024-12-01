@@ -1,6 +1,6 @@
 import docker
 import questionary
-import docker_manager as dm
+from . import docker_manager as dm
 # from .docker_manager import pull_image, create_project_dir, run_container, stop_container, destroy_container, create_project_directory
 from . import constants
 
