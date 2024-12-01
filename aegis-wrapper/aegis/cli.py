@@ -9,7 +9,7 @@ def main():
     parser = argparse.ArgumentParser(description="Aegis Docker Wrapper TUI")
     parser.add_argument('command', choices=['start', 'stop', 'destroy', 'pull'],
                         help="Action to perform")
-    parser.add_argument('-img', '--image', help="Docker image to use"),
+    parser.add_argument('-img', '--image_name', help="Docker image to use"),
     parser.add_argument('-n', '--name', help="project/container name")
     parser.add_argument('--host-network', action='store_true',
                         help="Enable host networking")
@@ -32,18 +32,18 @@ def main():
 
     elif args.command == 'start':
         project_name = questionary.text("Enter project name").ask()
-        image = questionary.select("Select an image to use",
-                                   choices=['fonalex45/aegis:dev',
-                                            'fonalex45/aegis:latest',
-                                            'Custom']
-                                   ).ask(),
+        image_name = questionary.select("Select an image to use",
+                                        choices=['fonalex45/aegis:dev',
+                                                 'fonalex45/aegis:latest',
+                                                 'Custom']
+                                        ).ask(),
         if image == 'Custom':
-            image = questionary.text("Enter the custom image name").ask()
+            image_name = questionary.text("Enter the custom image name").ask()
         try:
             validated_name = validate_project_name(project_name)
             project_dir = project_manager.create_project(validated_name)
             docker_handler.start_container(
-                image=image,
+                image=image_name,
                 name=args.name or validated_name,
                 project_dir=project_dir,
                 host_network=args.host_network,
