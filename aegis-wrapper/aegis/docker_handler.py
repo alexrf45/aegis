@@ -16,7 +16,7 @@ class DockerHandler:
             TextColumn("[bold blue]{task.fields[status]}", justify="right"),
             BarColumn(),
             "[progress.percentage]{task.percentage:>3.1f}%",
-            DownloadColumn(),
+            DownloadColumn(unit="MB"),
             TimeRemainingColumn(),
         ) as progress:
             task = progress.add_task(
@@ -45,9 +45,10 @@ class DockerHandler:
                         progress.update(
                             task,
                             completed=details['current'],
-                            total=details['total'],
+                            current_mb=details['current'] / (1024 * 1024),
+                            total=details['total'] / (1024 * 1024),
                             status=f"{line['status']}: {
-                                details['current']}/{details['total']} bytes",
+                                details['current']}/{details['total']} MB",
                         )
 
             elapsed_time = time.time() - start_time
