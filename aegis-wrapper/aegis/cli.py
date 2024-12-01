@@ -10,7 +10,7 @@ def main():
     parser.add_argument('command', choices=[
                         'start', 'stop', 'destroy', 'pull'],
                         help="Action to perform")
-    parser.add_argument('-img', help="Docker image to use")
+    # parser.add_argument('-img', help="Docker image to use")
     parser.add_argument('-n', help="project/container name",
                         action='store_true')
     parser.add_argument('--host-network', action='store_true',
@@ -38,7 +38,11 @@ def main():
             validated_name = validate_project_name(project_name)
             project_dir = project_manager.create_project(validated_name)
             docker_handler.start_container(
-                image_name=args.image or 'fonalex45/aegis:dev',
+                image=questionary.select("Select an image to pull",
+                                         choices=['fonalex45/aegis:dev',
+                                                  'fonalex45/aegis:latest',
+                                                  'Custom']
+                                         ).ask(),
                 name=args.name or validated_name,
                 project_dir=project_dir,
                 host_network=args.host_network,
