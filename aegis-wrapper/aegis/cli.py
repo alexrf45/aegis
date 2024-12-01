@@ -39,7 +39,7 @@ def main():
                 image_name=args.image or 'fonalex45/aegis:dev',
                 project_dir=project_dir,
                 host_network=args.host_network,
-                gui=args.gui,
+                gui=args.gui
                 attach_shell=True
             )
         except ValueError as e:

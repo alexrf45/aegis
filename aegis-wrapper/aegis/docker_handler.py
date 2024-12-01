@@ -78,7 +78,7 @@ class DockerHandler:
             network_mode="host" if host_network else None,
             volumes=volumes,
             environment=environment,
-            tty=True,
+            tty=True
         )
         container.attach(stream=True, logs=True)
         print(f"Container '{project_name}' started and attached.")
