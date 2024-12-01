@@ -50,10 +50,9 @@ def main():
                 host_network=args.host_network,
                 gui=args.gui
             )
-            docker_handler.attach()
         except ValueError as e:
             log_error(str(e))
-            return
+        return docker_handler.start_container()
     elif args.command == 'stop':
         project_name = questionary.text(
             "Enter project name to stop container").ask()
