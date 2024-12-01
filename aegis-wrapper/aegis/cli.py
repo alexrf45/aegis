@@ -11,8 +11,7 @@ def main():
                         'start', 'stop', 'destroy', 'pull'],
                         help="Action to perform")
     # parser.add_argument('-img', help="Docker image to use")
-    parser.add_argument('-n', help="project/container name",
-                        action='store_true')
+    parser.add_argument('-n', '--name', help="project/container name")
     parser.add_argument('--host-network', action='store_true',
                         help="Enable host networking")
     parser.add_argument('--gui', action='store_true',
@@ -43,7 +42,7 @@ def main():
                                                   'fonalex45/aegis:latest',
                                                   'Custom']
                                          ).ask(),
-                name=args.name or validated_name,
+                name=args.n or validated_name,
                 project_dir=project_dir,
                 host_network=args.host_network,
                 gui=args.gui
