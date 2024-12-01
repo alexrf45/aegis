@@ -45,7 +45,6 @@ class DockerHandler:
                         progress.update(
                             task,
                             completed=details['current'],
-                            current_gb=details['current'] / (1024 ** 3),
                             total=details['total'] / (1024 ** 3),
                             status=f"{line['status']}: {
                                 details['current']}/{details['total']} GB",

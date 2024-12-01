@@ -37,6 +37,7 @@ def main():
             project_dir = project_manager.create_project(validated_name)
             docker_handler.start_container(
                 image_name=args.image or 'fonalex45/aegis:dev',
+                name=validated_name,
                 project_dir=project_dir,
                 host_network=args.host_network,
                 gui=args.gui
