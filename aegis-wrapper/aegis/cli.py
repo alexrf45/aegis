@@ -35,7 +35,7 @@ def main():
                                         choices=['fonalex45/aegis:dev',
                                                  'fonalex45/aegis:latest',
                                                  'Custom']
-                                        ).ask(),
+                                        ).ask()
         if image_name == 'Custom':
             image_name = questionary.text("Enter the custom image name").ask()
         try:
