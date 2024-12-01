@@ -9,7 +9,7 @@ def main():
     parser = argparse.ArgumentParser(description="Aegis Docker Wrapper TUI")
     parser.add_argument('command', choices=['start', 'stop', 'destroy', 'pull'],
                         help="Action to perform")
-    parser.add_argument('-n', '--name', help="project/container name")
+    # parser.add_argument('-n', '--name', help="project/container name")
     parser.add_argument('--host-network', action='store_true',
                         help="Enable host networking")
     parser.add_argument('--gui', action='store_true',
@@ -42,8 +42,9 @@ def main():
             validated_name = validate_project_name(project_name)
             project_dir = project_manager.create_project(validated_name)
             docker_handler.start_container(
-                image=image_name,
-                name=args.name or validated_name,
+                image_name=image_name,
+                name=validated_name,
+                # name=args.name or validated_name,
                 project_dir=project_dir,
                 host_network=args.host_network,
                 gui=args.gui
