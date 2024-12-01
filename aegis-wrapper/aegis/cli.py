@@ -20,14 +20,14 @@ def main():
     project_manager = ProjectManager()
 
     if args.command == 'pull':
-        image = questionary.select(
+        image_name = questionary.select(
             "Select an image to pull",
             choices=['fonalex45/aegis:dev',
                      'fonalex45/aegis:latest', 'Custom']
         ).ask()
-        if image == 'Custom':
-            image = questionary.text("Enter the custom image name").ask()
-        docker_handler.pull_image(image)
+        if image_name == 'Custom':
+            image_name = questionary.text("Enter the custom image name").ask()
+        docker_handler.pull_image(image_name)
 
     elif args.command == 'start':
         project_name = questionary.text("Enter project name").ask()
@@ -36,7 +36,7 @@ def main():
                                                  'fonalex45/aegis:latest',
                                                  'Custom']
                                         ).ask(),
-        if image == 'Custom':
+        if image_name == 'Custom':
             image_name = questionary.text("Enter the custom image name").ask()
         try:
             validated_name = validate_project_name(project_name)
