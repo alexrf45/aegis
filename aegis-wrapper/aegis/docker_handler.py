@@ -81,7 +81,7 @@ class DockerHandler:
             environment=environment,
             tty=True
         )
-        container.attach(stream=True, logs=True)
+        container.attach()
         print(f"Container '{project_name}' started and attached.")
         # print(f"Container {container.short_id} started.")
 
