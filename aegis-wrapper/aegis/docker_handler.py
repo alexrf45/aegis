@@ -45,10 +45,10 @@ class DockerHandler:
                         progress.update(
                             task,
                             completed=details['current'],
-                            current_mb=details['current'] / (1024 * 1024),
-                            total=details['total'] / (1024 * 1024),
+                            current_gb=details['current'] / (1024 ** 3),
+                            total=details['total'] / (1024 ** 3),
                             status=f"{line['status']}: {
-                                details['current']}/{details['total']} MB",
+                                details['current']}/{details['total']} GB",
                         )
 
             elapsed_time = time.time() - start_time
