@@ -59,6 +59,7 @@ class DockerHandler:
                         image_name: str,
                         project_name: str,
                         project_dir: str,
+                        name: str,
                         host_network: bool,
                         gui: bool):
         """Starts a container with specified options."""
@@ -72,6 +73,7 @@ class DockerHandler:
 
         container = self.client.containers.run(
             image=image_name,
+            name=project_name,
             command="zsh",
             detach=False,
             stdin_open=True,
