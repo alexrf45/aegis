@@ -26,9 +26,13 @@ done
 fpath=(/tmp/zsh-completions/src $fpath)
 
 plugins=(
+colorize
+python
+ssh
+tmux
 git
-zsh-autosuggestions
-zsh-syntax-highlighting
+#zsh-autosuggestions
+#zsh-syntax-highlighting
 )
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
@@ -40,5 +44,5 @@ source <(fzf --zsh)
 eval $(ssh-agent) &> /dev/null
 
 #starship prompt
-eval "$(starship init zsh)"
+#eval "$(starship init zsh)"
 
