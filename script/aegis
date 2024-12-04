@@ -27,7 +27,8 @@ start_container() {
       --net=host --entrypoint=/bin/zsh \
       --cap-add=NET_ADMIN \
       --cap-add=CAP_SYS_TIME \
-      -e DISPLAY=$DISPLAY -e DOMAIN=$DOMAIN \
+      --device=/dev/dri:/dev/dri \
+      -e "DISPLAY=$DISPLAY" -e DOMAIN=$DOMAIN \
       -e TARGET=$project -e IP=$IP -e TZ=$TIME_ZONE -e NAME=$project \
       -v $(pwd)/.aegis-logs:$HOME/.logs:rw -v $(pwd):/$project \
       -v $HOME/.Xauthority:$HOME/.Xauthority:ro \

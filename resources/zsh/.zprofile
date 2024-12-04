@@ -3,6 +3,7 @@ export AGENT='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 export EDITOR=vim
 export TERM='xterm-256color'
 export VISUAL=vim
+export TZ=America/New_York
 
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --color=fg:-1,fg+:#d0d0d0,bg:-1,bg+:#262626

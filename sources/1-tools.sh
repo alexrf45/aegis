@@ -6,7 +6,7 @@ web() {
     sqlmap exiftool \
     default-mysql-client \
     hurl postgresql \
-    arjun sqsh
+    arjun sqsh burpsuite
 }
 
 web-server() {

@@ -61,3 +61,20 @@ webserver() {
 cert-gen() {
   mkcert -key-file $HOME/.local/$1-key.pem -cert-file $HOME/.local/$1-cert.pem localhost
 }
+
+timestamp() {
+  date +%Y%m%d-%T
+}
+
+encrypt_age() {
+  age \
+    --passphrase \
+    --output $1.enc \
+    $2
+
+}
+
+decrypt_age() {
+  age -d \
+    $1 >$2
+}

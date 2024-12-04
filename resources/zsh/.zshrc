@@ -31,8 +31,8 @@ python
 ssh
 tmux
 git
-#zsh-autosuggestions
-#zsh-syntax-highlighting
+zsh-autosuggestions
+zsh-syntax-highlighting
 )
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
