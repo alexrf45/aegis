@@ -3,14 +3,14 @@
 base() {
   sudo apt-get install -y \
     wget curl man git lolcat \
-    figlet tmux mousepad \
-    hexcurse file ruby ruby-dev \
+    figlet tmux mousepad firefox-esr hexcurse file ruby ruby-dev \
     vim nano p7zip-full kali-themes \
-    djvulibre-bin python3-pip \
-    python3-virtualenv libpcap-dev \
+    djvulibre-bin python3-pip openssh-client openssl traceroute python3-virtualenv libpcap-dev \
     jq xpdf pipx man-db exploitdb \
     rpcbind nfs-common feh cmake \
-    ntp ntpdate bash-completion zsh bat mkcert
+    ntp ntpdate bash-completion zsh bat mkcert \
+    dbus-x11 x11-utils openssh-server supervisor x11vnc xvfb autocutsel \
+    novnc upx-ucl
 }
 
 network() {
@@ -43,6 +43,12 @@ osint_tools() {
     sqlitebrowser exiflooter \
     h8mail \
     sn0int cewl seclists
+}
+
+slim_kali() {
+  sudo apt-get -y autoclean &&
+    sudo apt-get -y autoremove &&
+    sudo rm -rf /var/lib/apt/lists/*
 }
 
 base

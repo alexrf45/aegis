@@ -7,8 +7,9 @@ mkdir -p $HOME/.config && mkdir -p $HOME/.zsh &&
   cp -r /home/kali/resources/proxychains.conf $HOME/.proxychains/proxychains.conf &&
   cp -r /home/kali/resources/kerbrute $HOME/.local/bin/kerbrute && chmod +x /$HOME/.local/bin/kerbrute &&
   cp -r /home/kali/resources/smbserver.py $HOME/.tools/smbserver.py &&
-  cp -r /home/kali/resources/zsh/history $HOME/.history &&
-  cp -r /home/kali/resources/starship.toml $HOME/.config/starship.toml
+  cp -r /home/kali/resources/zsh/history $HOME/.history
+
+#cp -r /home/kali/resources/starship.toml $HOME/.config/starship.toml
 
 wget -q "https://github.com/junegunn/fzf/releases/download/0.53.0/fzf-0.53.0-linux_amd64.tar.gz" -O fzf.tar.gz &&
   tar xzf fzf.tar.gz && chmod +x fzf && mv fzf $HOME/.local/bin/.
@@ -30,7 +31,5 @@ cp /home/kali/resources/zsh/functions.sh $HOME/.zsh/functions.sh
 cp /home/kali/resources/zsh/aliases $HOME/.zsh/aliases
 
 cp /home/kali/resources/zsh/.zprofile $HOME/.zprofile
-
-curl -O https://starship.rs/install.sh && chmod +x install.sh && ./install.sh --yes -b ~/.local/bin && rm install.sh
 
 rm $HOME/fzf.tar.gz
