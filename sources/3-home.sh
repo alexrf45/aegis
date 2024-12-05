@@ -32,6 +32,4 @@ cp /home/kali/resources/zsh/aliases $HOME/.zsh/aliases
 
 cp /home/kali/resources/zsh/.zprofile $HOME/.zprofile
 
-curl -O https://starship.rs/install.sh && chmod +x install.sh && ./install.sh --yes -b ~/.local/bin && rm install.sh
-
 rm $HOME/fzf.tar.gz

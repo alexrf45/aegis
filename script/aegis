@@ -29,7 +29,7 @@ start_container() {
       --cap-add=CAP_SYS_TIME \
       --device=/dev/dri:/dev/dri \
       -e "DISPLAY=$DISPLAY" -e DOMAIN=$DOMAIN \
-      -e TARGET=$project -e IP=$IP -e TZ=$TIME_ZONE -e NAME=$project \
+      -e TARGET=$project -e IP=$IP -e TZ=$TZ -e NAME=$project \
       -v $(pwd)/.aegis-logs:$HOME/.logs:rw -v $(pwd):/$project \
       -v $HOME/.Xauthority:$HOME/.Xauthority:ro \
       -v /tmp/.X11-unix:/tmp/.X11-unix \
@@ -82,8 +82,8 @@ pull() {
 show_help() {
   echo 'aegis' | figlet -f shadow | lolcat &&
     gum style \
-      --foreground $FOREGROUND --border-foreground $BORDER_FOREGROUND --border double \
-      --align left --width 85 --margin "1 2" --bold --padding "1 2" \
+      --foreground $FOREGROUND --border-foreground $BORDER_FOREGROUND --border rounded \
+      --align left --width 50 --margin "1 2" --bold --padding "1 2" \
       '
       aegis start - start a container
       aegis stop - stop a container
