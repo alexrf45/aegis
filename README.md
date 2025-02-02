@@ -1,5 +1,6 @@
 ![Logo](https://ka-tet.s3.amazonaws.com/logo_long.png)                                                                                                                                           
-![Logo](https://img.shields.io/docker/image-size/fonalex45/aegis) ![Logo](https://img.shields.io/docker/pulls/fonalex45/aegis)       
+![GitHub Release](https://img.shields.io/github/v/release/alexrf45/aegis?display_name=tag&style=plastic)
+  ![Logo](https://img.shields.io/docker/image-size/fonalex45/aegis) ![Logo](https://img.shields.io/docker/pulls/fonalex45/aegis)       
 
 Aegis is a docker image designed for any engagement. Gone are the days of spinning up an entire Kali virtual machine or installing on bare metal. This image offers a flexible, repeatable environment for penetration testers, security researchers and analysts alike.
 
@@ -18,6 +19,7 @@ Aegis is a docker image designed for any engagement. Gone are the days of spinni
 - Customizable resources and tooling, config files are located in the `resources/` & `sources/` directories
 - Non-root container w/ sudo
 - Tmux inside the container (my favorite feature)
+- GUI apps such as burpsuite and firefox
 
 
 ### Custom aliases included:
@@ -73,8 +75,6 @@ aegis help - view this help menu
 
 
 TODO:
-- add quick https server script
 - Python wrapper (FUTURE)
-- Revamp bash function into script (beta)
 - fzf usage (only works in zsh)
-- miniserve quick web server w/ TLS function (done) 
+- miniserve quick web server w/ TLS function (done)
